@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js Fundamentals</title>
+    <link rel="stylesheet" href="../css/Nodejs.css">
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    
+    <header>
+        <h1>NODE.JS</h1>
+        <p>Fundamentals Of Programming - Node.js Fundamentals : Server-side</p>
+    </header>
+    
+    <nav>
+        <button class="nav-btn active" data-target="intro">Introduction</button>
+        <button class="nav-btn" data-target="modules">Modules</button>
+        <button class="nav-btn" data-target="events">Event Loop</button>
+        <button class="nav-btn" data-target="fs">File System</button>
+        <button class="nav-btn" data-target="http">HTTP Server</button>
+        <a href="../html/RWD.html">
+            <button class="nav-btn">EXIT</button>
+        </a>
+    </nav>
+    
+    <main>
+        <!-- Introduction Section -->
+        <section id="intro" class="content-section active">
+            <h2>Introduction to Node.js</h2>
+            <p>Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. It allows you to run JavaScript on the server, enabling full-stack JavaScript development.</p>
+            
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Non-blocking I/O:</strong> Handles multiple operations concurrently</li>
+                <li><strong>Event-driven architecture:</strong> Uses events and callbacks for async operations</li>
+                <li><strong>Single-threaded:</strong> Uses a single main thread with worker threads for heavy operations</li>
+                <li><strong>NPM ecosystem:</strong> Access to thousands of open-source packages</li>
+            </ul>
+            
+            <div class="code-block">
+                <span class="code-comment">// Simple Node.js example</span><br>
+                <span class="code-keyword">const</span> message = <span class="code-string">"Hello, Cyber World!"</span>;<br>
+                console.<span class="code-keyword">log</span>(message);
+            </div>
+            
+            <div class="interactive-demo">
+                <h3>Try It Out:</h3>
+                <p>Click the button to simulate a Node.js console output:</p>
+                <button class="demo-btn" id="consoleDemo">Run Console Demo</button>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                        <span style="margin-left: 10px;">node terminal</span>
+                    </div>
+                    <div class="terminal-body" id="terminalOutput">
+                        <span class="terminal-prompt">$ </span>Waiting for input...
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Modules Section -->
+        <section id="modules" class="content-section">
+            <h2>Node.js Modules</h2>
+            <p>Node.js uses a module system to organize code into reusable pieces. There are three types of modules:</p>
+            
+            <h3>1. Core Modules</h3>
+            <p>Built-in modules that come with Node.js installation:</p>
+            <ul>
+                <li><code>fs</code> - File system operations</li>
+                <li><code>http</code> - HTTP server and client</li>
+                <li><code>path</code> - File path utilities</li>
+                <li><code>events</code> - Event handling</li>
+            </ul>
+            
+            <h3>2. Local Modules</h3>
+            <p>Modules you create in your own files:</p>
+            <div class="code-block">
+                <span class="code-comment">// mathUtils.js</span><br>
+                <span class="code-keyword">const</span> add = (a, b) => a + b;<br>
+                <span class="code-keyword">const</span> multiply = (a, b) => a * b;<br>
+                <br>
+                module.<span class="code-keyword">exports</span> = { add, multiply };
+            </div>
+            
+            <div class="code-block">
+                <span class="code-comment">// app.js</span><br>
+                <span class="code-keyword">const</span> mathUtils = require(<span class="code-string">'./mathUtils'</span>);<br>
+                <br>
+                console.<span class="code-keyword">log</span>(mathUtils.add(5, 3)); <span class="code-comment">// Output: 8</span><br>
+                console.<span class="code-keyword">log</span>(mathUtils.multiply(5, 3)); <span class="code-comment">// Output: 15</span>
+            </div>
+            
+            <h3>3. Third-party Modules</h3>
+            <p>Modules installed via NPM (Node Package Manager):</p>
+            <div class="code-block">
+                <span class="code-comment">// Install with: npm install express</span><br>
+                <span class="code-keyword">const</span> express = require(<span class="code-string">'express'</span>);<br>
+                <span class="code-keyword">const</span> app = express();
+            </div>
+        </section>
+        
+        <!-- Event Loop Section -->
+        <section id="events" class="content-section">
+            <h2>Event Loop & Asynchronous Programming</h2>
+            <p>Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient.</p>
+            
+            <h3>The Event Loop</h3>
+            <p>The event loop allows Node.js to perform non-blocking I/O operations despite being single-threaded.</p>
+            
+            <div class="code-block">
+                <span class="code-comment">// Asynchronous example with callbacks</span><br>
+                <span class="code-keyword">const</span> fs = require(<span class="code-string">'fs'</span>);<br>
+                <br>
+                console.<span class="code-keyword">log</span>(<span class="code-string">'Start'</span>);<br>
+                <br>
+                fs.readFile(<span class="code-string">'example.txt'</span>, <span class="code-string">'utf8'</span>, (err, data) => {<br>
+                &nbsp;&nbsp;<span class="code-keyword">if</span> (err) <span class="code-keyword">throw</span> err;<br>
+                &nbsp;&nbsp;console.<span class="code-keyword">log</span>(<span class="code-string">'File content:'</span>, data);<br>
+                });<br>
+                <br>
+                console.<span class="code-keyword">log</span>(<span class="code-string">'End'</span>);<br>
+                <span class="code-comment">// Output order: Start, End, File content</span>
+            </div>
+            
+            <h3>Promises and Async/Await</h3>
+            <p>Modern approaches to handle asynchronous operations:</p>
+            
+            <div class="code-block">
+                <span class="code-comment">// Using Promises</span><br>
+                <span class="code-keyword">const</span> fetchData = () => {<br>
+                &nbsp;&nbsp;<span class="code-keyword">return new</span> Promise((resolve, reject) => {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;setTimeout(() => {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resolve(<span class="code-string">'Data received'</span>);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}, 1000);<br>
+                &nbsp;&nbsp;});<br>
+                };<br>
+                <br>
+                fetchData().then(data => console.<span class="code-keyword">log</span>(data));
+            </div>
+            
+            <div class="code-block">
+                <span class="code-comment">// Using Async/Await</span><br>
+                <span class="code-keyword">const</span> getData = <span class="code-keyword">async</span> () => {<br>
+                &nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> data = <span class="code-keyword">await</span> fetchData();<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-keyword">log</span>(data);<br>
+                &nbsp;&nbsp;} <span class="code-keyword">catch</span> (error) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-keyword">error</span>(error);<br>
+                &nbsp;&nbsp;}<br>
+                };<br>
+                <br>
+                getData();
+            </div>
+            
+            <div class="interactive-demo">
+                <h3>Event Loop Simulation</h3>
+                <p>Click to see how the event loop handles asynchronous operations:</p>
+                <button class="demo-btn" id="eventLoopDemo">Run Event Loop Demo</button>
+                <div id="eventLoopOutput" style="margin-top: 1rem; min-height: 100px; padding: 1rem; background-color: rgba(0,0,0,0.5); border: 1px solid var(--neon-blue);"></div>
+            </div>
+        </section>
+        
+        <!-- File System Section -->
+        <section id="fs" class="content-section">
+            <h2>File System Operations</h2>
+            <p>The <code>fs</code> module provides an API for interacting with the file system.</p>
+            
+            <h3>Reading Files</h3>
+            <div class="code-block">
+                <span class="code-keyword">const</span> fs = require(<span class="code-string">'fs'</span>);<br>
+                <br>
+                <span class="code-comment">// Synchronous reading</span><br>
+                <span class="code-keyword">try</span> {<br>
+                &nbsp;&nbsp;<span class="code-keyword">const</span> data = fs.readFileSync(<span class="code-string">'file.txt'</span>, <span class="code-string">'utf8'</span>);<br>
+                &nbsp;&nbsp;console.<span class="code-keyword">log</span>(data);<br>
+                } <span class="code-keyword">catch</span> (err) {<br>
+                &nbsp;&nbsp;console.<span class="code-keyword">error</span>(err);<br>
+                }<br>
+                <br>
+                <span class="code-comment">// Asynchronous reading</span><br>
+                fs.readFile(<span class="code-string">'file.txt'</span>, <span class="code-string">'utf8'</span>, (err, data) => {<br>
+                &nbsp;&nbsp;<span class="code-keyword">if</span> (err) <span class="code-keyword">throw</span> err;<br>
+                &nbsp;&nbsp;console.<span class="code-keyword">log</span>(data);<br>
+                });
+            </div>
+            
+            <h3>Writing Files</h3>
+            <div class="code-block">
+                <span class="code-keyword">const</span> fs = require(<span class="code-string">'fs'</span>);<br>
+                <br>
+                <span class="code-comment">// Write to a file</span><br>
+                fs.writeFile(<span class="code-string">'message.txt'</span>, <span class="code-string">'Hello Node.js'</span>, (err) => {<br>
+                &nbsp;&nbsp;<span class="code-keyword">if</span> (err) <span class="code-keyword">throw</span> err;<br>
+                &nbsp;&nbsp;console.<span class="code-keyword">log</span>(<span class="code-string">'File has been saved!'</span>);<br>
+                });<br>
+                <br>
+                <span class="code-comment">// Append to a file</span><br>
+                fs.appendFile(<span class="code-string">'message.txt'</span>, <span class="code-string">'\nMore data'</span>, (err) => {<br>
+                &nbsp;&nbsp;<span class="code-keyword">if</span> (err) <span class="code-keyword">throw</span> err;<br>
+                &nbsp;&nbsp;console.<span class="code-keyword">log</span>(<span class="code-string">'Data appended!'</span>);<br>
+                });
+            </div>
+        </section>
+        
+        <!-- HTTP Server Section -->
+        <section id="http" class="content-section">
+            <h2>Creating an HTTP Server</h2>
+            <p>Node.js makes it easy to create web servers using the <code>http</code> module.</p>
+            
+            <h3>Basic HTTP Server</h3>
+            <div class="code-block">
+                <span class="code-keyword">const</span> http = require(<span class="code-string">'http'</span>);<br>
+                <br>
+                <span class="code-keyword">const</span> server = http.createServer((req, res) => {<br>
+                &nbsp;&nbsp;<span class="code-comment">// Set response header</span><br>
+                &nbsp;&nbsp;res.writeHead(200, { <span class="code-string">'Content-Type'</span>: <span class="code-string">'text/html'</span> });<br>
+                &nbsp;&nbsp;<br>
+                &nbsp;&nbsp;<span class="code-comment">// Send response</span><br>
+                &nbsp;&nbsp;res.end(<span class="code-string">'&lt;h1&gt;Hello from Node.js Server!&lt;/h1&gt;'</span>);<br>
+                });<br>
+                <br>
+                <span class="code-comment">// Start server on port 3000</span><br>
+                server.listen(3000, () => {<br>
+                &nbsp;&nbsp;console.<span class="code-keyword">log</span>(<span class="code-string">'Server running at http://localhost:3000/'</span>);<br>
+                });
+            </div>
+            
+            <h3>Handling Routes</h3>
+            <div class="code-block">
+                <span class="code-keyword">const</span> http = require(<span class="code-string">'http'</span>);<br>
+                <br>
+                <span class="code-keyword">const</span> server = http.createServer((req, res) => {<br>
+                &nbsp;&nbsp;<span class="code-keyword">if</span> (req.url === <span class="code-string">'/'</span>) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;res.writeHead(200, { <span class="code-string">'Content-Type'</span>: <span class="code-string">'text/html'</span> });<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;res.end(<span class="code-string">'&lt;h1&gt;Home Page&lt;/h1&gt;'</span>);<br>
+                &nbsp;&nbsp;} <span class="code-keyword">else if</span> (req.url === <span class="code-string">'/about'</span>) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;res.writeHead(200, { <span class="code-string">'Content-Type'</span>: <span class="code-string">'text/html'</span> });<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;res.end(<span class="code-string">'&lt;h1&gt;About Page&lt;/h1&gt;'</span>);<br>
+                &nbsp;&nbsp;} <span class="code-keyword">else</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;res.writeHead(404, { <span class="code-string">'Content-Type'</span>: <span class="code-string">'text/html'</span> });<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;res.end(<span class="code-string">'&lt;h1&gt;404 - Page Not Found&lt;/h1&gt;'</span>);<br>
+                &nbsp;&nbsp;}<br>
+                });<br>
+                <br>
+                server.listen(3000);
+            </div>
+            
+            <div class="interactive-demo">
+                <h3>Server Simulation</h3>
+                <p>Click to simulate starting a Node.js HTTP server:</p>
+                <button class="demo-btn" id="serverDemo">Start Server Simulation</button>
+                <div id="serverOutput" style="margin-top: 1rem; min-height: 100px; padding: 1rem; background-color: rgba(0,0,0,0.5); border: 1px solid var(--neon-blue); font-family: 'Courier New', monospace;"></div>
+            </div>
+        </section>
+    </main>
+    <div class="Links">
+        <a href="https://youtu.be/TlB_eWDSMt4" style="color: orangered; margin-left: 600px;">Node.js Tutorial for Beginners: By Programming with Mosh</a>
+    </div>
+    
+    <footer>
+        <p>Baguio Central University</p>
+        <p>&copy; Bachelor of Science in Computer Science. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/Nodejs.js"></script>
+</body>
+</html>

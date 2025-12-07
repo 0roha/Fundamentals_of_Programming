@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Java Fundamentals</title>
+  <link rel="stylesheet" href="../css/Java.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">Jv</div>
+      <div>
+        <h1>Java</h1>
+        <div class="subtitle">Fundamentals of Programming - Java Fundamentals : Server-side</div>
+      </div>
+    </div>
+    <div class="controls">
+      <input class="search" id="search" placeholder="Search topics (e.g. 'threads', 'arrays')" />
+      <button class="btn" id="print">Print</button>
+      <button class="btn" id="toggle">Toggle Compact</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside>
+      <h3>Contents</h3>
+      <ul class="toc" id="toc">
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#syntax">Basic Syntax</a></li>
+        <li><a href="#types">Data Types</a></li>
+        <li><a href="#variables">Variables</a></li>
+        <li><a href="#operators">Operators</a></li>
+        <li><a href="#control">Control Flow</a></li>
+        <li><a href="#arrays">Arrays</a></li>
+        <li><a href="#strings">Strings</a></li>
+        <li><a href="#methods">Methods</a></li>
+        <li><a href="#oop">OOP</a></li>
+        <li><a href="#inheritance">Inheritance</a></li>
+        <li><a href="#polymorphism">Polymorphism</a></li>
+        <li><a href="#abstraction">Abstraction</a></li>
+        <li><a href="#interfaces">Interfaces</a></li>
+        <li><a href="#exceptions">Exception Handling</a></li>
+        <li><a href="#packages">Packages & Import</a></li>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#file">File Handling</a></li>
+        <li><a href="#threads">Multithreading</a></li>
+        <li><a href="#memory">JVM & Memory</a></li>
+        <li><a id="exit">EXIT</a></li>
+      </ul>
+      <hr/>
+      <div style="margin-top:12px;color:var(--muted);font-size:13px">Tip: Click any code block's <code>Copy</code> button to copy the snippet.</div>
+    </aside>
+
+    <main id="content">
+      <section id="intro">
+        <h2>1. Introduction</h2>
+        <p>Java is a high-level, class-based, object-oriented language that runs on the JVM. It emphasizes portability, security, and a strong standard library.</p>
+        <pre><code>// Basic Java program
+public class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println("Hello, Java!");
+  }
+}
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="syntax">
+        <h2>2. Basic Syntax</h2>
+        <p>Programs are organized into classes. Methods contain statements ending with semicolons. Java is case-sensitive.</p>
+        <pre><code>// Class and main method
+class Example {
+  public static void main(String[] args) {
+    // statements
+  }
+}
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="types">
+        <h2>3. Data Types</h2>
+        <p>Primitives: <span class="chip">byte</span> <span class="chip">short</span> <span class="chip">int</span> <span class="chip">long</span> <span class="chip">float</span> <span class="chip">double</span> <span class="chip">char</span> <span class="chip">boolean</span></p>
+        <pre><code>int age = 20;
+double price = 19.99;
+char letter = 'A';
+boolean ok = true;
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="variables">
+        <h2>4. Variables</h2>
+        <p>Local, instance, and static variables. Declare then initialize.</p>
+        <pre><code>// instance vs static
+public class Person {
+  String name;          // instance
+  static int count;     // static
+}
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="operators">
+        <h2>5. Operators</h2>
+        <p>Arithmetic, relational, logical, assignment, and increment/decrement operators.</p>
+        <pre><code>int x = 5 + 3; // 8
+boolean b = (x > 10) && (x < 20);
+x++;
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="control">
+        <h2>6. Control Flow</h2>
+        <p>If/else, switch, for/while/do-while loops.</p>
+        <pre><code>// if-else
+if (x > 10) {
+  System.out.println("x > 10");
+} else {
+  System.out.println("x <= 10");
+}
+
+// for loop
+for (int i = 0; i < 5; i++) {
+  System.out.println(i);
+}
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="arrays">
+        <h2>7. Arrays</h2>
+        <p>Fixed-size collections of the same type.</p>
+        <pre><code>int[] nums = {10, 20, 30};
+System.out.println(nums[0]); // 10
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="strings">
+        <h2>8. Strings</h2>
+        <p>Immutable sequences of characters. Useful methods: <code>length()</code>, <code>toUpperCase()</code>, <code>substring()</code>.</p>
+        <pre><code>String s = "Java";
+System.out.println(s.length());
+System.out.println(s.toUpperCase());
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="methods">
+        <h2>9. Methods</h2>
+        <p>Methods (functions) belong to classes; can be static or instance.</p>
+        <pre><code>public class Calculator {
+  static int add(int a, int b) { return a + b; }
+  public static void main(String[] args) {
+    System.out.println(add(2,3));
+  }
+}
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="oop">
+        <h2>10. Object-Oriented Programming (OOP)</h2>
+        <p>Four pillars: Encapsulation, Inheritance, Polymorphism, Abstraction.</p>
+        <pre><code>class Car {
+  String brand;
+  int year;
+  void drive() { System.out.println(brand + " driving"); }
+}
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="inheritance">
+        <h2>11. Inheritance</h2>
+        <p>Subclass extends a superclass and inherits members.</p>
+        <pre><code>class Animal { void sound(){ System.out.println("Animal sound"); } }
+class Dog extends Animal { void sound(){ System.out.println("Dog barks"); } }
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="polymorphism">
+        <h2>12. Polymorphism</h2>
+        <p>Objects can be treated as instances of their parent type. Method overriding is runtime polymorphism.</p>
+        <pre><code>Animal a = new Dog();
+a.sound(); // Dog barks
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="abstraction">
+        <h2>13. Abstraction</h2>
+        <p>Abstract classes declare methods to be implemented by subclasses.</p>
+        <pre><code>abstract class Shape { abstract void draw(); }
+class Circle extends Shape { void draw(){ System.out.println("Circle"); } }
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="interfaces">
+        <h2>14. Interfaces</h2>
+        <p>Interfaces declare methods that implementing classes must provide.</p>
+        <pre><code>interface Animal { void sound(); }
+class Dog implements Animal { public void sound(){ System.out.println("Dog"); } }
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="exceptions">
+        <h2>15. Exception Handling</h2>
+        <p>Use try/catch/finally to handle runtime errors cleanly.</p>
+        <pre><code>try {
+  int r = 10 / 0;
+} catch (ArithmeticException e) {
+  System.out.println("Error: " + e.getMessage());
+} finally {
+  System.out.println("Cleanup");
+}
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="packages">
+        <h2>16. Packages & Import</h2>
+        <p>Organize classes into packages and import libraries with <code>import</code>.</p>
+        <pre><code>import java.util.Scanner;
+Scanner sc = new Scanner(System.in);
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="collections">
+        <h2>17. Collections Framework</h2>
+        <p>Common interfaces: <code>List</code>, <code>Set</code>, <code>Map</code>. Implementations include <code>ArrayList</code>, <code>HashSet</code>, <code>HashMap</code>.</p>
+        <pre><code>List<String> list = new ArrayList<>();
+list.add("Java");
+System.out.println(list);
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="file">
+        <h2>18. File Handling</h2>
+        <p>Use java.io (or java.nio) to read/write files; handle IOExceptions.</p>
+        <pre><code>try (FileWriter fw = new FileWriter("out.txt")) {
+  fw.write("Hello");
+} catch (IOException e) {
+  e.printStackTrace();
+}
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="threads">
+        <h2>19. Multithreading</h2>
+        <p>Create threads by extending <code>Thread</code> or implementing <code>Runnable</code>. Use synchronization where needed.</p>
+        <pre><code>class MyThread extends Thread { public void run(){ System.out.println("running"); } }
+new MyThread().start();
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <section id="memory">
+        <h2>20. JVM & Memory</h2>
+        <p>The JVM divides memory into stack (locals) and heap (objects). The garbage collector reclaims unused objects.</p>
+        <pre><code>// Notes
+// Stack: method frames & local vars
+// Heap: objects and arrays
+// GC: automatic memory management
+</code><button class="copy">Copy</button></pre>
+      </section>
+
+      <div class="Links">
+        <a href="https://youtu.be/eIrMbAQSU34" style="color: orangered; margin-left: 300px;">Java Full Course for Beginners: By Programming with Mosh</a>
+    </div>
+      </div>
+
+      <footer>
+        <p>Baguio Central University</p>
+        <p>&copy; Bachelor of Science in Computer Science. All rights reserved.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="../js/Java.js"></script>
+</body>
+</html>

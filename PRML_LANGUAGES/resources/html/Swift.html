@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift Fundamentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/Swift.css">
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="glitch" data-text="Swift">Swift</h1>
+            <div class="tagline">Fundamentals of Programming - Swift Fundamentals : Server/Client-side</div>
+        </header>
+        
+        <div class="main-content">
+            <div class="panel">
+                <h2>Swift Basics</h2>
+                
+                <h3>Variables and Constants</h3>
+                <p>Swift uses <span class="keyword">var</span> for variables and <span class="keyword">let</span> for constants.</p>
+                
+                <div class="code-block">
+                    <span class="keyword">var</span> userName = <span class="string">"Neo"</span> <span class="comment">// Variable (mutable)</span><br>
+                    <span class="keyword">let</span> maxLoginAttempts = <span class="type">3</span> <span class="comment">// Constant (immutable)</span><br>
+                    userName = <span class="string">"Trinity"</span> <span class="comment">// This is allowed</span><br>
+                    <span class="comment">// maxLoginAttempts = 5 // This would cause an error</span>
+                </div>
+                
+                <h3>Data Types</h3>
+                <p>Swift is a type-safe language with strong type inference.</p>
+                
+                <div class="code-block">
+                    <span class="keyword">var</span> message: <span class="type">String</span> = <span class="string">"Hello, System"</span><br>
+                    <span class="keyword">var</span> accessLevel: <span class="type">Int</span> = <span class="type">9</span><br>
+                    <span class="keyword">var</span> isOnline: <span class="type">Bool</span> = <span class="keyword">true</span><br>
+                    <span class="keyword">var</span> connectionSpeed: <span class="type">Double</span> = <span class="type">100.5</span><br>
+                </div>
+                
+                <h3>Control Flow</h3>
+                <p>Swift provides standard control flow statements.</p>
+                
+                <div class="code-block">
+                    <span class="keyword">if</span> accessLevel > <span class="type">5</span> {<br>
+                    &nbsp;&nbsp;print(<span class="string">"Admin access granted"</span>)<br>
+                    } <span class="keyword">else</span> {<br>
+                    &nbsp;&nbsp;print(<span class="string">"Insufficient privileges"</span>)<br>
+                    }<br><br>
+                    
+                    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="type">1</span>...<span class="type">5</span> {<br>
+                    &nbsp;&nbsp;print(<span class="string">"Scanning sector </span>\(i)<span class="string">"</span>)<br>
+                    }<br><br>
+                    
+                    <span class="keyword">var</span> systemStatus = <span class="string">"online"</span><br>
+                    <span class="keyword">switch</span> systemStatus {<br>
+                    &nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"online"</span>:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"System operational"</span>)<br>
+                    &nbsp;&nbsp;<span class="keyword">case</span> <span class="string">"offline"</span>:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"System shutdown"</span>)<br>
+                    &nbsp;&nbsp;<span class="keyword">default</span>:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"Status unknown"</span>)<br>
+                    }
+                </div>
+            </div>
+            
+            <div class="panel">
+                <h2>Functions & Collections</h2>
+                
+                <h3>Functions</h3>
+                <p>Functions are self-contained chunks of code that perform specific tasks.</p>
+                
+                <div class="code-block">
+                    <span class="comment">// Function without parameters</span><br>
+                    <span class="keyword">func</span> bootSystem() -> <span class="type">String</span> {<br>
+                    &nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"System boot sequence initiated"</span><br>
+                    }<br><br>
+                    
+                    <span class="comment">// Function with parameters</span><br>
+                    <span class="keyword">func</span> authenticateUser(username: <span class="type">String</span>, password: <span class="type">String</span>) -> <span class="type">Bool</span> {<br>
+                    &nbsp;&nbsp;<span class="keyword">return</span> username == <span class="string">"admin"</span> && password == <span class="string">"cyber"</span><br>
+                    }<br><br>
+                    
+                    <span class="comment">// Function call</span><br>
+                    <span class="keyword">let</span> authResult = authenticateUser(username: <span class="string">"admin"</span>, password: <span class="string">"cyber"</span>)<br>
+                    print(<span class="string">"Authentication: </span>\(authResult)<span class="string">"</span>)
+                </div>
+                
+                <h3>Arrays and Dictionaries</h3>
+                <p>Collections are used to store multiple values.</p>
+                
+                <div class="code-block">
+                    <span class="comment">// Array</span><br>
+                    <span class="keyword">var</span> systems = [<span class="string">"Security"</span>, <span class="string">"Network"</span>, <span class="string">"Database"</span>]<br>
+                    systems.append(<span class="string">"AI Core"</span>)<br>
+                    print(<span class="string">"Total systems: </span>\(systems.count)<span class="string">"</span>)<br><br>
+                    
+                    <span class="comment">// Dictionary</span><br>
+                    <span class="keyword">var</span> systemStatus = [<br>
+                    &nbsp;&nbsp;<span class="string">"Security"</span>: <span class="string">"Online"</span>,<br>
+                    &nbsp;&nbsp;<span class="string">"Network"</span>: <span class="string">"Offline"</span>,<br>
+                    &nbsp;&nbsp;<span class="string">"Database"</span>: <span class="string">"Online"</span><br>
+                    ]<br>
+                    systemStatus[<span class="string">"AI Core"</span>] = <span class="string">"Booting"</span>
+                </div>
+                
+                <h3>Optionals</h3>
+                <p>Optionals handle the absence of a value.</p>
+                
+                <div class="code-block">
+                    <span class="keyword">var</span> encryptedMessage: <span class="type">String?</span> = <span class="string">"Secret Data"</span><br>
+                    encryptedMessage = <span class="keyword">nil</span> <span class="comment">// No value</span><br><br>
+                    
+                    <span class="comment">// Optional binding</span><br>
+                    <span class="keyword">if</span> <span class="keyword">let</span> message = encryptedMessage {<br>
+                    &nbsp;&nbsp;print(<span class="string">"Decrypted: </span>\(message)<span class="string">"</span>)<br>
+                    } <span class="keyword">else</span> {<br>
+                    &nbsp;&nbsp;print(<span class="string">"No message to decrypt"</span>)<br>
+                    }<br><br>
+                    
+                    <span class="comment">// Nil coalescing</span><br>
+                    <span class="keyword">let</span> safeMessage = encryptedMessage ?? <span class="string">"Default Message"</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel interactive-area">
+            <h2>Interactive Playground</h2>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="openTab(event, 'tab1')">Variable Playground</button>
+                <button class="tab" onclick="openTab(event, 'tab2')">Function Tester</button>
+                <button class="tab" onclick="openTab(event, 'tab3')">Control Flow</button>
+            </div>
+            
+            <div id="tab1" class="tab-content active">
+                <p>Experiment with Swift variables and constants:</p>
+                <input type="text" id="varName" placeholder="Enter variable name">
+                <input type="text" id="varValue" placeholder="Enter variable value">
+                <select id="varType">
+                    <option value="String">String</option>
+                    <option value="Int">Int</option>
+                    <option value="Double">Double</option>
+                    <option value="Bool">Bool</option>
+                </select>
+                <button onclick="createVariable()">Create Variable</button>
+                <div class="output" id="varOutput"></div>
+            </div>
+            
+            <div id="tab2" class="tab-content">
+                <p>Test a simple function that checks if a number is even:</p>
+                <input type="number" id="numberInput" placeholder="Enter a number">
+                <button onclick="checkEven()">Check if Even</button>
+                <div class="output" id="funcOutput"></div>
+            </div>
+            
+            <div id="tab3" class="tab-content">
+                <p>Control flow example - Access level check:</p>
+                <input type="number" id="accessInput" placeholder="Enter access level (1-10)" min="1" max="10">
+                <button onclick="checkAccess()">Check Access</button>
+                <div class="output" id="accessOutput"></div>
+            </div>
+            
+        </div>
+        <div class="Link">
+                <a href="https://youtu.be/n5X_V81OYnQ" style="color: orangered;">Learn the Essentials of Swift in one hour: By Paul Hudson</a><br>
+            </div>
+        <a href="../html/RGD.html">
+            <button>Exit</button>
+        </a>
+        
+        <footer>
+            <p>Baguio Central University</p>
+            <p>&copy; Bachelor of Science in Computer Science. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="../js/Swift.js"></script>
+</body>
+</html>

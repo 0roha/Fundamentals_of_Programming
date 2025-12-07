@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruby Fundamentals</title>
+    <link rel="stylesheet" href="../css/RRUBY.css">
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <div class="scan-line"></div>
+    
+    <header>
+        <div class="ruby-logo"></div>
+        <h1>Ruby</h1>
+        <p class="subtitle">Fundamentals of Programming - Ruby Fundamentals : Server-side</p>
+    </header>
+    
+    <div class="container">
+        <section>
+            <h2 class="section-title">Core Principles & Features</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <h3>Purely Object-Oriented</h3>
+                    <p>In Ruby, everything is an object - even primitive data types. Each piece of code can have its own properties and actions.</p>
+                    <div class="code-block">
+                        <span class="code-comment"># Everything is an object</span><br>
+                        5.<span class="code-method">times</span> { <span class="code-keyword">puts</span> <span class="code-string">"Hello"</span> }<br>
+                        <span class="code-comment"># Even classes are objects</span><br>
+                        String.<span class="code-method">class</span> <span class="code-comment"># => Class</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Dynamic & Concise Syntax</h3>
+                    <p>Ruby is dynamically typed and has a very readable, natural syntax that minimizes boilerplate code.</p>
+                    <div class="code-block">
+                        <span class="code-comment"># Clear, English-like syntax</span><br>
+                        [<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>].<span class="code-method">each</span> <span class="code-keyword">do</span> |number|<br>
+                        &nbsp;&nbsp;<span class="code-keyword">puts</span> number * <span class="code-number">2</span><br>
+                        <span class="code-keyword">end</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Automatic Memory Management</h3>
+                    <p>Ruby features garbage collection, automatically freeing developers from manual memory management tasks.</p>
+                    <div class="code-block">
+                        <span class="code-comment"># No need to manually allocate/free memory</span><br>
+                        obj = Object.<span class="code-method">new</span> <span class="code-comment"># Memory allocated automatically</span><br>
+                        obj = <span class="code-keyword">nil</span> <span class="code-comment"># Eligible for garbage collection</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Flexibility</h3>
+                    <p>Ruby allows you to modify existing classes and objects, giving you powerful metaprogramming capabilities.</p>
+                    <div class="code-block">
+                        <span class="code-comment"># Adding methods to existing classes</span><br>
+                        <span class="code-keyword">class</span> String<br>
+                        &nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-method">shout</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">self</span>.upcase + <span class="code-string">"!"</span><br>
+                        &nbsp;&nbsp;<span class="code-keyword">end</span><br>
+                        <span class="code-keyword">end</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Metaprogramming</h3>
+                    <p>Ruby programs can write, read, and modify other Ruby programs at runtime, enabling powerful DSLs.</p>
+                    <div class="code-block">
+                        <span class="code-comment"># Dynamically defining methods</span><br>
+                        [<span class="code-string">'name'</span>, <span class="code-string">'email'</span>].<span class="code-method">each</span> <span class="code-keyword">do</span> |attr|<br>
+                        &nbsp;&nbsp;define_method(attr) { instance_variable_get(<span class="code-string">"@#{attr}"</span>) }<br>
+                        <span class="code-keyword">end</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Support for Multiple Paradigms</h3>
+                    <p>While primarily object-oriented, Ruby supports procedural, functional, and imperative programming styles.</p>
+                    <div class="code-block">
+                        <span class="code-comment"># Functional programming features</span><br>
+                        numbers = [<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>, <span class="code-number">5</span>]<br>
+                        squares = numbers.<span class="code-method">map</span> { |n| n * n }<br>
+                        sum = numbers.<span class="code-method">reduce</span>(:+)
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="cyber-line"></div>
+        
+        <section>
+            <h2 class="section-title">Key Concepts to Learn</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <h3>Classes and Objects</h3>
+                    <p>The foundation of Ruby's object-oriented nature. Understand how to define classes and create objects.</p>
+                    <div class="code-block">
+                        <span class="code-keyword">class</span> Person<br>
+                        &nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-method">initialize</span>(name)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;@name = name<br>
+                        &nbsp;&nbsp;<span class="code-keyword">end</span><br>
+                        <span class="code-keyword">end</span><br><br>
+                        person = Person.<span class="code-method">new</span>(<span class="code-string">"Alice"</span>)
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Variables, Data Types, and Data Structures</h3>
+                    <p>Learn about Ruby's variable types, data structures like arrays and hashes, and dynamic typing.</p>
+                    <div class="code-block">
+                        <span class="code-comment"># Different variable types</span><br>
+                        local_var = <span class="code-string">"value"</span>  <span class="code-comment"># local</span><br>
+                        @instance_var = <span class="code-string">"value"</span> <span class="code-comment"># instance</span><br>
+                        @@class_var = <span class="code-string">"value"</span> <span class="code-comment"># class</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Control Structures</h3>
+                    <p>Master conditionals, loops, and other control structures that dictate program flow.</p>
+                    <div class="code-block">
+                        <span class="code-comment"># Ruby conditionals</span><br>
+                        <span class="code-keyword">if</span> condition<br>
+                        &nbsp;&nbsp;<span class="code-keyword">puts</span> <span class="code-string">"True"</span><br>
+                        <span class="code-keyword">else</span><br>
+                        &nbsp;&nbsp;<span class="code-keyword">puts</span> <span class="code-string">"False"</span><br>
+                        <span class="code-keyword">end</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Methods and Blocks</h3>
+                    <p>Understand method definition, invocation, and the powerful block syntax that enables Ruby's iterators.</p>
+                    <div class="code-block">
+                        <span class="code-comment"># Method with block</span><br>
+                        <span class="code-keyword">def</span> <span class="code-method">greet</span><br>
+                        &nbsp;&nbsp;<span class="code-keyword">yield</span> <span class="code-keyword">if</span> block_given?<br>
+                        <span class="code-keyword">end</span><br><br>
+                        greet { <span class="code-keyword">puts</span> <span class="code-string">"Hello!"</span> }
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Standard Library and Gems</h3>
+                    <p>Explore Ruby's extensive standard library and the gem ecosystem for extending functionality.</p>
+                    <div class="code-block">
+                        <span class="code-comment"># Using gems</span><br>
+                        <span class="code-comment"># gem install nokogiri</span><br>
+                        require <span class="code-string">'nokogiri'</span><br>
+                        require <span class="code-string">'open-uri'</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Ruby on Rails</h3>
+                    <p>The popular web framework that showcases Ruby's power through convention over configuration.</p>
+                    <div class="code-block">
+                        <span class="code-comment"># Rails example</span><br>
+                        <span class="code-keyword">class</span> ArticlesController < ApplicationController<br>
+                        &nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-method">show</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;@article = Article.<span class="code-method">find</span>(params[:id])<br>
+                        &nbsp;&nbsp;<span class="code-keyword">end</span><br>
+                        <span class="code-keyword">end</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+         <div class="cyber-line"></div>
+
+        <div class="Link">
+                <a href="https://youtu.be/cngXCWzA6xg" style="color: orangered; margin-left: 300px;">Ruby programming language basics: InvolveInInnovation</a><br>
+                <a href="https://youtu.be/PH21YzK3hJ4" style="color: orangered; margin-left: 300px;">Learn Ruby On Rails: SkillsBuild Security</a><br>
+                
+        </div>
+
+        
+      
+        <a>
+            <button id="runcode" class="glow-button">EXIT</button>
+        </a>
+            
+        
+    </div>
+        
+        
+    <footer>
+        <p>Baguio Central University</p>
+        <p>&copy; Bachelor of Science in Computer Science. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/RRUBY.js"></script>
+</body>
+
+</html>

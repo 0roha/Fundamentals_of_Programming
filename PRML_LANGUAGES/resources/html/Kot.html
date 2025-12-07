@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kotlin Fundamentals</title>
+    <link rel="stylesheet" href="../css/Kot.css">
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <div class="scan-line"></div>
+    
+    <div class="container">
+        <header>
+            <div class="kotlin-logo">K</div>
+            <h1 class="glitch" data-text="KOTLIN FUNDAMENTALS">KOTLIN</h1>
+            <p class="subtitle">Fundamentals of Programming - Kotlin Fundamentals : Server/Client-side</p>
+            
+            <div class="nav-container">
+                <button class="nav-btn" onclick="scrollToSection('basics')">Basics</button>
+                <button class="nav-btn" onclick="scrollToSection('syntax')">Syntax</button>
+                <button class="nav-btn" onclick="scrollToSection('functions')">Functions</button>
+                <button class="nav-btn" onclick="scrollToSection('oop')">OOP</button>
+                <button class="nav-btn" onclick="scrollToSection('features')">Features</button>
+                <a href="../html/RGD.html">
+                    <button class="nav-btn">Exit</button>
+                </a>
+            </div>
+        </header>
+        
+        <main>
+            <div class="content-grid">
+                <!-- Basics Card -->
+                <div class="content-card" id="basics">
+                    <div class="card-header">
+                        <div class="card-icon">01</div>
+                        <h2 class="card-title">KOTLIN BASICS</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Kotlin is a statically typed programming language that runs on the Java Virtual Machine and can be compiled to JavaScript source code.</p>
+                        
+                        <div class="code-block">
+                            <span class="keyword">fun</span> <span class="function">main</span>() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Print to console</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hello, Kotlin!"</span>)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Variables</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span> name = <span class="string">"CyberDev"</span> <span class="comment">// Immutable</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span> count = 0 <span class="comment">// Mutable</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Syntax Card -->
+                <div class="content-card" id="syntax">
+                    <div class="card-header">
+                        <div class="card-icon">02</div>
+                        <h2 class="card-title">SYNTAX & DATA TYPES</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Kotlin provides a concise syntax with type inference and null safety built into the type system.</p>
+                        
+                        <div class="code-block">
+                            <span class="comment">// Data types</span><br>
+                            <span class="keyword">val</span> number: <span class="type">Int</span> = 42<br>
+                            <span class="keyword">val</span> decimal: <span class="type">Double</span> = 3.14<br>
+                            <span class="keyword">val</span> text: <span class="type">String</span> = <span class="string">"Kotlin"</span><br>
+                            <span class="keyword">val</span> isReady: <span class="type">Boolean</span> = <span class="keyword">true</span><br>
+                            <span class="keyword">val</span> list: <span class="type">List</span>&lt;<span class="type">String</span>&gt; = listOf(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>)<br>
+                            <br>
+                            <span class="comment">// Null safety</span><br>
+                            <span class="keyword">var</span> nullableString: <span class="type">String</span>? = <span class="keyword">null</span><br>
+                            <span class="keyword">val</span> length = nullableString?.length ?: 0
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Functions Card -->
+                <div class="content-card" id="functions">
+                    <div class="card-header">
+                        <div class="card-icon">03</div>
+                        <h2 class="card-title">FUNCTIONS</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Kotlin functions are declared using the 'fun' keyword. They support default arguments, named parameters, and extension functions.</p>
+                        
+                        <div class="code-block">
+                            <span class="comment">// Basic function</span><br>
+                            <span class="keyword">fun</span> <span class="function">greet</span>(name: <span class="type">String</span>): <span class="type">String</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"Hello, $name"</span><br>
+                            }<br>
+                            <br>
+                            <span class="comment">// Single-expression function</span><br>
+                            <span class="keyword">fun</span> <span class="function">square</span>(x: <span class="type">Int</span>) = x * x<br>
+                            <br>
+                            <span class="comment">// Function with default parameter</span><br>
+                            <span class="keyword">fun</span> <span class="function">connect</span>(<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;host: <span class="type">String</span>, <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;port: <span class="type">Int</span> = 8080<br>
+                            ) { <span class="comment">/* ... */</span> }<br>
+                            <br>
+                            <span class="comment">// Extension function</span><br>
+                            <span class="keyword">fun</span> <span class="type">String</span>.<span class="function">reverse</span>() = <span class="keyword">this</span>.reversed()
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- OOP Card -->
+                <div class="content-card" id="oop">
+                    <div class="card-header">
+                        <div class="card-icon">04</div>
+                        <h2 class="card-title">OBJECT-ORIENTED PROGRAMMING</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Kotlin supports OOP with classes, objects, interfaces, and data classes that reduce boilerplate code.</p>
+                        
+                        <div class="code-block">
+                            <span class="comment">// Class with primary constructor</span><br>
+                            <span class="keyword">class</span> <span class="type">User</span>(<span class="keyword">val</span> name: <span class="type">String</span>, <span class="keyword">var</span> age: <span class="type">Int</span>)<br>
+                            <br>
+                            <span class="comment">// Data class (automatically implements equals, hashCode, toString)</span><br>
+                            <span class="keyword">data class</span> <span class="type">Person</span>(<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span> name: <span class="type">String</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span> email: <span class="type">String</span><br>
+                            )<br>
+                            <br>
+                            <span class="comment">// Interface</span><br>
+                            <span class="keyword">interface</span> <span class="type">Repository</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fun</span> <span class="function">getById</span>(id: <span class="type">Int</span>): <span class="type">Any</span>?<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">fun</span> <span class="function">save</span>(item: <span class="type">Any</span>)<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Features Card -->
+                <div class="content-card" id="features">
+                    <div class="card-header">
+                        <div class="card-icon">05</div>
+                        <h2 class="card-title">KEY FEATURES</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Kotlin includes many modern language features that make development more productive and enjoyable.</p>
+                        
+                        <ul class="feature-list">
+                            <li><strong>Null Safety</strong> - Eliminates NullPointerExceptions</li>
+                            <li><strong>Extension Functions</strong> - Add functionality to existing classes</li>
+                            <li><strong>Smart Casts</strong> - Automatically casts types after checks</li>
+                            <li><strong>Data Classes</strong> - Reduce boilerplate for POJOs</li>
+                            <li><strong>Coroutines</strong> - Asynchronous programming made easy</li>
+                            <li><strong>Type Inference</strong> - No need to explicitly declare types</li>
+                            <li><strong>Interoperability</strong> - Seamless Java integration</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Control Flow Card -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <div class="card-icon">06</div>
+                        <h2 class="card-title">CONTROL FLOW</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>Kotlin provides familiar control flow structures with some enhancements for better expressiveness.</p>
+                        
+                        <div class="code-block">
+                            <span class="comment">// If expression (returns a value)</span><br>
+                            <span class="keyword">val</span> max = <span class="keyword">if</span> (a > b) a <span class="keyword">else</span> b<br>
+                            <br>
+                            <span class="comment">// When expression (enhanced switch)</span><br>
+                            <span class="keyword">val</span> description = <span class="keyword">when</span> (x) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;0 -> <span class="string">"zero"</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;1 -> <span class="string">"one"</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">in</span> 2..10 -> <span class="string">"small number"</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span> -> <span class="string">"large number"</span><br>
+                            }<br>
+                            <br>
+                            <span class="comment">// For loop</span><br>
+                            <span class="keyword">for</span> (i <span class="keyword">in</span> 1..5) { println(i) }<br>
+                            <span class="keyword">for</span> (item <span class="keyword">in</span> collection) { println(item) }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="Link">
+                <a href="https://youtu.be/8uEYI6lTGps" style="color: orangered;">Full Kotlin Crash Course: By Coding Ambitions</a><br>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Baguio Central University</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">&copy; Bachelor of Science in Computer Science. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="../js/Kot.js"></script>
+</body>
+</html>

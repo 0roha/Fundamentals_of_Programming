@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Fundamentals</title>
+    <link rel="stylesheet" href="../css/PHP.css">
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    <canvas class="matrix-rain" id="matrixRain"></canvas>
+    
+    <header>
+        <h1>PHP <span class="neon-text">PROGRAMMING</span></h1>
+        <p class="subtitle">Fundamentals of Programming - PHP Fundamentals : Server-side</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#syntax">Syntax</a></li>
+            <li><a href="#variables">Variables</a></li>
+            <li><a href="#control">Control Flow</a></li>
+            <li><a href="#functions">Functions</a></li>
+            <li><a href="#forms">Forms & Data</a></li>
+            <li><a href="../html/RWD.html">EXIT</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section id="intro">
+            <h2>INTRODUCTION TO PHP</h2>
+            <p>PHP (Hypertext Preprocessor) is a server-side scripting language designed for web development. It's powerful, flexible, and used by millions of websites.</p>
+            
+            <div class="hacker-terminal">
+                <div class="terminal-prompt"><?php echo "Hello, Cyber World!"; ?></div>
+                <div>Hello, Cyber World!</div>
+                <div class="terminal-prompt">// PHP code is executed on the server</div>
+                <div class="terminal-prompt"><span class="blinking-cursor"></span></div>
+            </div>
+            
+            <p>PHP was created by Rasmus Lerdorf in 1994 and has evolved into a full-featured language that powers major platforms like WordPress, Wikipedia, and Facebook.</p>
+            
+            <h3>Why PHP?</h3>
+            <ul>
+                <li>Runs on almost all servers and operating systems</li>
+                <li>Compatible with almost all databases</li>
+                <li>Open source with a huge community</li>
+                <li>Easy to learn with great documentation</li>
+            </ul>
+        </section>
+        
+        <div class="cyber-line"></div>
+        
+        <section id="syntax">
+            <h2>PHP SYNTAX</h2>
+            <p>PHP code is embedded within HTML and executed on the server before the page is sent to the client's browser.</p>
+            
+            <div class="code-block">
+                <pre><code>// PHP code is enclosed in <?php ?> tags
+<?php
+  // This is a single-line comment
+  echo "Hello World!"; // This outputs Hello World!
+  
+  /*
+   This is a multi-line comment
+   It can span several lines
+  */
+  
+  // PHP statements end with a semicolon
+  $variable = "value";
+?></code></pre>
+            </div>
+            
+            <h3>Key Syntax Rules:</h3>
+            <ul>
+                <li>All PHP code must be enclosed within <?php ?> tags</li>
+                <li>Statements must end with a semicolon (;)</li>
+                <li>Variable names start with a dollar sign ($)</li>
+                <li>PHP is case-sensitive for variable names</li>
+                <li>Comments can be // for single-line or /* */ for multi-line</li>
+            </ul>
+        </section>
+        
+        <div class="cyber-line"></div>
+        
+        <section id="variables">
+            <h2>VARIABLES & DATA TYPES</h2>
+            <p>In PHP, variables are declared with a $ sign followed by the variable name. PHP is loosely typed, meaning you don't need to declare data types.</p>
+            
+            <div class="code-block">
+                <pre><code><?php
+// Variable assignment
+$name = "Neo";          // string
+$age = 30;              // integer
+$height = 5.9;          // float
+$isAdmin = true;        // boolean
+
+// Arrays
+$colors = array("red", "green", "blue");
+$person = array("name" => "John", "age" => 30);
+
+// Constants
+define("SITE_NAME", "CyberPHP");
+?></code></pre>
+            </div>
+            
+            <div class="interactive">
+                <h3>Variable Playground</h3>
+                <p>Try different variable operations:</p>
+                <button onclick="runVariableDemo()">Run Variable Examples</button>
+                <div class="output" id="variable-output"></div>
+            </div>
+        </section>
+        
+        <div class="cyber-line"></div>
+        
+        <section id="control">
+            <h2>CONTROL FLOW</h2>
+            <p>Control flow statements allow you to control the execution of your code based on conditions.</p>
+            
+            <h3>Conditional Statements</h3>
+            <div class="code-block">
+                <pre><code><?php
+$age = 25;
+
+// if/elseif/else statements
+if ($age < 13) {
+    echo "Child";
+} elseif ($age < 20) {
+    echo "Teenager";
+} else {
+    echo "Adult";
+}
+
+// Switch statement
+$role = "admin";
+switch ($role) {
+    case "admin":
+        echo "Full access";
+        break;
+    case "user":
+        echo "Limited access";
+        break;
+    default:
+        echo "No access";
+}
+?></code></pre>
+            </div>
+            
+            <h3>Loops</h3>
+            <div class="code-block">
+                <pre><code><?php
+// For loop
+for ($i = 0; $i < 5; $i++) {
+    echo "Iteration: " . $i . "<br>";
+}
+
+// While loop
+$count = 0;
+while ($count < 5) {
+    echo "Count: " . $count . "<br>";
+    $count++;
+}
+
+// Foreach loop (for arrays)
+$colors = array("red", "green", "blue");
+foreach ($colors as $color) {
+    echo "Color: " . $color . "<br>";
+}
+?></code></pre>
+            </div>
+            
+            <div class="interactive">
+                <h3>Control Flow Simulator</h3>
+                <p>Enter a number: <input type="number" id="number-input" value="10"></p>
+                <button onclick="checkNumber()">Check Number</button>
+                <button onclick="countNumbers()">Count to Number</button>
+                <div class="output" id="control-output"></div>
+            </div>
+        </section>
+        
+        <div class="cyber-line"></div>
+        
+        <section id="functions">
+            <h2>FUNCTIONS</h2>
+            <p>Functions are blocks of code that perform specific tasks and can be reused throughout your program.</p>
+            
+            <div class="code-block">
+                <pre><code><?php
+// Function definition
+function greet($name) {
+    return "Hello, " . $name . "!";
+}
+
+// Function call
+$message = greet("Trinity");
+echo $message;  // Output: Hello, Trinity!
+
+// Function with default parameter
+function cyberGreet($name = "Hacker") {
+    return "Welcome, " . $name . "!";
+}
+
+echo cyberGreet();          // Output: Welcome, Hacker!
+echo cyberGreet("Morpheus"); // Output: Welcome, Morpheus!
+
+// Function returning values
+function addNumbers($a, $b) {
+    return $a + $b;
+}
+
+$result = addNumbers(5, 3);
+echo $result;  // Output: 8
+?></code></pre>
+            </div>
+            
+            <div class="interactive">
+                <h3>Function Creator</h3>
+                <p>Define a function that adds two numbers:</p>
+                <p>Number 1: <input type="number" id="num1" value="5"></p>
+                <p>Number 2: <input type="number" id="num2" value="3"></p>
+                <button onclick="addNumbers()">Add Numbers</button>
+                <div class="output" id="function-output"></div>
+            </div>
+        </section>
+        
+        <div class="cyber-line"></div>
+        
+        <section id="forms">
+            <h2>HANDLING FORMS & USER DATA</h2>
+            <p>PHP is commonly used to process form data submitted by users.</p>
+            
+            <div class="code-block">
+                <pre><code><?php
+// Handling a simple form
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get form data
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    
+    // Validate and process data
+    if (!empty($username) && !empty($email)) {
+        echo "Welcome, " . htmlspecialchars($username) . "!";
+        echo "Your email is: " . htmlspecialchars($email);
+    } else {
+        echo "Please fill all fields!";
+    }
+}
+?></code></pre>
+            </div>
+            
+            <div class="interactive">
+                <h3>Form Simulator</h3>
+                <p>Username: <input type="text" id="username" value="CyberHacker"></p>
+                <p>Email: <input type="email" id="email" value="hacker@matrix.com"></p>
+                <button onclick="processForm()">Process Form</button>
+                <div class="output" id="form-output"></div>
+            </div>
+            
+            <h3>Security Notes:</h3>
+            <ul>
+                <li>Always validate user input</li>
+                <li>Use htmlspecialchars() to prevent XSS attacks</li>
+                <li>Use prepared statements for database queries</li>
+                <li>Never trust user input</li>
+            </ul>
+        </section>
+    </div>
+    <div class="Links">
+        <a href="https://youtube.com/playlist?list=PL0eyrZgxdwhwwQQZA79OzYwl5ewA7HQih&si=W1qtBr_5YLPnOu2w" style="color: orangered; margin-left: 600px;">PHP Course for Beginners: By Dani Krossing</a>
+    </div>
+    
+    <footer>
+        <p>Baguio Central University</p>
+        <p class="neon-text">&copy; Bachelor of Science in Computer Science. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/PHP.js"></script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Python Fundamentals</title>
+  <link rel="stylesheet" href="../css/Python.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">Py</div>
+      <div>
+        <h1>PYTHON</h1>
+        <p class="lead">Fundamentals Of Programming - Python Fundamentals : Server-side</p>
+      </div>
+    </header>
+
+    <nav aria-label="Quick links">
+      <a href="#intro">Intro</a>
+      <a href="#syntax">Basic Syntax</a>
+      <a href="#types">Variables & Types</a>
+      <a href="#control">Control Flow</a>
+      <a href="#functions">Functions</a>
+      <a href="#oop">OOP</a>
+      <a href="#files">File I/O</a>
+      <a href="#advanced">Advanced</a>
+    </nav>
+
+    <main>
+      <section>
+        <article class="card">
+
+          <div id="intro" class="section">
+            <h2>1. Introduction</h2>
+            <p class="muted">Python is a high-level, interpreted language valued for readability and rapid development. Uses: web, data, automation, AI, scripting.</p>
+          </div>
+
+          <div id="syntax" class="section">
+            <h2>2. Basic Syntax</h2>
+            <p class="muted">Indentation defines blocks. No semicolons required.</p>
+            <button class="copy" data-target="s1">Copy</button>
+            <pre id="s1"><code>print("Hello, World!")  # simple output</code></pre>
+          </div>
+
+          <div id="types" class="section">
+            <h2>3. Variables & Data Types</h2>
+            <p class="muted">Python is dynamically typed. Common built-ins shown below.</p>
+            <button class="copy" data-target="s2">Copy</button>
+            <pre id="s2"><code># Numbers
+x = 10          # int
+y = 3.14        # float
+
+# Strings
+name = "Alice"
+
+# Boolean
+is_valid = True
+
+# Containers
+lst = [1,2,3]
+tpl = (1,2)
+d = {"k": "v"}
+st = {1,2,3}</code></pre>
+          </div>
+
+          <div id="operators" class="section">
+            <h2>4. Operators</h2>
+            <button class="copy" data-target="s3">Copy</button>
+            <pre id="s3"><code># Arithmetic
+a = 5 + 3
+b = 5 ** 2   # exponent
+c = 10 // 3  # floor div
+
+# Comparison
+5 > 3   # True
+
+# Logical
+True and False  # False
+
+# Membership
+"a" in "apple"  # True</code></pre>
+          </div>
+
+          <div id="io" class="section">
+            <h2>5. Input & Output</h2>
+            <button class="copy" data-target="s4">Copy</button>
+            <pre id="s4"><code>name = input("Enter your name: ")
+print("Hello,", name)</code></pre>
+          </div>
+
+          <div id="control" class="section">
+            <h2>6. Control Flow</h2>
+            <h3>If / Else</h3>
+            <button class="copy" data-target="s5">Copy</button>
+            <pre id="s5"><code>x = 10
+if x > 0:
+    print("Positive")
+elif x == 0:
+    print("Zero")
+else:
+    print("Negative")</code></pre>
+
+            <h3>Loops</h3>
+            <button class="copy" data-target="s6">Copy</button>
+            <pre id="s6"><code># for loop
+for i in range(5):
+    print(i)
+
+# while loop
+n = 5
+while n > 0:
+    print(n)
+    n -= 1</code></pre>
+          </div>
+
+          <div id="functions" class="section">
+            <h2>7. Functions</h2>
+            <button class="copy" data-target="s7">Copy</button>
+            <pre id="s7"><code>def greet(name):
+    return "Hello, " + name
+
+print(greet("Alice"))</code></pre>
+          </div>
+
+          <div id="data-structures" class="section">
+            <h2>8. Data Structures</h2>
+            <button class="copy" data-target="s8">Copy</button>
+            <pre id="s8"><code># List
+fruits = ["apple","banana"]
+fruits.append("orange")
+
+# Tuple (immutable)
+point = (3,4)
+
+# Set
+s = {1,2,3}
+
+# Dict
+person = {"name":"Alice","age":25}</code></pre>
+          </div>
+
+          <div id="strings" class="section">
+            <h2>9. Strings</h2>
+            <button class="copy" data-target="s9">Copy</button>
+            <pre id="s9"><code>text = "Python"
+print(text.upper())    # PYTHON
+print(text[0:3])       # Pyt
+print(len(text))       # 6</code></pre>
+          </div>
+
+          <div id="exceptions" class="section">
+            <h2>10. Exception Handling</h2>
+            <button class="copy" data-target="s10">Copy</button>
+            <pre id="s10"><code>try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+finally:
+    print("Done")</code></pre>
+          </div>
+
+          <div id="files" class="section">
+            <h2>11. File Handling</h2>
+            <button class="copy" data-target="s11">Copy</button>
+            <pre id="s11"><code># Write
+with open("data.txt","w") as f:
+    f.write("Hello Python")
+
+# Read
+with open("data.txt","r") as f:
+    print(f.read())</code></pre>
+          </div>
+
+          <div id="oop" class="section">
+            <h2>12. Object-Oriented Programming</h2>
+            <button class="copy" data-target="s12">Copy</button>
+            <pre id="s12"><code>class Animal:
+    def __init__(self, name):
+        self.name = name
+    def speak(self):
+        print(self.name + " makes a sound")
+
+class Dog(Animal):
+    def speak(self):
+        print(self.name + " barks")
+
+dog = Dog("Buddy")
+dog.speak()</code></pre>
+          </div>
+
+          <div id="modules" class="section">
+            <h2>13. Modules & Libraries</h2>
+            <p class="muted">Use <code>import</code> for built-ins and <code>pip install</code> for third-party packages.</p>
+            <button class="copy" data-target="s13">Copy</button>
+            <pre id="s13"><code>import math
+print(math.sqrt(16))  # 4.0</code></pre>
+          </div>
+
+          <div id="advanced" class="section">
+            <h2>14. Advanced Concepts</h2>
+            <h3>Comprehensions, Lambdas, Generators</h3>
+            <button class="copy" data-target="s14">Copy</button>
+            <pre id="s14"><code># List comprehension
+squares = [x**2 for x in range(5)]
+
+# Lambda
+f = lambda x: x + 2
+
+# Generator
+def my_gen():
+    yield 1
+    yield 2</code></pre>
+          </div>
+
+          <footer>
+            <p>Made by: BSCS</p>
+          </footer>
+
+        </article>
+      </section>
+
+      <aside>
+        <div class="card">
+          <h3>Quick Tools</h3>
+          <p class="muted"></p>
+
+          <hr style="border:none;height:1px;background:rgba(255,255,255,0.03);margin:12px 0">
+
+          <div style="margin-bottom:12px">
+            <a>
+              <button id="downloadBtn" class="btn">EXIT</button>
+            </a>
+            
+          </div>
+
+          <div style="margin-bottom:8px">
+            <button id="toggleTheme" class="btn">Toggle Minimal Theme</button>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin:4px 0">Links</h4>
+            
+              <a href="https://youtu.be/4YW886M41g0?list=PLj8W7XIvO93paRBPCuGFGEC94xJofOgO5" style="color: orangered;">Python: Intro to Python Variables: By Programming and Math Tutorials</a>
+              <a href="https://youtu.be/yE9v9rt6ziw" style="color: orangered;">Python Tutorials for Beginners: By Programming with Mosh</a>
+      
+            
+          </div>
+        </div>
+      </aside>
+
+    </main>
+  </div>
+
+  <script src="../js/Python.js"></script>
+</body>
+</html>
+

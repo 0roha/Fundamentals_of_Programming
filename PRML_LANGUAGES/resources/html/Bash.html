@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShell: Bash Programming</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --cyber-green: #00ff9d;
+            --cyber-blue: #00f3ff;
+            --cyber-purple: #bc13fe;
+            --cyber-pink: #ff00ff;
+            --cyber-orange: #ff6600;
+            --dark-bg: #0a0a0f;
+            --darker-bg: #050508;
+            --grid-color: rgba(0, 255, 157, 0.1);
+            --terminal-bg: #001100;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: #e0e0ff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            min-height: 100vh;
+        }
+        
+        .cyber-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        /* Header styling */
+        .cyber-header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--cyber-green);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cyber-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 157, 0.1), transparent);
+            animation: scanline 8s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .cyber-title {
+            font-size: 3.5rem;
+            color: white;
+            text-shadow: 
+                0 0 10px var(--cyber-green),
+                0 0 20px var(--cyber-green),
+                0 0 40px var(--cyber-green);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .cyber-subtitle {
+            font-size: 1.2rem;
+            color: var(--cyber-blue);
+            text-shadow: 0 0 5px var(--cyber-blue);
+            letter-spacing: 2px;
+        }
+        
+        .terminal-badge {
+            display: inline-block;
+            background: var(--darker-bg);
+            color: var(--cyber-green);
+            padding: 5px 15px;
+            border: 1px solid var(--cyber-green);
+            border-radius: 0;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+        }
+        
+        /* Main content grid */
+        .cyber-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .cyber-card {
+            background: rgba(5, 15, 10, 0.85);
+            border: 1px solid var(--cyber-green);
+            padding: 25px;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .cyber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 5px 15px rgba(0, 255, 157, 0.2),
+                inset 0 0 20px rgba(0, 255, 157, 0.05);
+        }
+        
+        .card-title {
+            color: var(--cyber-green);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-icon {
+            color: var(--cyber-blue);
+        }
+        
+        /* Terminal styling */
+        .terminal-container {
+            background: var(--terminal-bg);
+            border: 1px solid var(--cyber-green);
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0, 255, 157, 0.1);
+        }
+        
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            color: var(--cyber-green);
+        }
+        
+        .terminal-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .terminal-prompt {
+            color: var(--cyber-green);
+            font-weight: bold;
+        }
+        
+        .terminal-user {
+            color: var(--cyber-blue);
+        }
+        
+        .terminal-path {
+            color: var(--cyber-orange);
+        }
+        
+        .terminal-command {
+            color: white;
+        }
+        
+        .terminal-output {
+            color: #cccccc;
+        }
+        
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--cyber-green);
+            color: var(--cyber-green);
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: var(--cyber-green);
+            color: black;
+        }
+        
+        /* Code highlighting */
+        .bash-comment {
+            color: var(--cyber-blue);
+            font-style: italic;
+        }
+        
+        .bash-keyword {
+            color: var(--cyber-pink);
+        }
+        
+        .bash-string {
+            color: var(--cyber-orange);
+        }
+        
+        .bash-variable {
+            color: var(--cyber-green);
+        }
+        
+        .bash-function {
+            color: var(--cyber-blue);
+        }
+        
+        /* Features list */
+        .cyber-list {
+            list-style-type: none;
+        }
+        
+        .cyber-list li {
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(0, 255, 157, 0.2);
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .cyber-list li:before {
+            content: '$';
+            color: var(--cyber-green);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* Interactive terminal */
+        #interactive-terminal {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .terminal-output-area {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            padding-right: 10px;
+        }
+        
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+        }
+        
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background-color: var(--cyber-green);
+            animation: blink 1s infinite;
+            margin-left: 5px;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        #terminal-input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            flex-grow: 1;
+            outline: none;
+            caret-color: var(--cyber-green);
+        }
+        
+        /* Footer */
+        .cyber-footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--cyber-purple);
+            color: #aaaaff;
+            font-size: 0.9rem;
+        }
+        
+        .footer-text {
+            margin-bottom: 10px;
+        }
+        
+        .cyber-link {
+            color: var(--cyber-green);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .cyber-link:hover {
+            color: var(--cyber-blue);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+        
+        /* Glitch effect */
+        .glitch {
+            position: relative;
+            animation: glitch-skew 4s infinite;
+        }
+        
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            10% { transform: skew(1deg); }
+            20% { transform: skew(-1deg); }
+            30% { transform: skew(0.5deg); }
+            40% { transform: skew(0deg); }
+            100% { transform: skew(0deg); }
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .cyber-title {
+                font-size: 2.5rem;
+            }
+            
+            .cyber-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cyber-container {
+                padding: 15px;
+            }
+        }
+        
+        /* Matrix rain effect background */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.05;
+        }
+        
+        /* Tab navigation */
+        .cyber-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+        }
+        
+        .cyber-tab {
+            background: transparent;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            border-bottom: none;
+            color: var(--cyber-green);
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-right: 5px;
+            transition: all 0.3s;
+        }
+        
+        .cyber-tab:hover {
+            background: rgba(0, 255, 157, 0.1);
+        }
+        
+        .cyber-tab.active {
+            background: rgba(0, 255, 157, 0.2);
+            border-color: var(--cyber-green);
+            position: relative;
+        }
+        
+        .cyber-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--dark-bg);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix rain background -->
+    <canvas id="matrix-bg" class="matrix-bg"></canvas>
+    
+    <div class="cyber-container">
+        <!-- Header -->
+        <header class="cyber-header">
+            <h1 class="cyber-title glitch">Bash</h1>
+            <p class="cyber-subtitle">Fundamentals of Programming - Bash Fundamentals : Shell scripting language</p>
+            <div class="terminal-badge">
+                <a href="../html/RCS.html">
+                    <button>EXIT</button>
+                </a>
+            </div>
+        </header>
+        
+        <!-- Tab Navigation -->
+        <div class="cyber-tabs">
+            <button class="cyber-tab active" data-tab="basics">BASICS</button>
+            <button class="cyber-tab" data-tab="scripts">SCRIPTS</button>
+            <button class="cyber-tab" data-tab="advanced">ADVANCED</button>
+            <button class="cyber-tab" data-tab="tools">CYBER TOOLS</button>
+        </div>
+        
+        <!-- Tab 1: Basics -->
+        <div id="basics" class="tab-content active">
+            <div class="cyber-grid">
+                <!-- Card 1: Introduction -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-terminal card-icon"></i> BASH INTRODUCTION</h2>
+                    <p>Bash (Bourne Again SHell) is a Unix shell and command language written by Brian Fox for the GNU Project. It's the default shell on most Linux distributions and macOS.</p>
+                    
+                    <div class="terminal-container">
+                        <div class="terminal-header">
+                            <span class="terminal-title">terminal</span>
+                            <button class="copy-btn" onclick="copyCode('code1')">COPY</button>
+                        </div>
+                        <div class="terminal-prompt">
+                            <span class="terminal-user">cyber@shell</span>:<span class="terminal-path">~</span>$ <span class="terminal-command">echo "Welcome to CyberShell"</span>
+                        </div>
+                        <div class="terminal-output" id="code1">Welcome to CyberShell</div>
+                    </div>
+                    
+                    <p>Bash combines features from the original Bourne shell (sh) with features from the Korn shell (ksh) and C shell (csh), making it a powerful tool for system administration and automation.</p>
+                </section>
+                
+                <!-- Card 2: Basic Commands -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-code card-icon"></i> ESSENTIAL COMMANDS</h2>
+                    <p>Master these core commands to navigate and manipulate the filesystem:</p>
+                    
+                    <div class="terminal-container">
+                        <div class="terminal-header">
+                            <span class="terminal-title">terminal</span>
+                            <button class="copy-btn" onclick="copyCode('code2')">COPY</button>
+                        </div>
+                        <pre id="code2"><span class="bash-comment"># List files with details</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">ls -la</span>
+
+<span class="bash-comment"># Change directory</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">cd /path/to/directory</span>
+
+<span class="bash-comment"># Print working directory</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">pwd</span>
+
+<span class="bash-comment"># Create file or update timestamp</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">touch filename.txt</span>
+
+<span class="bash-comment"># Create directory</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">mkdir new_folder</span>
+
+<span class="bash-comment"># Remove files or directories</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">rm file.txt</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">rm -rf directory/</span>
+
+<span class="bash-comment"># Copy files</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">cp source.txt destination.txt</span>
+
+<span class="bash-comment"># Move or rename files</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">mv oldname.txt newname.txt</span>
+
+<span class="bash-comment"># Display file contents</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">cat file.txt</span></pre>
+                    </div>
+                </section>
+                
+                <!-- Card 3: File Operations -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-file-code card-icon"></i> FILE OPERATIONS</h2>
+                    <p>Bash provides powerful text processing capabilities:</p>
+                    
+                    <div class="terminal-container">
+                        <div class="terminal-header">
+                            <span class="terminal-title">terminal</span>
+                            <button class="copy-btn" onclick="copyCode('code3')">COPY</button>
+                        </div>
+                        <pre id="code3"><span class="bash-comment"># View first 10 lines of a file</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">head -n 10 file.txt</span>
+
+<span class="bash-comment"># View last 10 lines of a file</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">tail -n 10 file.txt</span>
+
+<span class="bash-comment"># Search for pattern in files</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">grep "search_term" file.txt</span>
+
+<span class="bash-comment"># Search recursively in directories</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">grep -r "pattern" /path/</span>
+
+<span class="bash-comment"># Count lines, words, characters</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">wc file.txt</span>
+
+<span class="bash-comment"># Sort lines of a file</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">sort file.txt</span>
+
+<span class="bash-comment"># Find and replace text</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">sed 's/old/new/g' file.txt</span>
+
+<span class="bash-comment"># Extract columns from text</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">cut -d',' -f1,3 data.csv</span>
+
+<span class="bash-comment"># View file with line numbers</span>
+<span class="terminal-prompt">$</span> <span class="terminal-command">nl file.txt</span></pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Tab 2: Scripts -->
+        <div id="scripts" class="tab-content">
+            <div class="cyber-grid">
+                <!-- Card 4: Script Basics -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-scroll card-icon"></i> BASH SCRIPTING</h2>
+                    <p>Bash scripts automate tasks by executing commands in sequence. Every bash script starts with a shebang line:</p>
+                    
+                    <div class="terminal-container">
+                        <div class="terminal-header">
+                            <span class="terminal-title">hello.sh</span>
+                            <button class="copy-btn" onclick="copyCode('code4')">COPY</button>
+                        </div>
+                        <pre id="code4"><span class="bash-comment">#!/bin/bash</span>
+<span class="bash-comment"># This is a simple bash script</span>
+
+<span class="bash-keyword">echo</span> <span class="bash-string">"Hello, Cyber World!"</span>
+<span class="bash-keyword">echo</span> <span class="bash-string">"Current date: $(date)"</span>
+<span class="bash-keyword">echo</span> <span class="bash-string">"Current user: $USER"</span>
+<span class="bash-keyword">echo</span> <span class="bash-string">"Hostname: $(hostname)"</span>
+
+<span class="bash-comment"># Make script executable with: chmod +x hello.sh</span>
+<span class="bash-comment"># Run with: ./hello.sh</span></pre>
+                    </div>
+                    
+                    <p>Scripts can accept command-line arguments using positional parameters: $1, $2, $3, etc.</p>
+                </section>
+                
+                <!-- Card 5: Variables & Control -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-cogs card-icon"></i> VARIABLES & CONTROL FLOW</h2>
+                    
+                    <div class="terminal-container">
+                        <div class="terminal-header">
+                            <span class="terminal-title">control.sh</span>
+                            <button class="copy-btn" onclick="copyCode('code5')">COPY</button>
+                        </div>
+                        <pre id="code5"><span class="bash-comment">#!/bin/bash</span>
+<span class="bash-comment"># Variables and control flow examples</span>
+
+<span class="bash-comment"># Variable assignment</span>
+<span class="bash-variable">name</span>=<span class="bash-string">"CyberAdmin"</span>
+<span class="bash-variable">count</span>=10
+
+<span class="bash-comment"># If statement</span>
+<span class="bash-keyword">if</span> [ <span class="bash-string">"<span class="bash-variable">$USER</span>"</span> = <span class="bash-string">"root"</span> ]; <span class="bash-keyword">then</span>
+    <span class="bash-keyword">echo</span> <span class="bash-string">"Running as root - proceed with caution!"</span>
+<span class="bash-keyword">else</span>
+    <span class="bash-keyword">echo</span> <span class="bash-string">"Running as user: <span class="bash-variable">$USER</span>"</span>
+<span class="bash-keyword">fi</span>
+
+<span class="bash-comment"># For loop</span>
+<span class="bash-keyword">for</span> i <span class="bash-keyword">in</span> {1..5}; <span class="bash-keyword">do</span>
+    <span class="bash-keyword">echo</span> <span class="bash-string">"Iteration <span class="bash-variable">$i</span>"</span>
+<span class="bash-keyword">done</span>
+
+<span class="bash-comment"># While loop</span>
+<span class="bash-keyword">while</span> [ <span class="bash-variable">$count</span> -gt 0 ]; <span class="bash-keyword">do</span>
+    <span class="bash-keyword">echo</span> <span class="bash-string">"Countdown: <span class="bash-variable">$count</span>"</span>
+    <span class="bash-variable">count</span>=$((count-1))
+<span class="bash-keyword">done</span>
+
+<span class="bash-comment"># Case statement</span>
+<span class="bash-keyword">case</span> <span class="bash-string">"<span class="bash-variable">$1</span>"</span> <span class="bash-keyword">in</span>
+    start)
+        <span class="bash-keyword">echo</span> <span class="bash-string">"Starting service..."</span>
+        ;;
+    stop)
+        <span class="bash-keyword">echo</span> <span class="bash-string">"Stopping service..."</span>
+        ;;
+    *)
+        <span class="bash-keyword">echo</span> <span class="bash-string">"Usage: $0 {start|stop}"</span>
+        ;;
+<span class="bash-keyword">esac</span></pre>
+                    </div>
+                </section>
+                
+                <!-- Card 6: Functions -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-function card-icon"></i> FUNCTIONS & ERROR HANDLING</h2>
+                    
+                    <div class="terminal-container">
+                        <div class="terminal-header">
+                            <span class="terminal-title">functions.sh</span>
+                            <button class="copy-btn" onclick="copyCode('code6')">COPY</button>
+                        </div>
+                        <pre id="code6"><span class="bash-comment">#!/bin/bash</span>
+<span class="bash-comment"># Function examples</span>
+
+<span class="bash-comment"># Function definition</span>
+<span class="bash-function">greet_user</span>() {
+    <span class="bash-keyword">local</span> username=<span class="bash-string">"<span class="bash-variable">$1</span>"</span>
+    <span class="bash-keyword">echo</span> <span class="bash-string">"Hello, <span class="bash-variable">$username</span>! Welcome to the system."</span>
+}
+
+<span class="bash-comment"># Function with return value</span>
+<span class="bash-function">add_numbers</span>() {
+    <span class="bash-keyword">local</span> sum=$((<span class="bash-variable">$1</span> + <span class="bash-variable">$2</span>))
+    <span class="bash-keyword">echo</span> <span class="bash-string">"<span class="bash-variable">$sum</span>"</span>
+}
+
+<span class="bash-comment"># Error handling</span>
+<span class="bash-function">check_file</span>() {
+    <span class="bash-keyword">if</span> [ ! -f <span class="bash-string">"<span class="bash-variable">$1</span>"</span> ]; <span class="bash-keyword">then</span>
+        <span class="bash-keyword">echo</span> <span class="bash-string">"Error: File <span class="bash-variable">$1</span> not found!"</span> >&2
+        <span class="bash-keyword">return</span> 1
+    <span class="bash-keyword">fi</span>
+    <span class="bash-keyword">echo</span> <span class="bash-string">"File <span class="bash-variable">$1</span> exists."</span>
+    <span class="bash-keyword">return</span> 0
+}
+
+<span class="bash-comment"># Function calls</span>
+<span class="bash-function">greet_user</span> <span class="bash-string">"Neo"</span>
+<span class="bash-variable">result</span>=$(<span class="bash-function">add_numbers</span> 10 20)
+<span class="bash-keyword">echo</span> <span class="bash-string">"10 + 20 = <span class="bash-variable">$result</span>"</span>
+
+<span class="bash-comment"># Check if file exists</span>
+<span class="bash-function">check_file</span> <span class="bash-string">"/etc/passwd"</span> || <span class="bash-keyword">exit</span> 1
+
+<span class="bash-comment"># Exit codes</span>
+<span class="bash-keyword">echo</span> <span class="bash-string">"Script completed with exit code: $?"</span></pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Tab 3: Advanced -->
+        <div id="advanced" class="tab-content">
+            <div class="cyber-grid">
+                <!-- Card 7: Advanced Techniques -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-rocket card-icon"></i> ADVANCED TECHNIQUES</h2>
+                    
+                    <div class="terminal-container">
+                        <div class="terminal-header">
+                            <span class="terminal-title">advanced.sh</span>
+                            <button class="copy-btn" onclick="copyCode('code7')">COPY</button>
+                        </div>
+                        <pre id="code7"><span class="bash-comment">#!/bin/bash</span>
+<span class="bash-comment"># Advanced bash techniques</span>
+
+<span class="bash-comment"># Arrays</span>
+<span class="bash-variable">files</span>=(file1.txt file2.txt file3.txt)
+<span class="bash-keyword">echo</span> <span class="bash-string">"First file: <span class="bash-variable">${files[0]}</span>"</span>
+<span class="bash-keyword">echo</span> <span class="bash-string">"All files: <span class="bash-variable">${files[@]}</span>"</span>
+
+<span class="bash-comment"># Associative arrays (bash 4+)</span>
+<span class="bash-keyword">declare</span> -A <span class="bash-variable">config</span>
+<span class="bash-variable">config</span>[server]=<span class="bash-string">"cyberhost"</span>
+<span class="bash-variable">config</span>[port]=<span class="bash-string">"8080"</span>
+<span class="bash-keyword">echo</span> <span class="bash-string">"Server: <span class="bash-variable">${config[server]}</span>"</span>
+
+<span class="bash-comment"># Command substitution</span>
+<span class="bash-variable">current_date</span>=$(<span class="bash-keyword">date</span> +%Y-%m-%d)
+<span class="bash-variable">file_count</span>=$(<span class="bash-keyword">ls</span> | <span class="bash-keyword">wc</span> -l)
+
+<span class="bash-comment"># Process substitution</span>
+<span class="bash-keyword">diff</span> <(sort file1.txt) <(sort file2.txt)
+
+<span class="bash-comment"># Trap signals</span>
+<span class="bash-function">cleanup</span>() {
+    <span class="bash-keyword">echo</span> <span class="bash-string">"Script interrupted. Cleaning up..."</span>
+    <span class="bash-keyword">rm</span> -f tempfile.txt
+    <span class="bash-keyword">exit</span> 1
+}
+
+<span class="bash-keyword">trap</span> cleanup SIGINT SIGTERM
+
+<span class="bash-comment"># Background processes</span>
+<span class="bash-keyword">sleep</span> 10 &
+<span class="bash-variable">pid</span>=$!
+<span class="bash-keyword">echo</span> <span class="bash-string">"Background process PID: <span class="bash-variable">$pid</span>"</span>
+
+<span class="bash-comment"># Wait for process to complete</span>
+<span class="bash-keyword">wait</span> <span class="bash-variable">$pid</span>
+<span class="bash-keyword">echo</span> <span class="bash-string">"Background process completed"</span></pre>
+                    </div>
+                </section>
+                
+                <!-- Card 8: Text Processing -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-stream card-icon"></i> TEXT PROCESSING</h2>
+                    
+                    <div class="terminal-container">
+                        <div class="terminal-header">
+                            <span class="terminal-title">text_processing.sh</span>
+                            <button class="copy-btn" onclick="copyCode('code8')">COPY</button>
+                        </div>
+                        <pre id="code8"><span class="bash-comment">#!/bin/bash</span>
+<span class="bash-comment"># Advanced text processing with awk and sed</span>
+
+<span class="bash-comment"># Extract specific column from CSV</span>
+<span class="bash-keyword">awk</span> -F',' <span class="bash-string">'{print $1, $3}'</span> data.csv
+
+<span class="bash-comment"># Sum values in a column</span>
+<span class="bash-keyword">awk</span> <span class="bash-string">'{sum += $1} END {print "Total:", sum}'</span> numbers.txt
+
+<span class="bash-comment"># Find and replace in multiple files</span>
+<span class="bash-keyword">sed</span> -i <span class="bash-string">'s/old_ip/new_ip/g'</span> *.conf
+
+<span class="bash-comment"># Extract lines between patterns</span>
+<span class="bash-keyword">sed</span> -n <span class="bash-string">'/START/,/END/p'</span> logfile.txt
+
+<span class="bash-comment"># Remove empty lines</span>
+<span class="bash-keyword">sed</span> <span class="bash-string">'/^$/d'</span> file.txt
+
+<span class="bash-comment"># Sort by column numerically</span>
+<span class="bash-keyword">sort</span> -t',' -k2 -n data.csv
+
+<span class="bash-comment"># Find duplicate lines</span>
+<span class="bash-keyword">sort</span> file.txt | <span class="bash-keyword">uniq</span> -d
+
+<span class="bash-comment"># Count unique values</span>
+<span class="bash-keyword">cut</span> -d',' -f1 data.csv | <span class="bash-keyword">sort</span> | <span class="bash-keyword">uniq</span> -c
+
+<span class="bash-comment"># Join two files on a common field</span>
+<span class="bash-keyword">join</span> -t',' -1 1 -2 1 file1.csv file2.csv</pre>
+                    </div>
+                </section>
+                
+                <!-- Card 9: Interactive Terminal -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-gamepad card-icon"></i> INTERACTIVE TERMINAL</h2>
+                    <p>Try these bash commands in the interactive terminal:</p>
+                    
+                    <div class="terminal-container" id="interactive-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">live terminal</span>
+                            <span>Type 'help' for available commands</span>
+                        </div>
+                        <div class="terminal-output-area" id="terminal-output">
+                            <div class="terminal-prompt">
+                                <span class="terminal-user">cyber@shell</span>:<span class="terminal-path">~</span>$ <span class="terminal-command">Welcome to CyberShell Terminal</span>
+                            </div>
+                            <div class="terminal-output">Type bash commands to simulate a terminal session. Try: echo, ls, pwd, date, or help</div>
+                        </div>
+                        <div class="terminal-input-line">
+                            <span class="terminal-prompt">
+                                <span class="terminal-user">cyber@shell</span>:<span class="terminal-path">~</span>$ 
+                            </span>
+                            <input type="text" id="terminal-input" placeholder="Type command...">
+                            <div class="terminal-cursor"></div>
+                        </div>
+                    </div>
+                    
+                    <p class="bash-comment" style="margin-top: 10px;">Note: This is a simulation. Commands won't affect your actual system.</p>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Tab 4: Tools -->
+        <div id="tools" class="tab-content">
+            <div class="cyber-grid">
+                <!-- Card 10: Cyber Tools -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-tools card-icon"></i> CYBERSECURITY TOOLS</h2>
+                    <p>Bash is essential for cybersecurity professionals. Here are common tasks:</p>
+                    
+                    <div class="terminal-container">
+                        <div class="terminal-header">
+                            <span class="terminal-title">security_tasks.sh</span>
+                            <button class="copy-btn" onclick="copyCode('code10')">COPY</button>
+                        </div>
+                        <pre id="code10"><span class="bash-comment">#!/bin/bash</span>
+<span class="bash-comment"># Security-related bash scripts</span>
+
+<span class="bash-comment"># Monitor failed login attempts</span>
+<span class="bash-keyword">grep</span> <span class="bash-string">"Failed password"</span> /var/log/auth.log | <span class="bash-keyword">awk</span> <span class="bash-string">'{print $1, $2, $3, $11}'</span> | <span class="bash-keyword">sort</span> | <span class="bash-keyword">uniq</span> -c
+
+<span class="bash-comment"># Check for open ports</span>
+<span class="bash-keyword">netstat</span> -tuln | <span class="bash-keyword">awk</span> <span class="bash-string">'/LISTEN/ {print $4}'</span> | <span class="bash-keyword">awk</span> -F':' <span class="bash-string">'{print $NF}'</span> | <span class="bash-keyword">sort</span> -n
+
+<span class="bash-comment"># Find files with SUID bit set (potential privilege escalation)</span>
+<span class="bash-keyword">find</span> / -type f -perm /4000 2>/dev/null
+
+<span class="bash-comment"># Monitor network traffic</span>
+<span class="bash-keyword">tcpdump</span> -i eth0 -c 10
+
+<span class="bash-comment"># Check for processes listening on ports</span>
+<span class="bash-keyword">lsof</span> -i -P -n | <span class="bash-keyword">grep</span> LISTEN
+
+<span class="bash-comment"># Generate secure password</span>
+<span class="bash-keyword">openssl</span> rand -base64 12
+
+<span class="bash-comment"># Check file integrity with checksum</span>
+<span class="bash-keyword">sha256sum</span> important_file.txt
+
+<span class="bash-comment"># Scan for world-writable files</span>
+<span class="bash-keyword">find</span> / -type f -perm -o+w ! -path <span class="bash-string">"/proc/*"</span> ! -path <span class="bash-string">"/sys/*"</span> 2>/dev/null</pre>
+                    </div>
+                </section>
+                
+                <!-- Card 11: Automation -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-robot card-icon"></i> AUTOMATION SCRIPTS</h2>
+                    
+                    <div class="terminal-container">
+                        <div class="terminal-header">
+                            <span class="terminal-title">automation.sh</span>
+                            <button class="copy-btn" onclick="copyCode('code11')">COPY</button>
+                        </div>
+                        <pre id="code11"><span class="bash-comment">#!/bin/bash</span>
+<span class="bash-comment"># System automation examples</span>
+
+<span class="bash-comment"># Backup script</span>
+<span class="bash-function">backup_files</span>() {
+    <span class="bash-keyword">local</span> source_dir=<span class="bash-string">"<span class="bash-variable">$1</span>"</span>
+    <span class="bash-keyword">local</span> dest_dir=<span class="bash-string">"<span class="bash-variable">$2</span>"</span>
+    <span class="bash-keyword">local</span> timestamp=$(<span class="bash-keyword">date</span> +%Y%m%d_%H%M%S)
+    <span class="bash-keyword">local</span> backup_name=<span class="bash-string">"backup_<span class="bash-variable">$timestamp</span>.tar.gz"</span>
+    
+    <span class="bash-keyword">tar</span> -czf <span class="bash-string">"<span class="bash-variable">$dest_dir</span>/<span class="bash-variable">$backup_name</span>"</span> -C <span class="bash-string">"<span class="bash-variable">$source_dir</span>"</span> .
+    
+    <span class="bash-keyword">if</span> [ $? -eq 0 ]; <span class="bash-keyword">then</span>
+        <span class="bash-keyword">echo</span> <span class="bash-string">"Backup created: <span class="bash-variable">$dest_dir</span>/<span class="bash-variable">$backup_name</span>"</span>
+        <span class="bash-keyword">return</span> 0
+    <span class="bash-keyword">else</span>
+        <span class="bash-keyword">echo</span> <span class="bash-string">"Backup failed!"</span> >&2
+        <span class="bash-keyword">return</span> 1
+    <span class="bash-keyword">fi</span>
+}
+
+<span class="bash-comment"># Log analysis</span>
+<span class="bash-function">analyze_logs</span>() {
+    <span class="bash-keyword">local</span> log_file=<span class="bash-string">"<span class="bash-variable">$1</span>"</span>
+    
+    <span class="bash-keyword">echo</span> <span class="bash-string">"=== Top 10 IP addresses ==="</span>
+    <span class="bash-keyword">awk</span> <span class="bash-string">'{print $1}'</span> <span class="bash-string">"<span class="bash-variable">$log_file</span>"</span> | <span class="bash-keyword">sort</span> | <span class="bash-keyword">uniq</span> -c | <span class="bash-keyword">sort</span> -nr | <span class="bash-keyword">head</span> -10
+    
+    <span class="bash-keyword">echo</span> <span class="bash-string">"=== Top 10 requested pages ==="</span>
+    <span class="bash-keyword">awk</span> -F<span class="bash-string">'"'</span> <span class="bash-string">'{print $2}'</span> <span class="bash-string">"<span class="bash-variable">$log_file</span>"</span> | <span class="bash-keyword">awk</span> <span class="bash-string">'{print $2}'</span> | <span class="bash-keyword">sort</span> | <span class="bash-keyword">uniq</span> -c | <span class="bash-keyword">sort</span> -nr | <span class="bash-keyword">head</span> -10
+}
+
+<span class="bash-comment"># System monitor</span>
+<span class="bash-function">system_monitor</span>() {
+    <span class="bash-keyword">echo</span> <span class="bash-string">"=== System Status ==="</span>
+    <span class="bash-keyword">echo</span> <span class="bash-string">"Uptime: $(uptime -p)"</span>
+    <span class="bash-keyword">echo</span> <span class="bash-string">"Load average: $(uptime | awk -F'load average:' '{print $2}')"</span>
+    <span class="bash-keyword">echo</span> <span class="bash-string">"Memory usage: $(free -h | awk '/Mem:/ {print $3"/"$2}')"</span>
+    <span class="bash-keyword">echo</span> <span class="bash-string">"Disk usage: $(df -h / | awk 'NR==2 {print $5}')"</span>
+    <span class="bash-keyword">echo</span> <span class="bash-string">"Active users: $(who | wc -l)"</span>
+}</pre>
+                    </div>
+                </section>
+                
+                <!-- Card 12: Resources -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-book card-icon"></i> RESOURCES & NEXT STEPS</h2>
+                    <ul class="cyber-list">
+                        <li><strong>Official Documentation:</strong> GNU Bash Manual</li>
+                        <li><strong>Advanced Bash-Scripting Guide:</strong> tldp.org/LDP/abs/html/</li>
+                        <li><strong>Bash Hackers Wiki:</strong> wiki.bash-hackers.org</li>
+                        <li><strong>Practice Platforms:</strong> OverTheWire, HackTheBox</li>
+                        <li><strong>ShellCheck:</strong> Static analysis tool for bash scripts</li>
+                        <li><strong>Learn Regex:</strong> Essential for text processing</li>
+                        <li><strong>Master Awk & Sed:</strong> For advanced text manipulation</li>
+                        <li><strong>Explore Zsh:</strong> Bash alternative with more features</li>
+                    </ul>
+                    
+                    <div class="terminal-container" style="margin-top: 20px;">
+                        <div class="terminal-header">
+                            <span class="terminal-title">next_level.sh</span>
+                        </div>
+                        <div class="terminal-prompt">
+                            <span class="terminal-user">cyber@shell</span>:<span class="terminal-path">~</span>$ <span class="terminal-command">cat /path/to/mastery</span>
+                        </div>
+                        <div class="terminal-output">
+                            To master bash:
+                            1. Write scripts for daily tasks
+                            2. Read others' scripts (GitHub)
+                            3. Practice with challenges
+                            4. Learn from mistakes ($?)
+                            5. Automate everything possible
+                        </div>
+                    </div>
+                </section>
+            </div>
+          
+        </div>
+        
+        <!-- Footer -->
+        <footer class="cyber-footer">
+            <p>Baguio Central University</p>
+            <p>&copy; Bachelor of Science in Computer Science. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Matrix rain effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const letters = '0123456789$#@%&!?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for(let i = 0; i < columns; i++) {
+            drops[i] = Math.floor(Math.random() * canvas.height / fontSize) * fontSize;
+        }
+        
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(5, 15, 10, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ff9d';
+            ctx.font = `${fontSize}px monospace`;
+            
+            for(let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                const x = i * fontSize;
+                const y = drops[i] * 1;
+                
+                ctx.fillText(text, x, y);
+                
+                if(y > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i] += fontSize;
+            }
+        }
+        
+        setInterval(drawMatrix, 70);
+        
+        // Tab functionality
+        const tabs = document.querySelectorAll('.cyber-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show target content
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if(content.id === target) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // Copy code functionality
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const codeText = codeElement.textContent;
+            
+            // Create a temporary textarea to copy from
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeText;
+            document.body.appendChild(tempTextArea);
+            
+            // Select and copy the text
+            tempTextArea.select();
+            document.execCommand('copy');
+            
+            // Remove the temporary element
+            document.body.removeChild(tempTextArea);
+            
+            // Visual feedback
+            const originalButton = event.target;
+            const originalText = originalButton.textContent;
+            originalButton.textContent = 'COPIED!';
+            originalButton.style.background = 'var(--cyber-green)';
+            originalButton.style.color = 'black';
+            
+            setTimeout(() => {
+                originalButton.textContent = originalText;
+                originalButton.style.background = 'transparent';
+                originalButton.style.color = 'var(--cyber-green)';
+            }, 1500);
+        }
+        
+        // Interactive terminal
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalOutput = document.getElementById('terminal-output');
+        
+        const commands = {
+            'help': 'Available commands: echo, ls, pwd, date, whoami, clear, help',
+            'echo': 'Usage: echo [text] - Display a line of text',
+            'ls': 'file1.txt  file2.txt  script.sh  docs/  logs/',
+            'pwd': '/home/cyber/shell',
+            'date': new Date().toLocaleString(),
+            'whoami': 'cyber',
+            'clear': function() { 
+                terminalOutput.innerHTML = '';
+                return 'Terminal cleared';
+            }
+        };
+        
+        terminalInput.addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') {
+                const input = terminalInput.value.trim();
+                terminalInput.value = '';
+                
+                // Add command to output
+                const commandLine = document.createElement('div');
+                commandLine.className = 'terminal-prompt';
+                commandLine.innerHTML = `<span class="terminal-user">cyber@shell</span>:<span class="terminal-path">~</span>$ <span class="terminal-command">${input}</span>`;
+                terminalOutput.appendChild(commandLine);
+                
+                // Process command
+                let output = '';
+                const parts = input.split(' ');
+                const cmd = parts[0].toLowerCase();
+                
+                if(cmd === 'echo') {
+                    output = parts.slice(1).join(' ');
+                } 
+                else if(cmd === 'clear') {
+                    output = commands.clear();
+                }
+                else if(commands.hasOwnProperty(cmd)) {
+                    output = typeof commands[cmd] === 'function' ? commands[cmd]() : commands[cmd];
+                } 
+                else if(input) {
+                    output = `Command not found: ${cmd}. Type 'help' for available commands.`;
+                }
+                
+                if(output) {
+                    const outputLine = document.createElement('div');
+                    outputLine.className = 'terminal-output';
+                    outputLine.textContent = output;
+                    terminalOutput.appendChild(outputLine);
+                }
+                
+                // Scroll to bottom
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }
+        });
+        
+        // Glitch effect on title
+        setInterval(() => {
+            const title = document.querySelector('.cyber-title');
+            title.classList.toggle('glitch');
+            
+            // Re-add the class after a short delay if it was removed
+            setTimeout(() => {
+                title.classList.add('glitch');
+            }, 100);
+        }, 8000);
+        
+        // Window resize handler for matrix canvas
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>

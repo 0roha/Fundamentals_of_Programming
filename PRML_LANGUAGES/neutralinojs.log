@@ -1,0 +1,103 @@
+INFO 2025-10-05 17:35:07,439 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-10-05 17:35:08,106 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-10-05 17:35:09,012 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:14:57,210 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:14:58,270 NE_RS_UNBLDRE: Unable to load application resource file /resources/index.html api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:15:07,134 NE_RS_UNBLDRE: Unable to load application resource file /resources/index.html api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:16:16,859 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:16:40,730 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:16:41,052 NE_RS_UNBLDRE: Unable to load application resource file /resources/resources/html/RAV.html api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:16:44,920 NE_RS_UNBLDRE: Unable to load application resource file /resources/resources/html/RAV.html api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:16:46,149 NE_RS_UNBLDRE: Unable to load application resource file /resources/resources/html/RAV.html api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:20:01,941 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:20:02,825 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:20:03,034 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:24:10,239 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:24:11,731 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:24:12,483 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:25:12,748 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:25:13,875 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:25:14,363 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:42:12,474 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:42:13,178 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:42:13,720 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:46:30,479 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:46:30,996 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:46:31,505 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:46:36,725 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/JS/RDG.js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:46:47,520 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/JS/RDG.js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:47:39,536 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/JS/RDG.js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:47:48,178 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/JS/RDG.js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:47:52,777 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/JS/RDG.js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:48:00,415 NE_RS_UNBLDRE: Unable to load application resource file /resources/html/RC  .html api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:48:02,374 NE_RS_UNBLDRE: Unable to load application resource file /resources/html/RC  .html api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:48:07,109 NE_RS_UNBLDRE: Unable to load application resource file /resources/html/RC  .html api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:49:09,328 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:49:09,850 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:49:10,402 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:49:19,731 NE_RS_UNBLDRE: Unable to load application resource file /resources/html/RC  .html api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:50:09,325 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:09,868 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:10,385 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:13,637 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:14,428 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:16,668 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:17,935 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:19,648 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:20,479 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:27,025 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:29,883 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:31,516 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:33,863 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:37,669 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:50:43,703 NE_RS_UNBLDRE: Unable to load application resource file /resources/html/RC  .html api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:52:06,794 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:52:08,104 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:52:08,704 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:52:12,715 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:52:13,622 NE_RS_UNBLDRE: Unable to load application resource file /resources/css/RC  .css api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:52:13,623 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/RC  .js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:52:13,640 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:52:54,096 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:52:54,659 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:52:55,122 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:52:59,134 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:52:59,907 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/RC  .js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:52:59,908 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:54:08,662 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:54:09,206 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:54:09,696 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:54:13,814 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:54:14,740 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/RC  .js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:54:14,805 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 13:55:05,640 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:55:06,192 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 13:55:06,674 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 14:15:01,454 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 14:15:02,354 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 14:15:03,107 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 14:20:28,658 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 14:20:29,699 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 14:20:30,084 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 14:22:21,014 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 14:22:21,771 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 14:22:22,332 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-16 14:24:16,799 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 14:24:17,614 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 14:24:18,385 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-16 14:24:25,633 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/JS/RDG.js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-11-20 20:31:51,488 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-20 20:31:52,953 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-11-20 20:31:53,649 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-12-07 12:11:01,026 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-12-07 12:11:01,921 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-12-07 12:11:02,340 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-12-07 12:14:58,811 Reloading the application... api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-12-07 12:14:58,818 Reloading the application... api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+INFO 2025-12-07 12:16:10,667 Auth info was exported to ./.tmp/auth_info.json api\debug\debug.cpp:17 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-12-07 12:16:11,627 NE_RS_UNBLDRE: Unable to load application resource file /resources/favicon.ico api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-12-07 12:16:12,024 NE_RS_UNBLDRE: Unable to load application resource file /resources/.well-known/appspecific/com.chrome.devtools.json api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-12-07 12:17:28,598 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/JS/RDG.js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-12-07 12:17:33,335 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/JS/RDG.js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-12-07 12:17:37,283 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/JS/RDG.js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT
+ERROR 2025-12-07 12:17:46,715 NE_RS_UNBLDRE: Unable to load application resource file /resources/js/JS/RDG.js api\debug\debug.cpp:20 Rohann@LAPTOP-IL4CAHVT

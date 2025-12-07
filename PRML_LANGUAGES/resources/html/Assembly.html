@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembly Fundamentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --cyber-green: #00ff9d;
+            --cyber-blue: #00f3ff;
+            --cyber-purple: #bc13fe;
+            --cyber-red: #ff003c;
+            --cyber-yellow: #ffff00;
+            --dark-bg: #0a0a0f;
+            --darker-bg: #050508;
+            --terminal-bg: #001a00;
+            --crt-bg: #002200;
+            --grid-color: rgba(0, 255, 157, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: #e0e0ff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            min-height: 100vh;
+            /* CRT scanline effect */
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+        
+        .cyber-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        /* Header styling */
+        .cyber-header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--cyber-green);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cyber-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 157, 0.1), transparent);
+            animation: scanline 8s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .cyber-title {
+            font-size: 3.5rem;
+            color: white;
+            text-shadow: 
+                0 0 10px var(--cyber-green),
+                0 0 20px var(--cyber-green),
+                0 0 40px var(--cyber-green);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .cyber-subtitle {
+            font-size: 1.2rem;
+            color: var(--cyber-blue);
+            text-shadow: 0 0 5px var(--cyber-blue);
+            letter-spacing: 2px;
+        }
+        
+        .assembly-badge {
+            display: inline-block;
+            background: var(--darker-bg);
+            color: var(--cyber-green);
+            padding: 5px 15px;
+            border: 1px solid var(--cyber-green);
+            border-radius: 0;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+        }
+        
+        /* Main content grid */
+        .cyber-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .cyber-card {
+            background: rgba(5, 20, 10, 0.85);
+            border: 1px solid var(--cyber-green);
+            padding: 25px;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .cyber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 5px 15px rgba(0, 255, 157, 0.2),
+                inset 0 0 20px rgba(0, 255, 157, 0.05);
+        }
+        
+        .card-title {
+            color: var(--cyber-green);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-icon {
+            color: var(--cyber-blue);
+        }
+        
+        /* CRT Terminal styling */
+        .crt-terminal {
+            background: var(--crt-bg);
+            border: 3px solid var(--cyber-green);
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            position: relative;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            /* CRT curvature effect */
+            transform: perspective(500px) rotateX(1deg);
+        }
+        
+        .crt-terminal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 157, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            color: var(--cyber-green);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .terminal-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .terminal-address {
+            color: var(--cyber-yellow);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .terminal-data {
+            color: var(--cyber-blue);
+        }
+        
+        .terminal-opcode {
+            color: var(--cyber-green);
+            font-weight: bold;
+        }
+        
+        .terminal-comment {
+            color: var(--cyber-purple);
+            font-style: italic;
+        }
+        
+        .terminal-register {
+            color: var(--cyber-red);
+        }
+        
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--cyber-green);
+            color: var(--cyber-green);
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .copy-btn:hover {
+            background: var(--cyber-green);
+            color: black;
+        }
+        
+        /* Assembly code highlighting */
+        .asm-directive {
+            color: var(--cyber-purple);
+        }
+        
+        .asm-label {
+            color: var(--cyber-yellow);
+        }
+        
+        .asm-instruction {
+            color: var(--cyber-green);
+            font-weight: bold;
+        }
+        
+        .asm-register {
+            color: var(--cyber-red);
+        }
+        
+        .asm-number {
+            color: var(--cyber-blue);
+        }
+        
+        .asm-comment {
+            color: #888888;
+            font-style: italic;
+        }
+        
+        /* Features list */
+        .cyber-list {
+            list-style-type: none;
+        }
+        
+        .cyber-list li {
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(0, 255, 157, 0.2);
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .cyber-list li:before {
+            content: '>';
+            color: var(--cyber-green);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* Register display */
+        .register-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .register {
+            background: rgba(0, 30, 0, 0.5);
+            border: 1px solid var(--cyber-green);
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .register-name {
+            color: var(--cyber-red);
+            font-weight: bold;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .register-value {
+            color: var(--cyber-blue);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+        
+        /* Memory view */
+        .memory-view {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--cyber-blue);
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            overflow-x: auto;
+        }
+        
+        .memory-address {
+            color: var(--cyber-yellow);
+        }
+        
+        .memory-data {
+            color: var(--cyber-blue);
+        }
+        
+        .memory-ascii {
+            color: var(--cyber-green);
+        }
+        
+        /* Interactive assembler */
+        #assembler-terminal {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .assembler-output-area {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            padding-right: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+        
+        .assembler-input-line {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 20, 0, 0.7);
+            padding: 5px;
+            border: 1px solid var(--cyber-green);
+        }
+        
+        .assembler-prompt {
+            color: var(--cyber-green);
+            font-weight: bold;
+            white-space: nowrap;
+            padding-right: 10px;
+        }
+        
+        #assembler-input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            flex-grow: 1;
+            outline: none;
+            caret-color: var(--cyber-green);
+        }
+        
+        .assembler-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background-color: var(--cyber-green);
+            animation: blink 1s infinite;
+            margin-left: 5px;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        /* CPU visualization */
+        .cpu-visualization {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+        
+        .cpu-component {
+            background: rgba(0, 30, 0, 0.5);
+            border: 1px solid var(--cyber-blue);
+            padding: 15px;
+            text-align: center;
+            min-width: 120px;
+            position: relative;
+        }
+        
+        .cpu-component::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 1px solid var(--cyber-green);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .component-name {
+            color: var(--cyber-red);
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+            padding-bottom: 5px;
+        }
+        
+        /* Footer */
+        .cyber-footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--cyber-purple);
+            color: #aaaaff;
+            font-size: 0.9rem;
+        }
+        
+        .footer-text {
+            margin-bottom: 10px;
+        }
+        
+        .cyber-link {
+            color: var(--cyber-green);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .cyber-link:hover {
+            color: var(--cyber-blue);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+        
+        /* Glitch effect */
+        .glitch {
+            position: relative;
+            animation: glitch-skew 4s infinite;
+        }
+        
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            10% { transform: skew(0.5deg); }
+            20% { transform: skew(-0.5deg); }
+            30% { transform: skew(0.3deg); }
+            40% { transform: skew(0deg); }
+            100% { transform: skew(0deg); }
+        }
+        
+        /* Binary rain effect */
+        .binary-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.03;
+        }
+        
+        /* Tab navigation */
+        .cyber-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.3);
+        }
+        
+        .cyber-tab {
+            background: transparent;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            border-bottom: none;
+            color: var(--cyber-green);
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-right: 5px;
+            transition: all 0.3s;
+        }
+        
+        .cyber-tab:hover {
+            background: rgba(0, 255, 157, 0.1);
+        }
+        
+        .cyber-tab.active {
+            background: rgba(0, 255, 157, 0.2);
+            border-color: var(--cyber-green);
+            position: relative;
+        }
+        
+        .cyber-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--dark-bg);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .cyber-title {
+                font-size: 2.5rem;
+            }
+            
+            .cyber-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cyber-container {
+                padding: 15px;
+            }
+            
+            .cpu-visualization {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Pulse animation for active components */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 157, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Binary rain background -->
+    <canvas id="binary-rain" class="binary-rain"></canvas>
+    
+    <div class="cyber-container">
+        <!-- Header -->
+        <header class="cyber-header">
+            <h1 class="cyber-title glitch">ASSEMBLY</h1>
+            <p class="cyber-subtitle">Fundamentals of Programming - Swift Fundamentals : low-level programming language</p>
+            <div class="assembly-badge"><a href="../html/RCS.html">EXIT</a></div>
+        </header>
+        
+        <!-- Tab Navigation -->
+        <div class="cyber-tabs">
+            <button class="cyber-tab active" data-tab="basics">BASICS</button>
+            <button class="cyber-tab" data-tab="x86">x86 ARCH</button>
+            <button class="cyber-tab" data-tab="arm">ARM ARCH</button>
+            <button class="cyber-tab" data-tab="tools">TOOLS</button>
+            <button class="cyber-tab" data-tab="sim">SIMULATOR</button>
+        </div>
+        
+        <!-- Tab 1: Basics -->
+        <div id="basics" class="tab-content active">
+            <div class="cyber-grid">
+                <!-- Card 1: Introduction -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-microchip card-icon"></i> ASSEMBLY INTRODUCTION</h2>
+                    <p>Assembly language is a low-level programming language that provides a direct correspondence between the program and the machine code instructions of a specific CPU architecture.</p>
+                    
+                    <div class="crt-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">machine_code.asm</span>
+                            <button class="copy-btn" onclick="copyCode('code1')">COPY</button>
+                        </div>
+                        <pre id="code1"><span class="asm-directive">section</span> <span class="asm-instruction">.data</span>
+    <span class="asm-label">msg</span> <span class="asm-directive">db</span> <span class="asm-string">'Hello, Cyber World!', 0xA</span>
+    <span class="asm-label">len</span> <span class="asm-directive">equ</span> <span class="asm-number">$ - msg</span>
+
+<span class="asm-directive">section</span> <span class="asm-instruction">.text</span>
+    <span class="asm-label">global</span> <span class="asm-label">_start</span>
+
+<span class="asm-label">_start:</span>
+    <span class="asm-comment">; write message to stdout</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">eax</span>, <span class="asm-number">4</span>      <span class="asm-comment">; sys_write syscall</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">ebx</span>, <span class="asm-number">1</span>      <span class="asm-comment">; file descriptor (stdout)</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">ecx</span>, <span class="asm-label">msg</span>     <span class="asm-comment">; message address</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">edx</span>, <span class="asm-label">len</span>     <span class="asm-comment">; message length</span>
+    <span class="asm-instruction">int</span> <span class="asm-number">0x80</span>          <span class="asm-comment">; interrupt to invoke kernel</span>
+
+    <span class="asm-comment">; exit program</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">eax</span>, <span class="asm-number">1</span>      <span class="asm-comment">; sys_exit syscall</span>
+    <span class="asm-instruction">xor</span> <span class="asm-register">ebx</span>, <span class="asm-register">ebx</span>    <span class="asm-comment">; exit code 0</span>
+    <span class="asm-instruction">int</span> <span class="asm-number">0x80</span></pre>
+                    </div>
+                    
+                    <p>Each assembly instruction corresponds directly to a machine code instruction that the CPU can execute. This provides maximum control over hardware resources.</p>
+                </section>
+                
+                <!-- Card 2: Why Assembly -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-bolt card-icon"></i> WHY ASSEMBLY?</h2>
+                    <ul class="cyber-list">
+                        <li><strong>Maximum Performance:</strong> Direct hardware control eliminates overhead</li>
+                        <li><strong>Minimal Footprint:</strong> Tiny executable sizes (often kilobytes)</li>
+                        <li><strong>Hardware Access:</strong> Direct manipulation of CPU registers and memory</li>
+                        <li><strong>Reverse Engineering:</strong> Essential for malware analysis and security</li>
+                        <li><strong>Embedded Systems:</strong> Critical for microcontrollers with limited resources</li>
+                        <li><strong>Operating Systems:</strong> Bootloaders, kernel development, drivers</li>
+                        <li><strong>Game Development:</strong> Performance-critical game engine components</li>
+                        <li><strong>Cryptography:</strong> Optimized implementations of cryptographic algorithms</li>
+                    </ul>
+                    
+                    <!-- CPU Visualization -->
+                    <div class="cpu-visualization">
+                        <div class="cpu-component" id="alu">
+                            <div class="component-name">ALU</div>
+                            <div class="register-value">ADD/SUB/AND/OR</div>
+                        </div>
+                        <div class="cpu-component" id="registers">
+                            <div class="component-name">REGISTERS</div>
+                            <div class="register-value">RAX, RBX, RCX...</div>
+                        </div>
+                        <div class="cpu-component" id="cu">
+                            <div class="component-name">CONTROL UNIT</div>
+                            <div class="register-value">FETCH/DECODE</div>
+                        </div>
+                        <div class="cpu-component" id="memory">
+                            <div class="component-name">MEMORY BUS</div>
+                            <div class="register-value">LOAD/STORE</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Card 3: Basic Concepts -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-cogs card-icon"></i> CORE CONCEPTS</h2>
+                    
+                    <div class="register-display">
+                        <div class="register">
+                            <div class="register-name">Registers</div>
+                            <div class="register-value">CPU Storage</div>
+                        </div>
+                        <div class="register">
+                            <div class="register-name">Instructions</div>
+                            <div class="register-value">MOV, ADD, SUB</div>
+                        </div>
+                        <div class="register">
+                            <div class="register-name">Memory</div>
+                            <div class="register-value">RAM Access</div>
+                        </div>
+                        <div class="register">
+                            <div class="register-name">Stack</div>
+                            <div class="register-value">LIFO Structure</div>
+                        </div>
+                        <div class="register">
+                            <div class="register-name">Flags</div>
+                            <div class="register-value">Status Bits</div>
+                        </div>
+                        <div class="register">
+                            <div class="register-name">Interrupts</div>
+                            <div class="register-value">Hardware Signals</div>
+                        </div>
+                    </div>
+                    
+                    <div class="crt-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">basic_operations.asm</span>
+                            <button class="copy-btn" onclick="copyCode('code3')">COPY</button>
+                        </div>
+                        <pre id="code3"><span class="asm-comment">; Register operations</span>
+<span class="asm-instruction">mov</span> <span class="asm-register">eax</span>, <span class="asm-number">10</span>     <span class="asm-comment">; Load immediate value 10 into EAX</span>
+<span class="asm-instruction">add</span> <span class="asm-register">eax</span>, <span class="asm-number">5</span>      <span class="asm-comment">; EAX = EAX + 5  (now 15)</span>
+<span class="asm-instruction">sub</span> <span class="asm-register">eax</span>, <span class="asm-number">3</span>      <span class="asm-comment">; EAX = EAX - 3  (now 12)</span>
+
+<span class="asm-comment">; Memory operations</span>
+<span class="asm-instruction">mov</span> <span class="asm-register">ebx</span>, <span class="asm-number">0x1000</span>  <span class="asm-comment">; Load address</span>
+<span class="asm-instruction">mov</span> [<span class="asm-register">ebx</span>], <span class="asm-register">eax</span>  <span class="asm-comment">; Store EAX at memory location 0x1000</span>
+<span class="asm-instruction">mov</span> <span class="asm-register">ecx</span>, [<span class="asm-register">ebx</span>]  <span class="asm-comment">; Load from memory into ECX</span>
+
+<span class="asm-comment">; Bitwise operations</span>
+<span class="asm-instruction">and</span> <span class="asm-register">eax</span>, <span class="asm-number">0xF</span>     <span class="asm-comment">; Mask lower 4 bits</span>
+<span class="asm-instruction">or</span> <span class="asm-register">eax</span>, <span class="asm-number">0x10</span>    <span class="asm-comment">; Set bit 4</span>
+<span class="asm-instruction">xor</span> <span class="asm-register">eax</span>, <span class="asm-register">eax</span>    <span class="asm-comment">; Clear EAX (fast zero)</span>
+
+<span class="asm-comment">; Control flow</span>
+<span class="asm-instruction">cmp</span> <span class="asm-register">eax</span>, <span class="asm-number">10</span>     <span class="asm-comment">; Compare EAX with 10</span>
+<span class="asm-instruction">jg</span> <span class="asm-label">greater</span>      <span class="asm-comment">; Jump if greater</span>
+<span class="asm-instruction">jl</span> <span class="asm-label">less</span>         <span class="asm-comment">; Jump if less</span>
+<span class="asm-instruction">je</span> <span class="asm-label">equal</span>        <span class="asm-comment">; Jump if equal</span></pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Tab 2: x86 Architecture -->
+        <div id="x86" class="tab-content">
+            <div class="cyber-grid">
+                <!-- Card 4: x86 Registers -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-memory card-icon"></i> x86 REGISTERS</h2>
+                    
+                    <div class="register-display">
+                        <div class="register">
+                            <div class="register-name">EAX</div>
+                            <div class="register-value">0x7F34A1C2</div>
+                            <div class="asm-comment" style="font-size:0.8rem">Accumulator</div>
+                        </div>
+                        <div class="register">
+                            <div class="register-name">EBX</div>
+                            <div class="register-value">0x00401000</div>
+                            <div class="asm-comment" style="font-size:0.8rem">Base</div>
+                        </div>
+                        <div class="register">
+                            <div class="register-name">ECX</div>
+                            <div class="register-value">0x00000064</div>
+                            <div class="asm-comment" style="font-size:0.8rem">Counter</div>
+                        </div>
+                        <div class="register">
+                            <div class="register-name">EDX</div>
+                            <div class="register-value">0xABCD1234</div>
+                            <div class="asm-comment" style="font-size:0.8rem">Data</div>
+                        </div>
+                        <div class="register">
+                            <div class="register-name">ESI</div>
+                            <div class="register-value">0x0012FF88</div>
+                            <div class="asm-comment" style="font-size:0.8rem">Source Index</div>
+                        </div>
+                        <div class="register">
+                            <div class="register-name">EDI</div>
+                            <div class="register-value">0x0012FF8C</div>
+                            <div class="asm-comment" style="font-size:0.8rem">Dest Index</div>
+                        </div>
+                        <div class="register">
+                            <div class="register-name">EBP</div>
+                            <div class="register-value">0x0012FFC0</div>
+                            <div class="asm-comment" style="font-size:0.8rem">Base Pointer</div>
+                        </div>
+                        <div class="register">
+                            <div class="register-name">ESP</div>
+                            <div class="register-value">0x0012FF78</div>
+                            <div class="asm-comment" style="font-size:0.8rem">Stack Pointer</div>
+                        </div>
+                    </div>
+                    
+                    <div class="crt-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">x64_registers.asm</span>
+                            <button class="copy-btn" onclick="copyCode('code4')">COPY</button>
+                        </div>
+                        <pre id="code4"><span class="asm-comment">; 64-bit extensions (x86-64)</span>
+<span class="asm-comment">; 64-bit: RAX, RBX, RCX, RDX, RSI, RDI, RBP, RSP</span>
+<span class="asm-comment">; Additional: R8-R15</span>
+
+<span class="asm-comment">; Using 64-bit registers</span>
+<span class="asm-instruction">mov</span> <span class="asm-register">rax</span>, <span class="asm-number">0xFFFFFFFFFFFFFFFF</span>  <span class="asm-comment">; Max 64-bit value</span>
+<span class="asm-instruction">mov</span> <span class="asm-register">rbx</span>, <span class="asm-number">0x123456789ABCDEF</span>   <span class="asm-comment">; Large constant</span>
+
+<span class="asm-comment">; Accessing smaller parts</span>
+<span class="asm-comment">; RAX (64) -> EAX (32) -> AX (16) -> AH/AL (8 high/low)</span>
+<span class="asm-instruction">mov</span> <span class="asm-register">al</span>, <span class="asm-number">0xFF</span>        <span class="asm-comment">; Set low byte of RAX</span>
+<span class="asm-instruction">mov</span> <span class="asm-register">ah</span>, <span class="asm-number">0x11</span>        <span class="asm-comment">; Set high byte of AX</span>
+<span class="asm-instruction">mov</span> <span class="asm-register">eax</span>, <span class="asm-number">0xDEADBEEF</span>  <span class="asm-comment">; Set lower 32 bits of RAX</span>
+
+<span class="asm-comment">; New registers in x64</span>
+<span class="asm-instruction">mov</span> <span class="asm-register">r8</span>, <span class="asm-number">100</span>
+<span class="asm-instruction">mov</span> <span class="asm-register">r9</span>, <span class="asm-number">200</span>
+<span class="asm-instruction">add</span> <span class="asm-register">r8</span>, <span class="asm-register">r9</span>         <span class="asm-comment">; r8 = 300</span></pre>
+                    </div>
+                </section>
+                
+                <!-- Card 5: x86 Instructions -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-code card-icon"></i> x86 INSTRUCTION SET</h2>
+                    
+                    <div class="crt-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">common_instructions.asm</span>
+                            <button class="copy-btn" onclick="copyCode('code5')">COPY</button>
+                        </div>
+                        <pre id="code5"><span class="asm-comment">; Data Transfer</span>
+<span class="asm-instruction">mov</span> <span class="asm-register">eax</span>, <span class="asm-register">ebx</span>    <span class="asm-comment">; Copy EBX to EAX</span>
+<span class="asm-instruction">xchg</span> <span class="asm-register">eax</span>, <span class="asm-register">ebx</span>   <span class="asm-comment">; Swap EAX and EBX</span>
+<span class="asm-instruction">lea</span> <span class="asm-register">eax</span>, [<span class="asm-register">ebx</span>+<span class="asm-register">ecx</span>*4]  <span class="asm-comment">; Load effective address</span>
+
+<span class="asm-comment">; Arithmetic</span>
+<span class="asm-instruction">add</span> <span class="asm-register">eax</span>, <span class="asm-number">10</span>     <span class="asm-comment">; EAX = EAX + 10</span>
+<span class="asm-instruction">sub</span> <span class="asm-register">ebx</span>, <span class="asm-register">ecx</span>    <span class="asm-comment">; EBX = EBX - ECX</span>
+<span class="asm-instruction">inc</span> <span class="asm-register">eax</span>         <span class="asm-comment">; EAX++</span>
+<span class="asm-instruction">dec</span> <span class="asm-register">ebx</span>         <span class="asm-comment">; EBX--</span>
+<span class="asm-instruction">mul</span> <span class="asm-register">ecx</span>         <span class="asm-comment">; EDX:EAX = EAX * ECX</span>
+<span class="asm-instruction">div</span> <span class="asm-register">ebx</span>         <span class="asm-comment">; EAX = EDX:EAX / EBX</span>
+
+<span class="asm-comment">; Bit Operations</span>
+<span class="asm-instruction">and</span> <span class="asm-register">eax</span>, <span class="asm-number">0xF</span>     <span class="asm-comment">; Bitwise AND</span>
+<span class="asm-instruction">or</span> <span class="asm-register">eax</span>, <span class="asm-number">0x10</span>    <span class="asm-comment">; Bitwise OR</span>
+<span class="asm-instruction">xor</span> <span class="asm-register">eax</span>, <span class="asm-register">eax</span>    <span class="asm-comment">; Clear EAX</span>
+<span class="asm-instruction">not</span> <span class="asm-register">eax</span>         <span class="asm-comment">; Bitwise NOT</span>
+<span class="asm-instruction">shl</span> <span class="asm-register">eax</span>, <span class="asm-number">2</span>      <span class="asm-comment">; Shift left by 2 (multiply by 4)</span>
+<span class="asm-instruction">shr</span> <span class="asm-register">eax</span>, <span class="asm-number">1</span>      <span class="asm-comment">; Shift right by 1 (divide by 2)</span>
+
+<span class="asm-comment">; Control Flow</span>
+<span class="asm-instruction">jmp</span> <span class="asm-label">target</span>      <span class="asm-comment">; Unconditional jump</span>
+<span class="asm-instruction">call</span> <span class="asm-label">function</span>   <span class="asm-comment">; Call subroutine</span>
+<span class="asm-instruction">ret</span>             <span class="asm-comment">; Return from subroutine</span>
+
+<span class="asm-comment">; Stack Operations</span>
+<span class="asm-instruction">push</span> <span class="asm-register">eax</span>        <span class="asm-comment">; Push EAX onto stack</span>
+<span class="asm-instruction">pop</span> <span class="asm-register">ebx</span>         <span class="asm-comment">; Pop from stack into EBX</span>
+<span class="asm-instruction">pushad</span>          <span class="asm-comment">; Push all general registers</span>
+<span class="asm-instruction">popad</span>           <span class="asm-comment">; Pop all general registers</span></pre>
+                    </div>
+                    
+                    <!-- Memory View -->
+                    <div class="memory-view">
+                        <div style="color: var(--cyber-green); margin-bottom: 10px;">MEMORY DUMP:</div>
+                        <div><span class="memory-address">0x0012FF80:</span> <span class="memory-data">48 65 6C 6C 6F 20 57 6F</span> <span class="memory-ascii">| Hello Wo |</span></div>
+                        <div><span class="memory-address">0x0012FF88:</span> <span class="memory-data">72 6C 64 21 00 00 00 00</span> <span class="memory-ascii">| rld!.... |</span></div>
+                        <div><span class="memory-address">0x0012FF90:</span> <span class="memory-data">7F 34 A1 C2 00 40 10 00</span> <span class="memory-ascii">| .4...@.. |</span></div>
+                        <div><span class="memory-address">0x0012FF98:</span> <span class="memory-data">00 00 00 64 AB CD 12 34</span> <span class="memory-ascii">| ...d...4 |</span></div>
+                    </div>
+                </section>
+                
+                <!-- Card 6: System Calls -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-terminal card-icon"></i> SYSTEM CALLS & INTERRUPTS</h2>
+                    
+                    <div class="crt-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">syscalls.asm</span>
+                            <button class="copy-btn" onclick="copyCode('code6')">COPY</button>
+                        </div>
+                        <pre id="code6"><span class="asm-comment">; Linux x86 System Calls (int 0x80)</span>
+<span class="asm-comment">; EAX = syscall number, EBX, ECX, EDX = parameters</span>
+
+<span class="asm-label">_start:</span>
+    <span class="asm-comment">; write(1, message, length)</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">eax</span>, <span class="asm-number">4</span>      <span class="asm-comment">; sys_write = 4</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">ebx</span>, <span class="asm-number">1</span>      <span class="asm-comment">; fd = 1 (stdout)</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">ecx</span>, <span class="asm-label">msg</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">edx</span>, <span class="asm-label">len</span>
+    <span class="asm-instruction">int</span> <span class="asm-number">0x80</span>
+
+    <span class="asm-comment">; exit(0)</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">eax</span>, <span class="asm-number">1</span>      <span class="asm-comment">; sys_exit = 1</span>
+    <span class="asm-instruction">xor</span> <span class="asm-register">ebx</span>, <span class="asm-register">ebx</span>    <span class="asm-comment">; status = 0</span>
+    <span class="asm-instruction">int</span> <span class="asm-number">0x80</span>
+
+<span class="asm-directive">section</span> <span class="asm-instruction">.data</span>
+<span class="asm-label">msg</span> <span class="asm-directive">db</span> <span class="asm-string">'Access Granted', 0xA</span>
+<span class="asm-label">len</span> <span class="asm-directive">equ</span> <span class="asm-number">$ - msg</span></pre>
+                    </div>
+                    
+                    <div class="crt-terminal" style="margin-top: 20px;">
+                        <div class="terminal-header">
+                            <span class="terminal-title">common_syscalls.txt</span>
+                        </div>
+                        <div style="font-family: 'Courier New'; line-height: 1.5;">
+                            <div><span style="color: var(--cyber-yellow)">1</span> - sys_exit</div>
+                            <div><span style="color: var(--cyber-yellow)">3</span> - sys_read</div>
+                            <div><span style="color: var(--cyber-yellow)">4</span> - sys_write</div>
+                            <div><span style="color: var(--cyber-yellow)">5</span> - sys_open</div>
+                            <div><span style="color: var(--cyber-yellow)">6</span> - sys_close</div>
+                            <div><span style="color: var(--cyber-yellow)">11</span> - sys_execve</div>
+                            <div><span style="color: var(--cyber-yellow)">12</span> - sys_chdir</div>
+                            <div><span style="color: var(--cyber-yellow)">19</span> - sys_lseek</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Tab 3: ARM Architecture -->
+        <div id="arm" class="tab-content">
+            <div class="cyber-grid">
+                <!-- Card 7: ARM Introduction -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-mobile-alt card-icon"></i> ARM ASSEMBLY</h2>
+                    <p>ARM (Advanced RISC Machine) is a reduced instruction set computing (RISC) architecture used in most mobile devices, embedded systems, and increasingly in servers and desktops.</p>
+                    
+                    <div class="crt-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">arm_example.s</span>
+                            <button class="copy-btn" onclick="copyCode('code7')">COPY</button>
+                        </div>
+                        <pre id="code7"><span class="asm-comment">/* ARM Assembly - Hello World */</span>
+<span class="asm-directive">.global</span> <span class="asm-label">_start</span>
+
+<span class="asm-directive">.section</span> <span class="asm-instruction">.data</span>
+<span class="asm-label">message:</span>
+    <span class="asm-directive">.ascii</span> <span class="asm-string">"Hello, ARM World!\n"</span>
+<span class="asm-label">len</span> = <span class="asm-directive">. - message</span>
+
+<span class="asm-directive">.section</span> <span class="asm-instruction">.text</span>
+<span class="asm-label">_start:</span>
+    <span class="asm-comment">/* write(stdout, message, len) */</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">r0</span>, #1      <span class="asm-comment">@ stdout file descriptor</span>
+    <span class="asm-instruction">ldr</span> <span class="asm-register">r1</span>, =message
+    <span class="asm-instruction">ldr</span> <span class="asm-register">r2</span>, =len
+    <span class="asm-instruction">mov</span> <span class="asm-register">r7</span>, #4      <span class="asm-comment">@ sys_write syscall number</span>
+    <span class="asm-instruction">swi</span> #0          <span class="asm-comment">@ software interrupt</span>
+
+    <span class="asm-comment">/* exit(0) */</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">r0</span>, #0      <span class="asm-comment">@ exit status</span>
+    <span class="asm-instruction">mov</span> <span class="asm-register">r7</span>, #1      <span class="asm-comment">@ sys_exit syscall number</span>
+    <span class="asm-instruction">swi</span> #0</pre>
+                    </div>
+                </section>
+                
+                <!-- Card 8: ARM vs x86 -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-balance-scale card-icon"></i> ARM vs x86</h2>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <div style="border: 1px solid var(--cyber-green); padding: 15px;">
+                            <h3 style="color: var(--cyber-blue); margin-bottom: 10px;">ARM (RISC)</h3>
+                            <ul class="cyber-list" style="padding-left: 20px;">
+                                <li>Reduced Instruction Set</li>
+                                <li>Load/Store Architecture</li>
+                                <li>Fixed-length Instructions</li>
+                                <li>Energy Efficient</li>
+                                <li>Many General Registers</li>
+                                <li>Conditional Execution</li>
+                            </ul>
+                        </div>
+                        <div style="border: 1px solid var(--cyber-blue); padding: 15px;">
+                            <h3 style="color: var(--cyber-green); margin-bottom: 10px;">x86 (CISC)</h3>
+                            <ul class="cyber-list" style="padding-left: 20px;">
+                                <li>Complex Instruction Set</li>
+                                <li>Memory-to-Memory Ops</li>
+                                <li>Variable-length Instructions</li>
+                                <li>High Performance</li>
+                                <li>Fewer Registers</li>
+                                <li>Backward Compatibility</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="crt-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">comparison.asm</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-family: 'Courier New';">
+                            <div>
+                                <div style="color: var(--cyber-blue); margin-bottom: 5px;">ARM:</div>
+                                <div><span class="asm-instruction">add</span> <span class="asm-register">r0</span>, <span class="asm-register">r1</span>, <span class="asm-register">r2</span></div>
+                                <div><span class="asm-instruction">ldr</span> <span class="asm-register">r3</span>, [<span class="asm-register">r0</span>]</div>
+                                <div><span class="asm-instruction">str</span> <span class="asm-register">r4</span>, [<span class="asm-register">r1</span>, #4]</div>
+                                <div><span class="asm-instruction">cmp</span> <span class="asm-register">r0</span>, #10</div>
+                            </div>
+                            <div>
+                                <div style="color: var(--cyber-green); margin-bottom: 5px;">x86:</div>
+                                <div><span class="asm-instruction">add</span> <span class="asm-register">eax</span>, <span class="asm-register">ebx</span></div>
+                                <div><span class="asm-instruction">mov</span> <span class="asm-register">ecx</span>, [<span class="asm-register">eax</span>]</div>
+                                <div><span class="asm-instruction">mov</span> [<span class="asm-register">ebx</span>+4], <span class="asm-register">edx</span></div>
+                                <div><span class="asm-instruction">cmp</span> <span class="asm-register">eax</span>, 10</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Card 9: ARM Features -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-star card-icon"></i> ARM FEATURES</h2>
+                    
+                    <div class="crt-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">arm_features.s</span>
+                            <button class="copy-btn" onclick="copyCode('code9')">COPY</button>
+                        </div>
+                        <pre id="code9"><span class="asm-comment">@ Conditional execution (unique to ARM)</span>
+<span class="asm-instruction">cmp</span> <span class="asm-register">r0</span>, #10
+<span class="asm-instruction">addgt</span> <span class="asm-register">r1</span>, <span class="asm-register">r1</span>, #1   <span class="asm-comment">@ Only if r0 > 10</span>
+<span class="asm-instruction">addle</span> <span class="asm-register">r1</span>, <span class="asm-register">r1</span>, #2   <span class="asm-comment">@ Only if r0 <= 10</span>
+
+<span class="asm-comment">@ Barrel shifter - shift as part of instruction</span>
+<span class="asm-instruction">add</span> <span class="asm-register">r0</span>, <span class="asm-register">r1</span>, <span class="asm-register">r2</span>, LSL #2   <span class="asm-comment">@ r0 = r1 + (r2 << 2)</span>
+<span class="asm-instruction">mov</span> <span class="asm-register">r0</span>, <span class="asm-register">r1</span>, ROR #8      <span class="asm-comment">@ Rotate right by 8 bits</span>
+
+<span class="asm-comment">@ Load/Store multiple registers</span>
+<span class="asm-instruction">stmfd</span> <span class="asm-register">sp!</span>, {<span class="asm-register">r0</span>-<span class="asm-register">r3</span>, <span class="asm-register">lr</span>}   <span class="asm-comment">@ Push r0-r3 and lr</span>
+<span class="asm-instruction">ldmfd</span> <span class="asm-register">sp!</span>, {<span class="asm-register">r0</span>-<span class="asm-register">r3</span>, <span class="asm-register">pc</span>}   <span class="asm-comment">@ Pop r0-r3 and return</span>
+
+<span class="asm-comment">@ Thumb mode (16-bit instructions)</span>
+<span class="asm-directive">.thumb</span>
+<span class="asm-instruction">adds</span> <span class="asm-register">r0</span>, #1          <span class="asm-comment">@ 16-bit instruction</span>
+<span class="asm-instruction">bx</span> <span class="asm-register">lr</span>               <span class="asm-comment">@ Return from Thumb</span>
+
+<span class="asm-comment">@ NEON SIMD instructions</span>
+<span class="asm-instruction">vadd.i32</span> <span class="asm-register">q0</span>, <span class="asm-register">q1</span>, <span class="asm-register">q2</span>   <span class="asm-comment">@ Vector addition</span>
+<span class="asm-instruction">vmul.f32</span> <span class="asm-register">q3</span>, <span class="asm-register">q4</span>, <span class="asm-register">q5</span>   <span class="asm-comment">@ Vector multiplication</span></pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Tab 4: Tools -->
+        <div id="tools" class="tab-content">
+            <div class="cyber-grid">
+                <!-- Card 10: Assemblers & Tools -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-tools card-icon"></i> ASSEMBLY TOOLS</h2>
+                    
+                    <div class="crt-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">toolchain.txt</span>
+                        </div>
+                        <div style="font-family: 'Courier New'; line-height: 1.8;">
+                            <div><span style="color: var(--cyber-green)">NASM</span> - Netwide Assembler (x86)</div>
+                            <div><span style="color: var(--cyber-green)">GAS</span> - GNU Assembler (multiple arch)</div>
+                            <div><span style="color: var(--cyber-green)">MASM</span> - Microsoft Macro Assembler</div>
+                            <div><span style="color: var(--cyber-green)">FASM</span> - Flat Assembler</div>
+                            <div><span style="color: var(--cyber-green)">YASM</span> - Modular Assembler</div>
+                            <div><span style="color: var(--cyber-blue)">GDB</span> - GNU Debugger</div>
+                            <div><span style="color: var(--cyber-blue)">OllyDbg</span> - Windows Debugger</div>
+                            <div><span style="color: var(--cyber-blue)">Radare2</span> - Reverse Engineering</div>
+                            <div><span style="color: var(--cyber-blue)">IDA Pro</span> - Disassembler</div>
+                            <div><span style="color: var(--cyber-purple)">QEMU</span> - System Emulator</div>
+                            <div><span style="color: var(--cyber-purple)">Bochs</span> - x86 Emulator</div>
+                        </div>
+                    </div>
+                    
+                    <div class="crt-terminal" style="margin-top: 20px;">
+                        <div class="terminal-header">
+                            <span class="terminal-title">compile_script.sh</span>
+                            <button class="copy-btn" onclick="copyCode('code10')">COPY</button>
+                        </div>
+                        <pre id="code10"><span class="bash-comment">#!/bin/bash</span>
+<span class="bash-comment"># Compile and link NASM assembly (Linux x86)</span>
+
+<span class="bash-keyword">echo</span> <span class="bash-string">"Assembling..."</span>
+<span class="bash-keyword">nasm</span> -f elf32 -o program.o program.asm
+
+<span class="bash-keyword">echo</span> <span class="bash-string">"Linking..."</span>
+<span class="bash-keyword">ld</span> -m elf_i386 -o program program.o
+
+<span class="bash-keyword">echo</span> <span class="bash-string">"Running..."</span>
+./program
+
+<span class="bash-keyword">echo</span> <span class="bash-string">"Exit code: $?"</span></pre>
+                    </div>
+                </section>
+                
+                <!-- Card 11: Debugging -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-bug card-icon"></i> DEBUGGING ASSEMBLY</h2>
+                    
+                    <div class="crt-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">gdb_commands.txt</span>
+                        </div>
+                        <pre style="font-family: 'Courier New'; line-height: 1.5;">
+<span class="terminal-prompt">(gdb)</span> <span class="terminal-command">file program</span>      <span class="terminal-comment"># Load executable</span>
+<span class="terminal-prompt">(gdb)</span> <span class="terminal-command">break _start</span>      <span class="terminal-comment"># Set breakpoint at _start</span>
+<span class="terminal-prompt">(gdb)</span> <span class="terminal-command">run</span>              <span class="terminal-comment"># Start execution</span>
+<span class="terminal-prompt">(gdb)</span> <span class="terminal-command">stepi</span>            <span class="terminal-comment"># Step one instruction</span>
+<span class="terminal-prompt">(gdb)</span> <span class="terminal-command">info registers</span>   <span class="terminal-comment"># Show all registers</span>
+<span class="terminal-prompt">(gdb)</span> <span class="terminal-command">print/x $eax</span>      <span class="terminal-comment"># Print EAX in hex</span>
+<span class="terminal-prompt">(gdb)</span> <span class="terminal-command">x/10i $pc</span>         <span class="terminal-comment"># Examine 10 instructions at PC</span>
+<span class="terminal-prompt">(gdb)</span> <span class="terminal-command">x/20xw $esp</span>       <span class="terminal-comment"># Examine 20 words at stack</span>
+<span class="terminal-prompt">(gdb)</span> <span class="terminal-command">continue</span>          <span class="terminal-comment"># Continue execution</span>
+<span class="terminal-prompt">(gdb)</span> <span class="terminal-command">quit</span>             <span class="terminal-comment"># Exit GDB</span></pre>
+                    </div>
+                    
+                    <!-- Memory View -->
+                    <div class="memory-view" style="margin-top: 20px;">
+                        <div style="color: var(--cyber-green); margin-bottom: 10px;">DEBUGGER VIEW:</div>
+                        <div><span class="memory-address">EAX:</span> <span class="memory-data">0x0000000A</span> <span class="memory-ascii">| EBX: 0x00401000 |</span></div>
+                        <div><span class="memory-address">ECX:</span> <span class="memory-data">0x00000064</span> <span class="memory-ascii">| EDX: 0x00000000 |</span></div>
+                        <div><span class="memory-address">ESI:</span> <span class="memory-data">0x0012FF88</span> <span class="memory-ascii">| EDI: 0x0012FF8C |</span></div>
+                        <div><span class="memory-address">EIP:</span> <span class="memory-data">0x0040102A</span> <span class="memory-ascii">| ESP: 0x0012FF78 |</span></div>
+                        <div><span class="memory-address">FLAGS:</span> <span class="memory-data">[ZF=0 SF=0 CF=0]</span></div>
+                    </div>
+                </section>
+                
+                <!-- Card 12: Resources -->
+                <section class="cyber-card">
+                    <h2 class="card-title"><i class="fas fa-book card-icon"></i> RESOURCES</h2>
+                    
+                    <ul class="cyber-list">
+                        <li><strong>Intel Manuals:</strong> Official x86 documentation</li>
+                        <li><strong>ARM Architecture Manuals:</strong> ARM reference</li>
+                        <li><strong>NASM Manual:</strong> Netwide Assembler guide</li>
+                        <li><strong>OSDev Wiki:</strong> Operating system development</li>
+                        <li><strong>X86 Opcode Reference:</strong> Instruction details</li>
+                        <li><strong>Compiler Explorer:</strong> See generated assembly</li>
+                        <li><strong>Practice Platforms:</strong> Crackmes, CTF challenges</li>
+                        <li><strong>Community:</strong> r/asm, OSDev.org, forums</li>
+                    </ul>
+                    
+                    <div class="crt-terminal" style="margin-top: 20px;">
+                        <div class="terminal-header">
+                            <span class="terminal-title">learning_path.txt</span>
+                        </div>
+                        <div style="font-family: 'Courier New'; line-height: 1.6; padding: 10px;">
+                            <div>1. Learn basic instructions (MOV, ADD, SUB)</div>
+                            <div>2. Understand registers and memory</div>
+                            <div>3. Practice control flow (JMP, CALL, RET)</div>
+                            <div>4. Study system calls/interrupts</div>
+                            <div>5. Write simple programs (I/O, arithmetic)</div>
+                            <div>6. Learn debugging with GDB</div>
+                            <div>7. Study calling conventions</div>
+                            <div>8. Explore optimization techniques</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Tab 5: Simulator -->
+        <div id="sim" class="tab-content">
+            <div class="cyber-grid">
+                <!-- Card 13: Assembler Simulator -->
+                <section class="cyber-card" style="grid-column: 1 / -1;">
+                    <h2 class="card-title"><i class="fas fa-laptop-code card-icon"></i> ASSEMBLY SIMULATOR</h2>
+                    
+                    <div class="crt-terminal" id="assembler-terminal">
+                        <div class="terminal-header">
+                            <span class="terminal-title">asm_simulator.asm</span>
+                            <span>Try: MOV AX, 5 or ADD AX, BX</span>
+                        </div>
+                        <div class="assembler-output-area" id="assembler-output">
+                            <div class="terminal-prompt">
+                                <span class="terminal-user">asm@sim</span>:<span class="terminal-path">~</span>$ <span class="terminal-command">Welcome to Assembly Simulator</span>
+                            </div>
+                            <div class="terminal-output">Enter assembly instructions to simulate. Supported: MOV, ADD, SUB, INC, DEC, MUL</div>
+                            <div class="terminal-output" style="margin-top: 10px; color: var(--cyber-yellow)">REGISTERS:</div>
+                            <div class="terminal-output" id="register-display">
+                                AX: 0x0000 BX: 0x0000 CX: 0x0000 DX: 0x0000
+                            </div>
+                            <div class="terminal-output" id="flag-display">
+                                FLAGS: [ZF=0 SF=0 CF=0]
+                            </div>
+                        </div>
+                        <div class="assembler-input-line">
+                            <span class="assembler-prompt">ASM></span>
+                            <input type="text" id="assembler-input" placeholder="Enter assembly instruction...">
+                            <div class="assembler-cursor"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                        <div>
+                            <div style="color: var(--cyber-green); margin-bottom: 10px;">EXAMPLE INSTRUCTIONS:</div>
+                            <div style="font-family: 'Courier New'; font-size: 0.9rem; line-height: 1.6;">
+                                <div>MOV AX, 10</div>
+                                <div>MOV BX, 5</div>
+                                <div>ADD AX, BX</div>
+                                <div>SUB AX, 3</div>
+                                <div>INC CX</div>
+                                <div>DEC DX</div>
+                                <div>MUL BX</div>
+                                <div>CMP AX, 10</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="color: var(--cyber-blue); margin-bottom: 10px;">MEMORY VIEW:</div>
+                            <div class="memory-view" style="height: 150px; overflow-y: auto;">
+                                <div id="memory-display">
+                                    <div>0x0000: 00 00 00 00 00 00 00 00</div>
+                                    <div>0x0008: 00 00 00 00 00 00 00 00</div>
+                                    <div>0x0010: 00 00 00 00 00 00 00 00</div>
+                                    <div>0x0018: 00 00 00 00 00 00 00 00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            
+        </div>
+        </div>
+             <div class="Link">
+                <a href="https://youtu.be/6S5KRJv-7RU" style="color: orangered;">Learn assembly: By Low Level</a><br>
+            </div>
+        <!-- Footer -->
+        <footer class="cyber-footer">
+            <p>Baguio Central University</p>
+            <p>&copy; Bachelor of Science in Computer Science. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Binary rain effect
+        const canvas = document.getElementById('binary-rain');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const binary = '01';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for(let i = 0; i < columns; i++) {
+            drops[i] = Math.floor(Math.random() * canvas.height / fontSize) * fontSize;
+        }
+        
+        function drawBinaryRain() {
+            ctx.fillStyle = 'rgba(5, 20, 10, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ff9d';
+            ctx.font = `${fontSize}px monospace`;
+            
+            for(let i = 0; i < drops.length; i++) {
+                const text = binary[Math.floor(Math.random() * binary.length)];
+                const x = i * fontSize;
+                const y = drops[i] * 1;
+                
+                ctx.fillText(text, x, y);
+                
+                if(y > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i] += fontSize;
+            }
+        }
+        
+        setInterval(drawBinaryRain, 70);
+        
+        // Tab functionality
+        const tabs = document.querySelectorAll('.cyber-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show target content
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if(content.id === target) {
+                        content.classList.add('active');
+                    }
+                });
+                
+                // If switching to simulator tab, focus input
+                if(target === 'sim') {
+                    setTimeout(() => {
+                        document.getElementById('assembler-input').focus();
+                    }, 100);
+                }
+            });
+        });
+        
+        // Copy code functionality
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const codeText = codeElement.textContent;
+            
+            // Create a temporary textarea to copy from
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeText;
+            document.body.appendChild(tempTextArea);
+            
+            // Select and copy the text
+            tempTextArea.select();
+            document.execCommand('copy');
+            
+            // Remove the temporary element
+            document.body.removeChild(tempTextArea);
+            
+            // Visual feedback
+            const originalButton = event.target;
+            const originalText = originalButton.textContent;
+            originalButton.textContent = 'COPIED!';
+            originalButton.style.background = 'var(--cyber-green)';
+            originalButton.style.color = 'black';
+            
+            setTimeout(() => {
+                originalButton.textContent = originalText;
+                originalButton.style.background = 'transparent';
+                originalButton.style.color = 'var(--cyber-green)';
+            }, 1500);
+        }
+        
+        // CPU component pulse animation
+        const components = ['alu', 'registers', 'cu', 'memory'];
+        setInterval(() => {
+            const randomComponent = components[Math.floor(Math.random() * components.length)];
+            const element = document.getElementById(randomComponent);
+            if(element) {
+                element.classList.add('pulse');
+                setTimeout(() => {
+                    element.classList.remove('pulse');
+                }, 2000);
+            }
+        }, 3000);
+        
+        // Assembly Simulator
+        const assemblerInput = document.getElementById('assembler-input');
+        const assemblerOutput = document.getElementById('assembler-output');
+        const registerDisplay = document.getElementById('register-display');
+        const flagDisplay = document.getElementById('flag-display');
+        const memoryDisplay = document.getElementById('memory-display');
+        
+        // Simulator state
+        const simulatorState = {
+            AX: 0,
+            BX: 0,
+            CX: 0,
+            DX: 0,
+            flags: {
+                ZF: 0, // Zero flag
+                SF: 0, // Sign flag
+                CF: 0  // Carry flag
+            },
+            memory: new Array(32).fill(0)
+        };
+        
+        // Update display
+        function updateSimulatorDisplay() {
+            registerDisplay.textContent = 
+                `AX: 0x${simulatorState.AX.toString(16).padStart(4, '0')} ` +
+                `BX: 0x${simulatorState.BX.toString(16).padStart(4, '0')} ` +
+                `CX: 0x${simulatorState.CX.toString(16).padStart(4, '0')} ` +
+                `DX: 0x${simulatorState.DX.toString(16).padStart(4, '0')}`;
+            
+            flagDisplay.textContent = 
+                `FLAGS: [ZF=${simulatorState.flags.ZF} SF=${simulatorState.flags.SF} CF=${simulatorState.flags.CF}]`;
+            
+            // Update memory display
+            let memoryHTML = '';
+            for(let i = 0; i < 32; i += 8) {
+                const address = i.toString(16).padStart(4, '0');
+                const bytes = simulatorState.memory.slice(i, i + 8)
+                    .map(b => b.toString(16).padStart(2, '0'))
+                    .join(' ');
+                memoryHTML += `<div>0x${address}: ${bytes}</div>`;
+            }
+            memoryDisplay.innerHTML = memoryHTML;
+        }
+        
+        // Parse and execute assembly instruction
+        function executeAssemblyInstruction(input) {
+            const parts = input.toUpperCase().split(/\s+/);
+            if(parts.length < 2) return "Invalid instruction";
+            
+            const instruction = parts[0];
+            const operands = parts.slice(1).join('').split(',');
+            
+            // Clean operands
+            const op1 = operands[0] ? operands[0].trim() : '';
+            const op2 = operands[1] ? operands[1].trim() : '';
+            
+            let result = "";
+            
+            switch(instruction) {
+                case 'MOV':
+                    if(op1 in simulatorState && !isNaN(parseInt(op2))) {
+                        simulatorState[op1] = parseInt(op2) & 0xFFFF;
+                        result = `${op1} = ${simulatorState[op1]}`;
+                    } else if(op1 in simulatorState && op2 in simulatorState) {
+                        simulatorState[op1] = simulatorState[op2];
+                        result = `${op1} = ${op2} (${simulatorState[op1]})`;
+                    }
+                    break;
+                    
+                case 'ADD':
+                    if(op1 in simulatorState && !isNaN(parseInt(op2))) {
+                        const sum = simulatorState[op1] + parseInt(op2);
+                        simulatorState.flags.CF = sum > 0xFFFF ? 1 : 0;
+                        simulatorState[op1] = sum & 0xFFFF;
+                        simulatorState.flags.ZF = simulatorState[op1] === 0 ? 1 : 0;
+                        simulatorState.flags.SF = (simulatorState[op1] & 0x8000) ? 1 : 0;
+                        result = `${op1} = ${simulatorState[op1]}`;
+                    } else if(op1 in simulatorState && op2 in simulatorState) {
+                        const sum = simulatorState[op1] + simulatorState[op2];
+                        simulatorState.flags.CF = sum > 0xFFFF ? 1 : 0;
+                        simulatorState[op1] = sum & 0xFFFF;
+                        simulatorState.flags.ZF = simulatorState[op1] === 0 ? 1 : 0;
+                        simulatorState.flags.SF = (simulatorState[op1] & 0x8000) ? 1 : 0;
+                        result = `${op1} = ${op1} + ${op2} = ${simulatorState[op1]}`;
+                    }
+                    break;
+                    
+                case 'SUB':
+                    if(op1 in simulatorState && !isNaN(parseInt(op2))) {
+                        const diff = simulatorState[op1] - parseInt(op2);
+                        simulatorState.flags.CF = diff < 0 ? 1 : 0;
+                        simulatorState[op1] = diff & 0xFFFF;
+                        simulatorState.flags.ZF = simulatorState[op1] === 0 ? 1 : 0;
+                        simulatorState.flags.SF = (simulatorState[op1] & 0x8000) ? 1 : 0;
+                        result = `${op1} = ${simulatorState[op1]}`;
+                    } else if(op1 in simulatorState && op2 in simulatorState) {
+                        const diff = simulatorState[op1] - simulatorState[op2];
+                        simulatorState.flags.CF = diff < 0 ? 1 : 0;
+                        simulatorState[op1] = diff & 0xFFFF;
+                        simulatorState.flags.ZF = simulatorState[op1] === 0 ? 1 : 0;
+                        simulatorState.flags.SF = (simulatorState[op1] & 0x8000) ? 1 : 0;
+                        result = `${op1} = ${op1} - ${op2} = ${simulatorState[op1]}`;
+                    }
+                    break;
+                    
+                case 'INC':
+                    if(op1 in simulatorState) {
+                        simulatorState[op1] = (simulatorState[op1] + 1) & 0xFFFF;
+                        simulatorState.flags.ZF = simulatorState[op1] === 0 ? 1 : 0;
+                        simulatorState.flags.SF = (simulatorState[op1] & 0x8000) ? 1 : 0;
+                        result = `${op1} = ${simulatorState[op1]}`;
+                    }
+                    break;
+                    
+                case 'DEC':
+                    if(op1 in simulatorState) {
+                        simulatorState[op1] = (simulatorState[op1] - 1) & 0xFFFF;
+                        simulatorState.flags.ZF = simulatorState[op1] === 0 ? 1 : 0;
+                        simulatorState.flags.SF = (simulatorState[op1] & 0x8000) ? 1 : 0;
+                        result = `${op1} = ${simulatorState[op1]}`;
+                    }
+                    break;
+                    
+                case 'MUL':
+                    if(op1 in simulatorState) {
+                        const product = simulatorState.AX * simulatorState[op1];
+                        simulatorState.AX = product & 0xFFFF;
+                        simulatorState.DX = (product >> 16) & 0xFFFF;
+                        result = `AX = ${simulatorState.AX}, DX = ${simulatorState.DX}`;
+                    }
+                    break;
+                    
+                case 'CMP':
+                    let cmpResult;
+                    if(op1 in simulatorState && !isNaN(parseInt(op2))) {
+                        cmpResult = simulatorState[op1] - parseInt(op2);
+                    } else if(op1 in simulatorState && op2 in simulatorState) {
+                        cmpResult = simulatorState[op1] - simulatorState[op2];
+                    }
+                    
+                    if(cmpResult !== undefined) {
+                        simulatorState.flags.ZF = cmpResult === 0 ? 1 : 0;
+                        simulatorState.flags.SF = (cmpResult & 0x8000) ? 1 : 0;
+                        simulatorState.flags.CF = cmpResult < 0 ? 1 : 0;
+                        result = `Comparison result: ${cmpResult}`;
+                    }
+                    break;
+                    
+                case 'HELP':
+                    result = "Available: MOV, ADD, SUB, INC, DEC, MUL, CMP";
+                    break;
+                    
+                default:
+                    result = `Unknown instruction: ${instruction}`;
+            }
+            
+            updateSimulatorDisplay();
+            return result;
+        }
+        
+        // Assembler input handler
+        assemblerInput.addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') {
+                const input = assemblerInput.value.trim();
+                assemblerInput.value = '';
+                
+                if(!input) return;
+                
+                // Add command to output
+                const commandLine = document.createElement('div');
+                commandLine.className = 'terminal-prompt';
+                commandLine.innerHTML = `<span class="terminal-user">asm@sim</span>:<span class="terminal-path">~</span>$ <span class="terminal-command">${input}</span>`;
+                assemblerOutput.appendChild(commandLine);
+                
+                // Execute instruction
+                const output = executeAssemblyInstruction(input);
+                
+                if(output) {
+                    const outputLine = document.createElement('div');
+                    outputLine.className = 'terminal-output';
+                    outputLine.textContent = output;
+                    assemblerOutput.appendChild(outputLine);
+                }
+                
+                // Scroll to bottom
+                assemblerOutput.scrollTop = assemblerOutput.scrollHeight;
+            }
+        });
+        
+        // Initialize simulator display
+        updateSimulatorDisplay();
+        
+        // Glitch effect on title
+        setInterval(() => {
+            const title = document.querySelector('.cyber-title');
+            title.classList.toggle('glitch');
+            
+            // Re-add the class after a short delay if it was removed
+            setTimeout(() => {
+                title.classList.add('glitch');
+            }, 100);
+        }, 8000);
+        
+        // Window resize handler for binary canvas
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Focus on simulator input when tab is clicked
+        document.querySelector('[data-tab="sim"]').addEventListener('click', () => {
+            setTimeout(() => {
+                document.getElementById('assembler-input').focus();
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+* 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root 
+{
+    --neon-cyan: #00ffff;
+    --neon-pink: #ff00ff;
+    --neon-purple: #9d00ff;
+    --dark-bg: #0a0a0a;
+    --dark-card: #111122;
+    --text-primary: #e0e0ff;
+    --text-secondary: #a0a0c0;
+}
+
+body 
+{
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a2e 50%, #16213e 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.cyber-grid 
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.scan-line 
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to bottom, transparent, var(--neon-cyan), transparent);
+    opacity: 0.1;
+    animation: scan 3s linear infinite;
+    pointer-events: none;
+    z-index: 999;
+}
+
+@keyframes scan 
+{
+    0% { top: 0; }
+    100% { top: 100%; }
+}
+
+.container 
+{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header 
+{
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--neon-cyan);
+    position: relative;
+    overflow: hidden;
+}
+
+h1 
+{
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+    position: relative;
+    z-index: 1;
+}
+
+.subtitle 
+{
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.kotlin-logo 
+{
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: var(--neon-purple);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    box-shadow: 0 0 15px var(--neon-purple);
+}
+
+.nav-container 
+{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.nav-btn 
+{
+    padding: 12px 25px;
+    background: rgba(10, 10, 20, 0.7);
+    border: 1px solid var(--neon-cyan);
+    border-radius: 5px;
+    color: var(--neon-cyan);
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-btn:hover 
+{
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 15px var(--neon-cyan);
+    transform: translateY(-2px);
+}
+
+.content-grid 
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.content-card 
+{
+    background: rgba(10, 10, 20, 0.7);
+    border: 1px solid var(--neon-cyan);
+    border-radius: 8px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.content-card::before
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--neon-cyan);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.content-card:hover 
+{
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+.content-card:hover::before 
+{
+    transform: scaleX(1);
+}
+
+.card-header 
+{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-icon 
+{
+    width: 40px;
+    height: 40px;
+    background: var(--neon-purple);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 1.2rem;
+}
+
+.card-title 
+{
+    font-size: 1.4rem;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 5px var(--neon-cyan);
+}
+
+.card-content 
+{
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.code-block 
+{
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--neon-pink);
+    border-radius: 5px;
+    padding: 15px;
+    margin: 15px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #7cfc00;
+    overflow-x: auto;
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+}
+
+.keyword 
+{
+    color: #ff79c6;
+}
+
+.function 
+{
+    color: #50fa7b;
+}
+
+.comment 
+{
+    color: #6272a4;
+}
+
+.string 
+{
+    color: #f1fa8c;
+}
+
+.type 
+{
+    color: #8be9fd;
+}
+
+.feature-list 
+{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.feature-list li 
+{
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(0, 255, 255, 0.2);
+    position: relative;
+    padding-left: 25px;
+}
+
+.feature-list li:before 
+{
+    content: '▶';
+    position: absolute;
+    left: 0;
+    color: var(--neon-pink);
+}
+
+footer 
+{
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+    border-top: 1px solid var(--neon-cyan);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.glitch 
+{
+    position: relative;
+}
+
+.glitch::before, .glitch::after 
+{
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before 
+{
+    left: 2px;
+    text-shadow: -2px 0 var(--neon-pink);
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after 
+{
+    left: -2px;
+    text-shadow: -2px 0 var(--neon-cyan);
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim 
+{
+    0% { clip: rect(42px, 9999px, 44px, 0); }
+    5% { clip: rect(12px, 9999px, 59px, 0); }
+    10% { clip: rect(48px, 9999px, 29px, 0); }
+    100% { clip: rect(4px, 9999px, 91px, 0); }
+}
+
+@keyframes glitch-anim2 
+{
+    0% { clip: rect(65px, 9999px, 100px, 0); }
+    5% { clip: rect(52px, 9999px, 74px, 0); }
+    10% { clip: rect(79px, 9999px, 85px, 0); }
+    100% { clip: rect(38px, 9999px, 49px, 0); }
+}
+
+@media (max-width: 768px) 
+{
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}

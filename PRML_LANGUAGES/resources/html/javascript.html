@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Fundamentals</title>
+  <link rel="stylesheet" href="../css/Javascript.css">
+</head>
+<body>
+
+  <header>
+    <h1>JAVASCRIPT</h1>
+    <p>Fundamentals Of Programming - Javascript Fundamentals : Client-side</p>
+  </header>
+
+  <nav>
+    <a href="#variables">Variables</a>
+    <a href="#datatypes">Data Types</a>
+    <a href="#operators">Operators</a>
+    <a href="#control">Control Flow</a>
+    <a href="#functions">Functions</a>
+    <a href="#arrays">Arrays</a>
+    <a href="#objects">Objects</a>
+    <a href="#classes">Classes</a>
+    <a href="#dom">DOM</a>
+    <a href="#async">Async</a>
+    <a id="exit">EXIT</a>
+  </nav>
+
+  <section id="variables">
+    <h2>Variables</h2>
+    <pre><code>var x = 10;   // function-scoped
+let y = 20;   // block-scoped
+const z = 30; // constant</code></pre>
+  </section>
+
+  <section id="datatypes">
+    <h2>Data Types</h2>
+    <pre><code>// Primitive
+string, number, boolean, null, undefined, symbol, bigint
+
+// Reference
+let obj = { name: "Alice", age: 25 };
+</code></pre>
+  </section>
+
+  <section id="operators">
+    <h2>Operators</h2>
+    <pre><code>5 + 2  // 7
+5 == "5"   // true
+5 === "5"  // false
+true && false // false
+</code></pre>
+  </section>
+
+  <section id="control">
+    <h2>Control Structures</h2>
+    <pre><code>if (x > y) {
+  console.log("X is bigger");
+} else {
+  console.log("Y is bigger");
+}
+
+for (let i=0; i&lt;3; i++) {
+  console.log(i);
+}
+</code></pre>
+  </section>
+
+  <section id="functions">
+    <h2>Functions</h2>
+    <pre><code>function greet(name) {
+  return "Hello " + name;
+}
+
+const greet2 = (name) => `Hello ${name}`;
+</code></pre>
+  </section>
+
+  <section id="arrays">
+    <h2>Arrays</h2>
+    <pre><code>let nums = [1,2,3];
+nums.push(4);
+let evens = nums.filter(n =&gt; n % 2 === 0);
+</code></pre>
+  </section>
+
+  <section id="objects">
+    <h2>Objects</h2>
+    <pre><code>let user = {
+  name: "Alice",
+  greet() { console.log("Hi " + this.name); }
+};
+</code></pre>
+  </section>
+
+  <section id="classes">
+    <h2>Classes</h2>
+    <pre><code>class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  sayHi() {
+    console.log(`Hi, I am ${this.name}`);
+  }
+}
+</code></pre>
+  </section>
+
+  <section id="dom">
+    <h2>DOM Manipulation</h2>
+    <pre><code>let btn = document.getElementById("myBtn");
+btn.textContent = "Click Me!";
+btn.addEventListener("click", () =&gt; alert("Clicked!"));
+</code></pre>
+  </section>
+
+  <section id="async">
+    <h2>Promises & Async</h2>
+    <pre><code>let promise = new Promise((resolve) =&gt; {
+  setTimeout(() =&gt; resolve("Done!"), 1000);
+});
+promise.then(msg =&gt; console.log(msg));
+
+async function fetchData() {
+  let res = await fetch("https://api.example.com");
+  let data = await res.json();
+  console.log(data);
+}
+</code></pre>
+  </section>
+  <div class="Link">
+        <a href="https://youtu.be/vEROU2XtPR8" style="color: orangered; margin-left: 600px;">JavaScript Fundamentals For Beginners: Traversy Media</a><br>
+        <a href="https://youtu.be/W6NZfCO5SIk" style="color: orangered; margin-left: 600px;">JavaScript Course for Beginners: By Programming with Mosh</a>
+  </div>
+  <script src="../js/Javascript.js"></script>
+</body>
+</html>
+

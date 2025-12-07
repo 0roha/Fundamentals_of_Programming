@@ -1,0 +1,791 @@
+/* Cyber Global Styles */
+:root 
+{
+    --neon-blue: #0ff;
+    --neon-pink: #f0f;
+    --neon-green: #0f0;
+    --dark-bg: #0a0a12;
+    --darker-bg: #050508;
+    --text-color: #ffffff;
+    --grid-color: rgba(0, 255, 255, 0.1);
+    --color-darkred: #8B0000;
+}
+
+* 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
+
+body 
+{
+    background-color: black;
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: center center;
+}
+
+.container 
+{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section 
+{
+    padding: 80px 0;
+    position: relative;
+}
+
+.section-title 
+{
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    color: var(--neon-blue);
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+}
+
+.section-title::after 
+{
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--neon-pink);
+    box-shadow: 0 0 10px var(--neon-pink);
+}
+
+.btn 
+{
+    display: inline-block;
+    padding: 12px 30px;
+    background: transparent;
+    color: var(--neon-blue);
+    text-decoration: none;
+    border-radius: 0;
+    border: 1px solid var(--neon-blue);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    text-shadow: 0 0 5px var(--neon-blue);
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.btn:hover 
+{
+    color: var(--dark-bg);
+    background: var(--neon-blue);
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
+.btn::before 
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+    transition: 0.5s;
+}
+
+.btn:hover::before
+{
+    left: 100%;
+}
+
+/* Cyber Header & Navigation */
+header 
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 18, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--neon-blue);
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+nav 
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo 
+{
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--neon-blue);
+    text-decoration: none;
+    text-shadow: 0 0 10px var(--neon-blue);
+    letter-spacing: 2px;
+}
+
+.logo span 
+{
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.nav-links 
+{
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li 
+{
+    margin-left: 30px;
+    position: relative;
+}
+
+.nav-links a 
+{
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.nav-links a:hover 
+{
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.nav-links a::after 
+{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--neon-blue);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after 
+{
+    width: 100%;
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* Cyber Hero Section */
+.hero 
+{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(0, 255, 255, 0.05), transparent);
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before 
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1), transparent);
+}
+
+.hero-content 
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-text 
+{
+    flex: 1;
+    padding-right: 50px;
+}
+
+.hero-text h1 
+{
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 1.2;
+}
+
+.hero-text h1 span 
+{
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue);
+    position: relative;
+}
+
+.hero-text p 
+{
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #aaa;
+    max-width: 600px;
+}
+
+.cyber-text 
+{
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+    font-weight: bold;
+}
+
+.hero-image 
+{
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.hero-image::before 
+{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    border: 2px solid var(--neon-blue);
+    border-radius: 50%;
+    box-shadow: 0 0 30px var(--neon-blue);
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse 
+{
+    0% { opacity: 0.7; }
+    50% { opacity: 0.3; }
+    100% { opacity: 0.7; }
+}
+
+.hero-image img 
+{
+    max-width: 80%;
+    border-radius: 50%;
+    border: 3px solid var(--neon-blue);
+    box-shadow: 0 0 30px var(--neon-blue);
+    position: relative;
+    z-index: 1;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float 
+{
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+/* Cyber Projects Section */
+.projects 
+{
+    background: var(--darker-bg);
+    position: relative;
+}
+
+.projects::before 
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.projects-grid 
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.project-card 
+{
+    background: rgba(10, 10, 18, 0.8);
+    border-radius: 0;
+    overflow: hidden;
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 15px var(--neon-blue);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.project-card:hover 
+{
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 0 35px darkred;
+}
+
+.project-img 
+{
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.project-img::after 
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, var(--neon-blue) 200%);
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+}
+
+.project-img img 
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-img img 
+{
+    transform: scale(1.1);
+}
+
+.project-info 
+{
+    padding: 20px;
+}
+
+.project-info h3 
+{
+    margin-bottom: 10px;
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.project-info p 
+{
+    color: #aaa;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+/* Cyber Skills Section */
+.skills 
+{
+    background: var(--dark-bg);
+    position: relative;
+}
+
+.skills::before
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
+    box-shadow: 0 0 10px var(--neon-pink);
+}
+
+.skills-container 
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.skill 
+{
+    text-align: center;
+    padding: 30px;
+    background: rgba(10, 10, 18, 0.8);
+    border-radius: 0;
+    border: 1px solid var(--neon-pink);
+    box-shadow: 0 0 15px var(--neon-pink);
+    transition: transform 0.3s ease;
+}
+
+.skill:hover 
+{
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px var(--neon-pink);
+}
+
+.skill i 
+{
+    font-size: 3rem;
+    color: var(--neon-pink);
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.skill h3 
+{
+    margin-bottom: 15px;
+    color: var(--neon-pink);
+    text-shadow: 0 0 5px var(--neon-pink);
+}
+
+.skill p 
+{
+    color: #aaa;
+}
+
+/* Cyber About Section */
+.about 
+{
+    background: var(--darker-bg);
+    position: relative;
+}
+
+.about::before 
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+    box-shadow: 0 0 10px var(--neon-green);
+}
+
+.about-content 
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-text 
+{
+    flex: 1;
+    padding-right: 50px;
+}
+
+.about-text h2 
+{
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--neon-green);
+    text-shadow: 0 0 10px var(--neon-green);
+}
+
+.about-text p 
+{
+    margin-bottom: 20px;
+    color: #aaa;
+}
+
+.about-image 
+{
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.about-image::before 
+{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    border: 2px solid var(--neon-green);
+    border-radius: 5px;
+    box-shadow: 0 0 30px var(--neon-green);
+    animation: pulse 3s infinite;
+}
+
+.about-image img 
+{
+    max-width: 100%;
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 20px var(--neon-green);
+    position: relative;
+    z-index: 1;
+}
+
+/* Cyber Contact Section */
+.contact 
+{
+    background: var(--dark-bg);
+    position: relative;
+}
+
+.contact::before 
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.contact-container 
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-info 
+{
+    flex: 1;
+    padding-right: 50px;
+}
+
+.contact-info h3 
+{
+    margin-bottom: 20px;
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.contact-info p 
+{
+    margin-bottom: 10px;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+}
+
+.contact-info i 
+{
+    margin-right: 10px;
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.social-links 
+{
+    margin-top: 30px;
+}
+
+.social-links a 
+{
+    display: inline-block;
+    margin-right: 15px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    color: var(--neon-blue);
+    border-radius: 0;
+    text-align: center;
+    line-height: 40px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.social-links a:hover 
+{
+    background: var(--neon-blue);
+    color: var(--dark-bg);
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
+.contact-form 
+{
+    flex: 1;
+}
+
+.form-group 
+{
+    margin-bottom: 20px;
+}
+
+.form-group label 
+{
+    display: block;
+    margin-bottom: 5px;
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.form-group input,
+.form-group textarea 
+{
+    width: 100%;
+    padding: 12px;
+    background: rgba(10, 10, 18, 0.8);
+    border: 1px solid var(--neon-blue);
+    border-radius: 0;
+    font-size: 1rem;
+    color: var(--text-color);
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.form-group textarea 
+{
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus 
+{
+    outline: none;
+    box-shadow: 0 0 15px var(--neon-blue);
+}
+
+/* Cyber Footer */
+footer 
+{
+    background: var(--darker-bg);
+    color: #aaa;
+    text-align: center;
+    padding: 30px 0;
+    border-top: 1px solid var(--neon-blue);
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* Glitch Effects */
+.glitch 
+{
+    position: relative;
+}
+
+.glitch::before,
+.glitch::after 
+{
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip: rect(0, 0, 0, 0);
+}
+
+.glitch::before 
+{
+    left: 2px;
+    text-shadow: -2px 0 var(--neon-pink);
+    animation: glitch-1 2s infinite linear alternate-reverse;
+}
+
+.glitch::after 
+{
+    left: -2px;
+    text-shadow: 2px 0 var(--neon-green);
+    animation: glitch-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-1 
+{
+    0% { clip: rect(20px, 9999px, 15px, 0); }
+    20% { clip: rect(42px, 9999px, 76px, 0); }
+    40% { clip: rect(28px, 9999px, 63px, 0); }
+    60% { clip: rect(54px, 9999px, 89px, 0); }
+    80% { clip: rect(12px, 9999px, 35px, 0); }
+    100% { clip: rect(67px, 9999px, 91px, 0); }
+}
+
+@keyframes glitch-2 
+{
+    0% { clip: rect(65px, 9999px, 100px, 0); }
+    20% { clip: rect(52px, 9999px, 74px, 0); }
+    40% { clip: rect(28px, 9999px, 33px, 0); }
+    60% { clip: rect(84px, 9999px, 40px, 0); }
+    80% { clip: rect(22px, 9999px, 65px, 0); }
+    100% { clip: rect(55px, 9999px, 80px, 0); }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) 
+{
+    .hero-content,
+    .about-content,
+    .contact-container 
+    {
+        flex-direction: column;
+    }
+    
+    .hero-text,
+    .about-text,
+    .contact-info 
+    {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+    
+    .hero-text h1 
+    {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) 
+{
+    .nav-links 
+    {
+        display: none;
+    }
+    
+    .section-title 
+    {
+        font-size: 2rem;
+    }
+    
+    .hero-text h1 
+    {
+        font-size: 2.2rem;
+    }
+    
+    .hero-image::before,
+    .about-image::before 
+    {
+        width: 250px;
+        height: 250px;
+    }
+}

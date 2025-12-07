@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Fundamentals</title>
+    <link rel="stylesheet" href="../css/HTML.css">
+</head>
+<body>
+    <canvas class="matrix-rain" id="matrixRain"></canvas>
+    
+    <div class="container">
+        <header>
+            <h1>HTML</h1>
+            <p class="subtitle">Fundamentals Of Programming - HTML Fundamentals : Client-side</p>
+        </header>
+        
+        <div class="cyber-terminal">
+            <div class="terminal-header">
+                <div class="terminal-title">user@html-terminal:~</div>
+                <div class="terminal-buttons">
+                    <div class="terminal-button button-close"></div>
+                    <div class="terminal-button button-minimize"></div>
+                    <div class="terminal-button button-expand"></div>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="tag">&lt;h1&gt;<span class="text">Welcome to HTML Fundamentals</span>&lt;/h1&gt;</div>
+                <div class="comment">&lt;!-- This is an HTML comment --&gt;</div>
+                <div class="tag">&lt;p <span class="attribute">class="subtitle"</span>&gt;<span class="text">Learn the language of the web</span>&lt;/p&gt;</div>
+            </div>
+        </div>
+        
+        <div class="content-grid">
+            <div class="cyber-card">
+                <h2 class="card-title">WHAT IS HTML?</h2>
+                <p>HTML (HyperText Markup Language) is the standard markup language for documents designed to be displayed in a web browser.</p>
+                <p>It provides the structure of a webpage and is composed of elements that tell the browser how to display content.</p>
+            </div>
+            
+            <div class="cyber-card">
+                <h2 class="card-title">BASIC STRUCTURE</h2>
+                <div class="code-example">
+                    <div class="tag">&lt;!DOCTYPE html&gt;</div>
+                    <div class="tag">&lt;html&gt;</div>
+                    <div class="tag">&lt;head&gt;</div>
+                    <div class="tag">&nbsp;&nbsp;&lt;title&gt;<span class="text">Page Title</span>&lt;/title&gt;</div>
+                    <div class="tag">&lt;/head&gt;</div>
+                    <div class="tag">&lt;body&gt;</div>
+                    <div class="tag">&nbsp;&nbsp;&lt;h1&gt;<span class="text">My First Heading</span>&lt;/h1&gt;</div>
+                    <div class="tag">&nbsp;&nbsp;&lt;p&gt;<span class="text">My first paragraph.</span>&lt;/p&gt;</div>
+                    <div class="tag">&lt;/body&gt;</div>
+                    <div class="tag">&lt;/html&gt;</div>
+                </div>
+            </div>
+            
+            <div class="cyber-card">
+                <h2 class="card-title">TEXT ELEMENTS</h2>
+                <div class="tag">&lt;h1&gt;<span class="text">Heading 1</span>&lt;/h1&gt;</div>
+                <div class="tag">&lt;h2&gt;<span class="text">Heading 2</span>&lt;/h2&gt;</div>
+                <div class="tag">&lt;p&gt;<span class="text">Paragraph</span>&lt;/p&gt;</div>
+                <div class="tag">&lt;a <span class="attribute">href="https://example.com"</span>&gt;<span class="text">Link</span>&lt;/a&gt;</div>
+                <div class="tag">&lt;strong&gt;<span class="text">Bold text</span>&lt;/strong&gt;</div>
+                <div class="tag">&lt;em&gt;<span class="text">Italic text</span>&lt;/em&gt;</div>
+            </div>
+            
+            <div class="cyber-card">
+                <h2 class="card-title">LISTS</h2>
+                <div class="comment">&lt;!-- Unordered List --&gt;</div>
+                <div class="tag">&lt;ul&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;li&gt;<span class="text">First item</span>&lt;/li&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;li&gt;<span class="text">Second item</span>&lt;/li&gt;</div>
+                <div class="tag">&lt;/ul&gt;</div>
+                
+                <div class="comment">&lt;!-- Ordered List --&gt;</div>
+                <div class="tag">&lt;ol&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;li&gt;<span class="text">First item</span>&lt;/li&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;li&gt;<span class="text">Second item</span>&lt;/li&gt;</div>
+                <div class="tag">&lt;/ol&gt;</div>
+            </div>
+            
+            <div class="cyber-card">
+                <h2 class="card-title">IMAGES & MEDIA</h2>
+                <div class="tag">&lt;img <span class="attribute">src="image.jpg" alt="Description"</span>&gt;</div>
+                <div class="comment">&lt;!-- Audio --&gt;</div>
+                <div class="tag">&lt;audio <span class="attribute">controls</span>&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;source <span class="attribute">src="audio.mp3" type="audio/mpeg"</span>&gt;</div>
+                <div class="tag">&lt;/audio&gt;</div>
+                <div class="comment">&lt;!-- Video --&gt;</div>
+                <div class="tag">&lt;video <span class="attribute">width="320" height="240" controls</span>&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;source <span class="attribute">src="movie.mp4" type="video/mp4"</span>&gt;</div>
+                <div class="tag">&lt;/video&gt;</div>
+            </div>
+            
+            <div class="cyber-card">
+                <h2 class="card-title">FORMS</h2>
+                <div class="tag">&lt;form <span class="attribute">action="/submit" method="post"</span>&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;label <span class="attribute">for="fname"</span>&gt;<span class="text">First name:</span>&lt;/label&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;input <span class="attribute">type="text" id="fname" name="fname"</span>&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;input <span class="attribute">type="submit" value="Submit"</span>&gt;</div>
+                <div class="tag">&lt;/form&gt;</div>
+            </div>
+            
+            <div class="cyber-card">
+                <h2 class="card-title">SEMANTIC HTML</h2>
+                <div class="tag">&lt;header&gt;<span class="text">Intro content</span>&lt;/header&gt;</div>
+                <div class="tag">&lt;nav&gt;<span class="text">Navigation links</span>&lt;/nav&gt;</div>
+                <div class="tag">&lt;main&gt;<span class="text">Main content</span>&lt;/main&gt;</div>
+                <div class="tag">&lt;section&gt;<span class="text">Thematic grouping</span>&lt;/section&gt;</div>
+                <div class="tag">&lt;article&gt;<span class="text">Self-contained content</span>&lt;/article&gt;</div>
+                <div class="tag">&lt;footer&gt;<span class="text">Closing content</span>&lt;/footer&gt;</div>
+            </div>
+            
+            <div class="cyber-card">
+                <h2 class="card-title">TABLES</h2>
+                <div class="tag">&lt;table&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;tr&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;<span class="text">Firstname</span>&lt;/th&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;<span class="text">Lastname</span>&lt;/th&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;/tr&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;tr&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;<span class="text">John</span>&lt;/td&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;<span class="text">Doe</span>&lt;/td&gt;</div>
+                <div class="tag">&nbsp;&nbsp;&lt;/tr&gt;</div>
+                <div class="tag">&lt;/table&gt;</div>
+            </div>
+        </div>
+
+            <div class="Link">
+                <a href="https://youtu.be/vY2xUc4TVmY" style="color: orangered;">HTML Tutorial For Beginners: By The Coding Sloth</a><br>
+                <a href="https://youtu.be/-USAeFpVf_A"style="color: orangered;">HTML Tutorial for Beginners: By EJ Media</a><br>
+                <a href="https://youtu.be/qz0aGYrrlhU" style="color: orangered;">HTML Tutorial for Beginners: By Programming with Mosh</a>
+            </div>
+
+                <div class="status-itema">
+                    <a href="../html/RWD.html"> 
+                        EXIT
+                    </a>
+                </div>
+        
+        <footer>
+            <p>Baguio Central University</p>
+            <p>&copy; Bachelor of Science in Computer Science. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="../js/HTML.js"></script>
+</body>
+</html>

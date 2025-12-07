@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Fundamentals</title>
+    <link rel="stylesheet" href="../css/RSQL.css">
+</head>
+<body>
+    <header>
+        <div class="header-grid"></div>
+        <h1 class="glitch" data-text="SQL">SQL</h1>
+        <p class="subtitle">Fundamentals of Programming - Sql Fundamentals : Server-side</p>
+    </header>
+    
+    <nav>
+        <a href="#intro">Introduction</a>
+        <a href="#basics">SQL Basics</a>
+        <a href="#commands">Core Commands</a>
+        <a href="#injection">SQL Injection</a>
+        <a href="#practice">Hands-On Practice</a>
+        <a href="#security">Security Practices</a>
+    </nav>
+    
+    <div class="container">
+        <section id="intro" class="cyber-border">
+            <h2>INTRODUCTION TO SQL IN CYBERSECURITY</h2>
+            <p>Structured Query Language (SQL) is a standardized programming language specifically designed for managing data held in relational database management systems (RDBMS) :cite[1]. In the context of cybersecurity, SQL proficiency is essential for both <span class="highlight">defensive security operations</span> and understanding <span class="danger">offensive attack techniques</span>.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>SQL FOR DEFENSE</h3>
+                    <p>Security professionals use SQL to:</p>
+                    <ul>
+                        <li>Analyze logs and detect anomalies</li>
+                        <li>Manage security information and event management (SIEM) systems</li>
+                        <li>Implement database security controls</li>
+                        <li>Conduct forensic investigations</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>SQL FOR OFFENSE</h3>
+                    <p>Ethical hackers need to understand:</p>
+                    <ul>
+                        <li>SQL injection vulnerability identification</li>
+                        <li>Database structure enumeration</li>
+                        <li>Data extraction techniques</li>
+                        <li>Privilege escalation paths</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tip">
+                <p>According to security researchers, injection attacks (including SQL injections) were the third most serious web application security risk in 2021, with 274,000 occurrences found in tested applications :cite[5].</p>
+            </div>
+        </section>
+        
+        <section id="basics" class="cyber-border">
+            <h2>SQL BASICS: DATABASE FUNDAMENTALS</h2>
+            <p>Understanding database structure is crucial for both development and security purposes. Relational databases organize data into tables consisting of rows and columns :cite[6].</p>
+            
+            <h3>DATABASE COMPONENTS</h3>
+            <div class="table-wrapper">
+                <table class="table">
+                    <tr>
+                        <th>Component</th>
+                        <th>Description</th>
+                        <th>Security Consideration</th>
+                    </tr>
+                    <tr>
+                        <td>Tables</td>
+                        <td>Collections of related data organized in rows and columns</td>
+                        <td>Access control, sensitive data storage</td>
+                    </tr>
+                    <tr>
+                        <td>Rows</td>
+                        <td>Individual records in a table</td>
+                        <td>Row-level security implementation</td>
+                    </tr>
+                    <tr>
+                        <td>Columns</td>
+                        <td>Specific attributes or fields of data</td>
+                        <td>Data classification, encryption needs</td>
+                    </tr>
+                    <tr>
+                        <td>Primary Key</td>
+                        <td>Unique identifier for each record in a table</td>
+                        <td>Prevention of duplicate entries</td>
+                    </tr>
+                    <tr>
+                        <td>Foreign Key</td>
+                        <td>Field that links to the primary key in another table</td>
+                        <td>Maintaining referential integrity</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3>DATABASE MANAGEMENT SYSTEMS (DBMS)</h3>
+            <p>A DBMS serves as an interface between databases and end users, handling how data is stored, maintained, and retrieved :cite[6]. Common relational database systems include:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>MySQL</h3>
+                    <p>Open-source RDBMS popular for web applications</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Microsoft SQL Server</h3>
+                    <p>Enterprise RDBMS with comprehensive security features</p>
+                </div>
+                
+                <div class="card">
+                    <h3>PostgreSQL</h3>
+                    <p>Advanced open-source RDBMS with strong compliance</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Oracle Database</h3>
+                    <p>Commercial RDBMS with robust security capabilities</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="commands" class="cyber-border">
+            <h2>CORE SQL COMMANDS</h2>
+            <p>SQL commands can be categorized based on their functionality. Understanding these is essential for both database interaction and security assessment.</p>
+            
+            <h3>DATA DEFINITION LANGUAGE (DDL)</h3>
+            <p>DDL commands define and modify database structures:</p>
+            
+            <pre>
+<span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> thm_bookmarket_db; <span class="code-comment">-- Creates a new database</span>
+
+<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> book_inventory (
+    book_id <span class="keyword">INT</span> <span class="keyword">AUTO_INCREMENT</span> <span class="keyword">PRIMARY KEY</span>,
+    book_name <span class="keyword">VARCHAR</span>(255) <span class="keyword">NOT NULL</span>,
+    publication_date <span class="keyword">DATE</span>
+); <span class="code-comment">-- Creates a new table with specified columns</span>
+
+<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> book_inventory <span class="keyword">ADD</span> page_count <span class="keyword">INT</span>; <span class="code-comment">-- Adds a new column to existing table</span>
+
+<span class="keyword">DROP</span> <span class="keyword">TABLE</span> book_inventory; <span class="code-comment">-- Deletes a table</span></pre>
+            
+            <h3>DATA MANIPULATION LANGUAGE (DML)</h3>
+            <p>DML commands handle data within database objects:</p>
+            
+            <pre>
+<span class="code-comment">-- INSERT: Adds new records to a table</span>
+<span class="keyword">INSERT INTO</span> books (id, name, published_date, description)
+<span class="keyword">VALUES</span> (1, "Android Security Internals", "2014-10-14", "An In-Depth Guide to Android's Security Architecture");
+
+<span class="code-comment">-- UPDATE: Modifies existing records</span>
+<span class="keyword">UPDATE</span> books
+<span class="keyword">SET</span> description = "An In-Depth Guide to Android's Security Architecture."
+<span class="keyword">WHERE</span> id = 1;
+
+<span class="code-comment">-- DELETE: Removes records from a table</span>
+<span class="keyword">DELETE FROM</span> books <span class="keyword">WHERE</span> id = 1;</pre>
+            
+            <h3>DATA QUERY LANGUAGE (DQL)</h3>
+            <p>The SELECT statement retrieves data from databases and is the most frequently used command in SQL :cite[1]:</p>
+            
+            <pre>
+<span class="code-comment">-- Basic SELECT retrieving all columns</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users;
+
+<span class="code-comment">-- SELECT specific columns with a condition</span>
+<span class="keyword">SELECT</span> username, email <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> status = 'active';
+
+<span class="code-comment">-- SELECT with JOIN between tables</span>
+<span class="keyword">SELECT</span> users.username, orders.order_date, orders.amount
+<span class="keyword">FROM</span> users
+<span class="keyword">INNER JOIN</span> orders <span class="keyword">ON</span> users.id = orders.user_id;</pre>
+            
+            <h3>DATA CONTROL LANGUAGE (DCL)</h3>
+            <p>DCL commands control access to data, crucial for security:</p>
+            
+            <pre>
+<span class="code-comment">-- GRANT: Provides privileges to users</span>
+<span class="keyword">GRANT SELECT</span>, <span class="keyword">INSERT</span> <span class="keyword">ON</span> database.table <span class="keyword">TO</span> 'username'@'host';
+
+<span class="code-comment">-- REVOKE: Removes privileges from users</span>
+<span class="keyword">REVOKE DELETE</span> <span class="keyword">ON</span> database.table <span class="keyword">FROM</span> 'username'@'host';</pre>
+        </section>
+        
+        <section id="injection" class="cyber-border">
+            <h2>SQL INJECTION: THE HACKER'S WEAPON</h2>
+            <p>SQL injection (SQLi) is a code injection technique that exploits vulnerabilities in application-database interactions, allowing attackers to execute malicious SQL statements :cite[5]:cite[9].</p>
+            
+            <div class="alert">
+                <p>SQL injection attacks can have severe consequences, including data exposure, privacy compromise, unauthorized system access, and data integrity destruction :cite[5].</p>
+            </div>
+            
+            <h3>HOW SQL INJECTION WORKS</h3>
+            <p>Applications that concatenate user input directly into SQL queries are vulnerable:</p>
+            
+            <pre>
+<span class="code-comment">// UNSAFE CODE - Vulnerable to SQL injection</span>
+txtUserId = getRequestString("UserId");
+txtSQL = "SELECT * FROM Users WHERE UserId = " + txtUserId;</pre>
+            
+            <p>If an attacker provides <code>105 OR 1=1</code> as input, the resulting query becomes:</p>
+            
+            <pre>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Users <span class="keyword">WHERE</span> UserId = 105 <span class="keyword">OR</span> 1=1;</pre>
+            
+            <p>This condition always evaluates to TRUE, returning all records from the Users table :cite[9].</p>
+            
+            <h3>TYPES OF SQL INJECTION ATTACKS</h3>
+            <div class="table-wrapper">
+                <table class="table">
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>In-Band SQLi</td>
+                        <td>Uses the same channel for attack and results</td>
+                        <td>Error-based and Union-based attacks</td>
+                    </tr>
+                    <tr>
+                        <td>Inferential (Blind) SQLi</td>
+                        <td>No direct data transfer; infer from behavior</td>
+                        <td>Boolean-based and Time-based attacks</td>
+                    </tr>
+                    <tr>
+                        <td>Out-of-Band SQLi</td>
+                        <td>Uses different channels for attack and results</td>
+                        <td>DNS requests, HTTP requests to attacker server</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3>PREVENTING SQL INJECTION</h3>
+            <p>Effective defense strategies include:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Parameterized Queries</h3>
+                    <p>Use prepared statements with parameterized queries to separate SQL code from data :cite[5]:cite[9].</p>
+                    <pre>
+<span class="code-comment">// SAFE CODE - Parameterized query</span>
+txtUserId = getRequestString("UserId");
+txtSQL = "SELECT * FROM Users WHERE UserId = @0";
+db.Execute(txtSQL, txtUserId);</pre>
+                </div>
+                
+                <div class="card">
+                    <h3>Input Validation</h3>
+                    <p>Validate and sanitize all user inputs, rejecting suspicious patterns :cite[7].</p>
+                    <pre>
+<span class="code-comment">// Input validation example</span>
+if (!isValidInput(txtUserId)) {
+    throw new Exception("Invalid input detected");
+}</pre>
+                </div>
+                
+                <div class="card">
+                    <h3>Least Privilege</h3>
+                    <p>Database accounts should have minimal necessary privileges :cite[5]:cite[7].</p>
+                    <pre>
+<span class="code-comment">-- Grant only necessary permissions</span>
+<span class="keyword">GRANT SELECT</span> <span class="keyword">ON</span> products <span class="keyword">TO</span> 'webuser'@'%';</pre>
+                </div>
+            </div>
+        </section>
+        
+        <section id="practice" class="cyber-border">
+            <h2>HANDS-ON SQL PRACTICE</h2>
+            <p>Try these SQL commands in a safe practice environment to build your skills.</p>
+            
+            <div class="terminal">
+                <span class="success">sql-practice></span> SELECT name, description FROM vulnerabilities WHERE risk_level > 7;
+            </div>
+            
+            <h3>CYBER-THEMED SQL EXERCISES</h3>
+            <div class="grid">
+                <div class="card">
+                    <h3>Exercise 1: Log Analysis</h3>
+                    <p>Find failed login attempts from the last 24 hours:</p>
+                    <pre>
+<span class="keyword">SELECT</span> username, attempt_time, ip_address
+<span class="keyword">FROM</span> login_attempts
+<span class="keyword">WHERE</span> status = 'failed' 
+<span class="keyword">AND</span> attempt_time > NOW() - INTERVAL 1 DAY;</pre>
+                </div>
+                
+                <div class="card">
+                    <h3>Exercise 2: User Privileges</h3>
+                    <p>List all users with administrative privileges:</p>
+                    <pre>
+<span class="keyword">SELECT</span> u.username, p.permission_name
+<span class="keyword">FROM</span> users u
+<span class="keyword">JOIN</span> user_permissions up <span class="keyword">ON</span> u.id = up.user_id
+<span class="keyword">JOIN</span> permissions p <span class="keyword">ON</span> up.permission_id = p.id
+<span class="keyword">WHERE</span> p.is_admin = 1;</pre>
+                </div>
+                
+                <div class="card">
+                    <h3>Exercise 3: Security Events</h3>
+                    <p>Count security events by type for the past week:</p>
+                    <pre>
+<span class="keyword">SELECT</span> event_type, COUNT(*) AS event_count
+<span class="keyword">FROM</span> security_events
+<span class="keyword">WHERE</span> event_time > NOW() - INTERVAL 7 DAY
+<span class="keyword">GROUP BY</span> event_type
+<span class="keyword">ORDER BY</span> event_count <span class="keyword">DESC</span>;</pre>
+                </div>
+            </div>
+            
+            <div class="tip">
+                <p>Many free resources are available for SQL practice, including W3Schools SQL Tutorial :cite[1]:cite[4] and TryHackMe's SQL Fundamentals module :cite[6].</p>
+            </div>
+        </section>
+        
+        <section id="security" class="cyber-border">
+            <h2>DATABASE SECURITY BEST PRACTICES</h2>
+            <p>Implementing robust database security is essential for protecting sensitive information :cite[7].</p>
+            
+            <h3>ENCRYPTION METHODS</h3>
+            <div class="table-wrapper">
+                <table class="table">
+                    <tr>
+                        <th>Technique</th>
+                        <th>Description</th>
+                        <th>Implementation</th>
+                    </tr>
+                    <tr>
+                        <td>Always Encrypted</td>
+                        <td>Encrypts data at rest and in transit</td>
+                        <td>Use randomized encryption when possible</td>
+                    </tr>
+                    <tr>
+                        <td>Transparent Data Encryption (TDE)</td>
+                        <td>Encrypts database files at rest</td>
+                        <td>Encrypts data, log, and backup files</td>
+                    </tr>
+                    <tr>
+                        <td>Dynamic Data Masking (DDM)</td>
+                        <td>Obfuscates sensitive data at the column level</td>
+                        <td>Mask data shown to unauthorized users</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3>ACCESS CONTROL STRATEGIES</h3>
+            <div class="grid">
+                <div class="card">
+                    <h3>Row-Level Security</h3>
+                    <p>RLS limits database access at the row level based on user characteristics :cite[7].</p>
+                    <pre>
+<span class="keyword">CREATE</span> <span class="keyword">SECURITY POLICY</span> user_access_policy
+<span class="keyword">ADD</span> <span class="keyword">FILTER</span> <span class="keyword">PREDICATE</span> security.fn_security_predicate(user_id)
+<span class="keyword">ON</span> dbo.sensitive_data;</pre>
+                </div>
+                
+                <div class="card">
+                    <h3>Least Privilege Principle</h3>
+                    <p>Grant users only the permissions they absolutely need :cite[7].</p>
+                    <pre>
+<span class="code-comment">-- Instead of granting full access:</span>
+<span class="keyword">GRANT SELECT</span>, <span class="keyword">INSERT</span>, <span class="keyword">UPDATE</span> <span class="keyword">ON</span> customers <span class="keyword">TO</span> sales_team;
+
+<span class="code-comment">-- Grant minimal required access:</span>
+<span class="keyword">GRANT SELECT</span> <span class="keyword">ON</span> customer_view <span class="keyword">TO</span> sales_team;
+<span class="keyword">GRANT INSERT</span> <span class="keyword">ON</span> lead_table <span class="keyword">TO</span> sales_team;</pre>
+                </div>
+            </div>
+            
+            <h3>AUDITING AND MONITORING</h3>
+            <p>Regular auditing helps detect suspicious activities and maintain compliance:</p>
+            
+            <pre>
+<span class="code-comment">-- Enable auditing at the server level</span>
+<span class="keyword">CREATE</span> <span class="keyword">SERVER</span> AUDIT security_audit
+<span class="keyword">TO</span> FILE (FILEPATH = 'C:\Audits\');
+
+<span class="code-comment">-- Create audit specification for login changes</span>
+<span class="keyword">CREATE</span> <span class="keyword">SERVER</span> AUDIT SPECIFICATION login_audit_spec
+<span class="keyword">FOR</span> SERVER AUDIT security_audit
+<span class="keyword">ADD</span> (SERVER_PRINCIPAL_CHANGE_GROUP);</pre>
+            
+            <div class="alert">
+                <p>Regularly review tables containing sensitive information, even when security measures can't be directly applied due to application or architectural limitations :cite[7].</p>
+            </div>
+        </section>
+        
+        <section class="cyber-border">
+            <h2>ADDITIONAL RESOURCES</h2>
+            <p>Continue your SQL and database security journey with these resources:</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Interactive Tutorials</h3>
+                    <ul>
+                        <li>W3Schools SQL Tutorial :cite[1]:cite[4]</li>
+                        <li>DataCamp SQL Fundamentals :cite[10]</li>
+                        <li>TryHackMe SQL Fundamentals :cite[6]</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Security Guidelines</h3>
+                    <ul>
+                        <li>Microsoft SQL Server Security Best Practices :cite[7]</li>
+                        <li>OWASP SQL Injection Prevention Cheat Sheet</li>
+                        <li>CrowdStrike SQL Injection Protection Guide :cite[5]</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Practice Environments</h3>
+                    <ul>
+                        <li>SQLFiddle (online SQL playground)</li>
+                        <li>TryHackMe SQL Injection rooms</li>
+                        <li>HackTheBox database challenges</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="Link">
+                <a href="https://youtu.be/kbKty5ZVKMY" style="color: orangered;">Learn Basic SQL: Adam Finer - Learn BI Online</a><br>
+            </div>
+            
+            <p class="pulse" style="text-align: center; margin-top: 1.5rem;">
+                <a href="../html/RCS.html" class="btn">EXIT</a>
+            </p>
+        </section>
+    </div>
+    
+    <footer>
+        <p>Baguio Central University</p>
+        <p>&copy; Bachelor of Science in Computer Science. All rights reserved.</p>
+    </footer>
+</body>
+</html>

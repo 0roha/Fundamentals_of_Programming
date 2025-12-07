@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Fundamentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/RC.css">
+</head>
+<body>
+    <div class="grid-lines"></div>
+    
+    <header>
+        <h1>C++</h1>
+        <p class="subtitle">Fundamentals of Programming - C++ Fundamentals : Server-side</p>
+        <div class="buttons">
+            <a>
+                <button class="cyberpunk-btn" id="btnone">EXIT</button>
+            </a>
+            
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="cards-grid">
+            <!-- Card 1: Basic Syntax -->
+            <div class="card">
+                <h3><i class="fas fa-code"></i> Basic Syntax & Structure</h3>
+                <p>The foundation of every C++ program:</p>
+                <ul>
+                    <li>Header files and namespaces</li>
+                    <li>Main fution structure</li>
+                    <li>Comments and documentation</li>
+                    <li>Preprocessor directives</li>
+                </ul>
+                <div class="code-snippet">
+                    <span class="comment">// Basic C++ program structure</span><br>
+                    <span class="keyword">#include</span> <span class="type">&lt;iostream&gt;</span><br>
+                    <span class="keyword">using namespace</span> std;<br><br>
+                    <span class="keyword">int</span> <span class="function">main</span>() {<br>
+                    &nbsp;&nbsp;cout << <span class="type">"Hello, Cyber World!"</span> << endl;<br>
+                    &nbsp;&nbsp;<span class="keyword">return</span> 0;<br>
+                    }
+                </div>
+            </div>
+            
+            <!-- Card 2: Varincables & Data Types -->
+            <div class="card">
+                <h3><i class="fas fa-cube"></i> Variables & Data Types</h3>
+                <p>Storing and manipulating data:</p>
+                <ul>
+                    <li>Primitive data types</li>
+                    <li>Type modifiers and conversion</li>
+                    <li>Constants and literals</li>
+                    <li>Type inference with auto</li>
+                </ul>
+                <div class="code-snippet">
+                    <span class="keyword">int</span> score = 100;<br>
+                    <span class="keyword">double</span> precision = 3.14159;<br>
+                    <span class="keyword">char</span> grade = 'A';<br>
+                    <span class="keyword">bool</span> isCyber = <span class="keyword">true</span>;<br>
+                    <span class="keyword">auto</span> future = 2077; <span class="comment">// type inferred as int</span>
+                </div>
+            </div>
+            
+            <!-- Card 3: Operators -->
+            <div class="card">
+                <h3><i class="fas fa-calculator"></i> Operators</h3>
+                <p>Performing operations on data:</p>
+                <ul>
+                    <li>Arithmetic operators</li>
+                    <li>Relational and logical operators</li>
+                    <li>Bitwise operators</li>
+                    <li>Assignment and compound operators</li>
+                </ul>
+                <div class="code-snippet">
+                    <span class="keyword">int</span> a = 10, b = 5;<br>
+                    <span class="keyword">int</span> sum = a + b; <span class="comment">// 15</span><br>
+                    <span class="keyword">bool</span> result = (a > b) && (a != 0); <span class="comment">// true</span><br>
+                    a += 10; <span class="comment">// a becomes 20</span><br>
+                    <span class="keyword">int</span> bits = a & b; <span class="comment">// bitwise AND</span>
+                </div>
+            </div>
+            
+            <!-- Card 4: Input & Output -->
+            <div class="card">
+                <h3><i class="fas fa-terminal"></i> Input & Output</h3>
+                <p>Interacting with the user:</p>
+                <ul>
+                    <li>Standard output with cout</li>
+                    <li>Standard input with cin</li>
+                    <li>Formatting output</li>
+                    <li>File I/O operations</li>
+                </ul>
+                <div class="code-snippet">
+                    <span class="keyword">int</span> age;<br>
+                    <span class="keyword">string</span> name;<br>
+                    cout << <span class="type">"Enter your name: "</span>;<br>
+                    cin >> name;<br>
+                    cout << <span class="type">"Hello "</span> << name << <span class="type">"! Welcome to 2077"</span> << endl;
+                </div>
+            </div>
+            
+            <!-- Card 5: Control Flow -->
+            <div class="card">
+                <h3><i class="fas fa-project-diagram"></i> Control Flow</h3>
+                <p>Directing program execution:</p>
+                <ul>
+                    <li>Conditional statements (if/else)</li>
+                    <li>Switch statements</li>
+                    <li>Loop structures (for, while, do-while)</li>
+                    <li>Break and continue statements</li>
+                </ul>
+                <div class="code-snippet">
+                    <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i < 10; i++) {<br>
+                    &nbsp;&nbsp;<span class="keyword">if</span> (i % 2 == 0) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;cout << i << <span class="type">" is even"</span> << endl;<br>
+                    &nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">continue</span>;<br>
+                    &nbsp;&nbsp;}<br>
+                    }
+                </div>
+            </div>
+            
+            <!-- Card 6: Functions -->
+            <div class="card">
+                <h3><i class="fas fa-sitemap"></i> Functions</h3>
+                <p>Modular and reusable code:</p>
+                <ul>
+                    <li>Function declaration and definition</li>
+                    <li>Parameters and return types</li>
+                    <li>Function overloading</li>
+                    <li>Recursion and inline functions</li>
+                </ul>
+                <div class="code-snippet">
+                    <span class="keyword">int</span> <span class="function">add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {<br>
+                    &nbsp;&nbsp;<span class="keyword">return</span> a + b;<br>
+                    }<br><br>
+                    <span class="keyword">double</span> <span class="function">add</span>(<span class="keyword">double</span> a, <span class="keyword">double</span> b) {<br>
+                    &nbsp;&nbsp;<span class="keyword">return</span> a + b; <span class="comment">// function overloading</span><br>
+                    }
+                </div>
+            </div>
+            
+            <!-- Card 7: Arrays & Pointers -->
+            <div class="card">
+                <h3><i class="fas fa-braille"></i> Arrays & Pointers</h3>
+                <p>Working with memory and collections:</p>
+                <ul>
+                    <li>Array declaration and initialization</li>
+                    <li>Pointer variables and memory addresses</li>
+                    <li>Dynamic memory allocation</li>
+                    <li>Pointer arithmetic</li>
+                </ul>
+                <div class="code-snippet">
+                    <span class="keyword">int</span> arr[5] = {1, 2, 3, 4, 5};<br>
+                    <span class="keyword">int</span>* ptr = arr; <span class="comment">// pointer to first element</span><br>
+                    cout << *ptr; <span class="comment">// outputs 1</span><br>
+                    ptr++; <span class="comment">// move to next element</span><br>
+                    cout << *ptr; <span class="comment">// outputs 2</span>
+                </div>
+            </div>
+            
+            <!-- Card 8: OOP Concepts -->
+            <div class="card">
+                <h3><i class="fas fa-object-group"></i> OOP Concepts</h3>
+                <p>Object-oriented programming principles:</p>
+                <ul>
+                    <li>Classes and objects</li>
+                    <li>Encapsulation and abstraction</li>
+                    <li>Inheritance and polymorphism</li>
+                    <li>Constructors and destructors</li>
+                </ul>
+                <div class="code-snippet">
+                    <span class="keyword">class</span> <span class="type">Android</span> {<br>
+                    &nbsp;&nbsp;<span class="keyword">private</span>:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">string</span> model;<br>
+                    &nbsp;&nbsp;<span class="keyword">public</span>:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">Android</span>(<span class="keyword">string</span> m) : model(m) {}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">void</span> <span class="function">speak</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << <span class="type">"I am model "</span> << model << endl;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    };
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="Link">
+        <a href="https://youtu.be/ZzaPdXTrSb8" style="color: orangered; margin-left: 200px; ">C++ Tutorial for Beginners: Programming with Mosh</a><br>
+        </div>
+    <footer>
+        <p>Baguio Central University</p>
+        <p>&copy; Bachelor of Science in Computer Science. All rights reserved.</p>
+        <p class="neon-text pulse">C++ Portfolio • Created with <i class="fas fa-heart" style="color: var(--neon-purple);"></i> for future developers</p>
+    </footer>
+
+    <script src="../js/RC.js"></script>
+</body>
+
+</html>
+

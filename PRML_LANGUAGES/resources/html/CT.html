@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# Fundamentals</title>
+    <link rel="stylesheet" href="../css/CT.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="glitch" data-text="C# FUNDAMENTALS">C#</h1>
+            <p class="subtitle">Fundamentals of Programming - C# Fundamentals : Server-side</p>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Variables & Data Types</h2>
+                <p>C# is a strongly-typed language, meaning every variable has a specific type.</p>
+                <div class="code-block">
+                    <span class="code-keyword">int</span> age = <span class="code-string">25</span>;<br>
+                    <span class="code-keyword">string</span> name = <span class="code-string">"Neo"</span>;<br>
+                    <span class="code-keyword">bool</span> isConnected = <span class="code-keyword">true</span>;<br>
+                    <span class="code-keyword">double</span> height = <span class="code-string">1.85</span>;<br>
+                    <span class="code-keyword">char</span> initial = <span class="code-string">'N'</span>;
+                </div>
+                <p>Common data types: int, string, bool, double, char, float, decimal</p>
+            </div>
+
+            <div class="card">
+                <h2>Control Structures</h2>
+                <p>Control the flow of your program with conditionals and loops.</p>
+                <div class="code-block">
+                    <span class="code-comment">// If statement</span><br>
+                    <span class="code-keyword">if</span> (temperature > <span class="code-string">30</span>) {<br>
+                    &nbsp;&nbsp;Console.WriteLine(<span class="code-string">"It's hot!"</span>);<br>
+                    }<br><br>
+                    
+                    <span class="code-comment">// For loop</span><br>
+                    <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-string">0</span>; i < <span class="code-string">10</span>; i++) {<br>
+                    &nbsp;&nbsp;Console.WriteLine(i);<br>
+                    }
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Methods</h2>
+                <p>Methods are blocks of code that perform specific tasks.</p>
+                <div class="code-block">
+                    <span class="code-keyword">static</span> <span class="code-keyword">int</span> AddNumbers(<span class="code-keyword">int</span> a, <span class="code-keyword">int</span> b) {<br>
+                    &nbsp;&nbsp;<span class="code-keyword">return</span> a + b;<br>
+                    }<br><br>
+                    
+                    <span class="code-comment">// Calling the method</span><br>
+                    <span class="code-keyword">int</span> result = AddNumbers(<span class="code-string">5</span>, <span class="code-string">3</span>);
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Classes & Objects</h2>
+                <p>C# is an object-oriented language where classes define blueprints for objects.</p>
+                <div class="code-block">
+                    <span class="code-keyword">public class</span> <span class="code-type">Robot</span> {<br>
+                    &nbsp;&nbsp;<span class="code-keyword">public string</span> Name { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }<br>
+                    &nbsp;&nbsp;<span class="code-keyword">public int</span> PowerLevel { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }<br><br>
+                    
+                    &nbsp;&nbsp;<span class="code-keyword">public void</span> Activate() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine(<span class="code-string">$"{Name} is now active!"</span>);<br>
+                    &nbsp;&nbsp;}<br>
+                    }<br><br>
+                    
+                    <span class="code-comment">// Creating an object</span><br>
+                    Robot r2d2 = <span class="code-keyword">new</span> Robot();<br>
+                    r2d2.Name = <span class="code-string">"R2-D2"</span>;<br>
+                    r2d2.Activate();
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Arrays & Collections</h2>
+                <p>Store multiple values in a single variable using arrays and collections.</p>
+                <div class="code-block">
+                    <span class="code-comment">// Array</span><br>
+                    <span class="code-keyword">int</span>[] numbers = <span class="code-keyword">new int</span>[] { <span class="code-string">1</span>, <span class="code-string">2</span>, <span class="code-string">3</span>, <span class="code-string">4</span>, <span class="code-string">5</span> };<br><br>
+                    
+                    <span class="code-comment">// List</span><br>
+                    List&lt;<span class="code-keyword">string</span>&gt; names = <span class="code-keyword">new</span> List&lt;<span class="code-keyword">string</span>&gt;();<br>
+                    names.Add(<span class="code-string">"Alice"</span>);<br>
+                    names.Add(<span class="code-string">"Bob"</span>);<br>
+                    names.Add(<span class="code-string">"Charlie"</span>);
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Exception Handling</h2>
+                <p>Handle runtime errors gracefully using try-catch blocks.</p>
+                <div class="code-block">
+                    <span class="code-keyword">try</span> {<br>
+                    &nbsp;&nbsp;<span class="code-keyword">int</span> result = <span class="code-string">10</span> / <span class="code-string">0</span>; <span class="code-comment">// This will cause an exception</span><br>
+                    }<br>
+                    <span class="code-keyword">catch</span> (DivideByZeroException ex) {<br>
+                    &nbsp;&nbsp;Console.WriteLine(<span class="code-string">"Error: Cannot divide by zero!"</span>);<br>
+                    &nbsp;&nbsp;Console.WriteLine(ex.Message);<br>
+                    }<br>
+                    <span class="code-keyword">finally</span> {<br>
+                    &nbsp;&nbsp;Console.WriteLine(<span class="code-string">"This code always executes"</span>);<br>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="Link">
+        <a href="https://youtu.be/IFayQioG71A" style="color: orangered; margin-left: 450px; ">Learn C# BASICS in 10 MINUTES!: Code Monkey</a><br>
+        </div>
+        <a href="../html/RGD.html" class="btn1">
+            <button>EXIT</button>
+            
+        </a>
+
+        <footer>
+            <p>Baguio Central University</p>
+            <p>&copy; Bachelor of Science in Computer Science. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="../js/CT.js"></script>
+</body>
+</html>
